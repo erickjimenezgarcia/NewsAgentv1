@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # NewsAgent
 
 Herramienta para la extracción, procesamiento y análisis de noticias desde PDFs y fuentes en línea.
@@ -71,3 +72,6 @@ Las contribuciones son bienvenidas. Para cambios importantes, abre primero un is
 ## Licencia
 
 [MIT](LICENSE)
+=======
+# NewsAgent
+>>>>>>> 004d66a8c2d2b719a91e71e91a55935c2541a375
