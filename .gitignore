@@ -24,6 +24,9 @@ input/Stats/*
 base/*
 !base/.gitkeep
 
+# Agrega esta línea si no existe
+/cache/
+
 # Archivos de salida
 output/*
 !output/.gitkeep
