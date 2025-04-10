@@ -1,0 +1,60 @@
+# Ignorar archivos específicos en la carpeta codigo (excepto los que necesitas)
+/codigo/*.py
+/codigo/*.json
+/codigo/__pycache__/
+
+# Excepciones (archivos que SÍ quieres incluir en codigo/)
+!/codigo/main.py
+!/codigo/notebook_utils.py
+!/codigo/lib/
+
+# Ignorar directorios de datos extensos
+input/Images/downloads/*
+input/Images/skipped/*
+input/Out/*
+input/Stats/*
+
+# Permitir estructura de carpetas pero no contenido
+!input/Images/downloads/.gitkeep
+!input/Images/skipped/.gitkeep
+!input/Out/.gitkeep
+!input/Stats/.gitkeep
+
+# Ignorar PDFs descargados
+base/*
+!base/.gitkeep
+
+# Archivos de salida
+output/*
+!output/.gitkeep
+
+# Logs
+logs/*
+!logs/.gitkeep
+
+# Archivos de historial extensos
+codigo/lib/history/processed_urls.json
+
+# Caché y archivos de Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+*.so
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de notebook que no deberían ser comprometidos
+.ipynb_checkpoints/
+
+# Archivos de IDE y editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Credenciales y claves API (¡importante para seguridad!)
+credentials/*
+!credentials/.gitkeep
