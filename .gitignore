@@ -29,7 +29,7 @@ Thumbs.db
 
 # Archivos de salida temporales
 /output/*
-!output/.gitkeep
+#!output/.gitkeep
 
 # Credenciales y claves API (importante para seguridad)
 /credentials/*
