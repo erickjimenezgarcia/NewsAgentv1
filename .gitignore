@@ -23,13 +23,17 @@ Thumbs.db
 # Archivos de caché
 /cache/
 
-# Logs generados
-#/codigo/logs/*
-#!codigo/logs/.gitkeep
+# Base directory - incluir carpeta pero excluir subdirectorios
+/base/*
+!/base/.gitkeep
+
+# Logs - incluir todo el contenido
+!/logs/
+!/logs/*
 
 # Archivos de salida temporales
 /output/*
-#!output/.gitkeep
+!output/.gitkeep
 
 # Credenciales y claves API (importante para seguridad)
 /credentials/*
