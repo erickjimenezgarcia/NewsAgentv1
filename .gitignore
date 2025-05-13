@@ -5,6 +5,7 @@
 
 # Excepciones (archivos que SÍ quieres incluir en codigo/)
 !/codigo/main.py
+!/codigo/main2.py
 !/codigo/notebook_utils.py
 !/codigo/lib/
 
