@@ -1,0 +1,6 @@
+tienes acceso a la ruta: C:\Jerson\SUNASS\2025\5_May\NewsAgent
+en los logs de la lineas 66 hasta 173 (C:\Jerson\SUNASS\2025\5_May\NewsAgent\logs\scraper.log) quiero que cuando se procesa las urls de python se procese solo las del momento, esto es, ejecute 
+python codigo\main.py 15042025 y se han procesado social_links_ddmmyyyy_unprocessed.json de diferentes fechas y solo debia haber procesado para 
+la fecha del 15042025
+
+centrate en el procedimiento para procesar las urls de facebook

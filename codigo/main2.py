@@ -46,6 +46,10 @@ from lib.image_processor import ImageProcessor
 from lib.facebook_processor import FacebookProcessor
 from lib.text_extractor import extract_and_save_pdf_text
 
+# Importar el módulo de limpieza semántica
+from lib.semantic_cleaner import SemanticCleaner, MarkdownConverter
+from lib.semantic_cleaner.facebook_extractor_fix import fix_facebook_texts_extraction
+
 # -------------------------------
 # Función principal de orquestación
 # -------------------------------
@@ -294,6 +298,14 @@ def run_pipeline(custom_date_str=None):
             except Exception as e:
                 logger.error(f"Error creando directorio para PDFs: {e}")
             
+            # SOLUCIÓN: Asegurar que el directorio 'output' exista antes de procesar Facebook
+            output_dir = os.path.join(project_root, 'output')
+            try:
+                os.makedirs(output_dir, exist_ok=True)
+                logger.info(f"Asegurando que exista el directorio de salida: {output_dir}")
+            except Exception as e:
+                logger.error(f"Error al crear directorio de salida: {e}")
+            
             # Extraer solo las URLs de los diccionarios
             fb_urls = [link["URL"] for link in facebook_links]
             processed_data["facebook"] = facebook_processor.process_facebook_urls_parallel(fb_urls, today_date_for_filename)
@@ -450,6 +462,69 @@ def run_pipeline(custom_date_str=None):
         except Exception as e:
             logger.error(f"Error al guardar resultados consolidados: {e}", exc_info=True)
 
+        # --- 12. Limpieza Semántica (Opcional) ---
+        logger.info("--- Paso 12: Realizando Limpieza Semántica ---")
+        try:
+            # Verificar si existe el archivo consolidado
+            if os.path.exists(consolidated_output_path):
+                clean_start_time = time.time()
+                
+                # Definir rutas de salida para los archivos limpios
+                clean_output_dir = os.path.join(project_root, 'output', 'clean')
+                os.makedirs(clean_output_dir, exist_ok=True)
+                clean_output_base = os.path.join(clean_output_dir, f"clean_{today_date_for_filename}")
+                clean_output_json = f"{clean_output_base}.json"
+                clean_output_md = f"{clean_output_base}.md"
+                
+                # Cargar el archivo consolidado
+                with open(consolidated_output_path, 'r', encoding='utf-8') as f:
+                    json_data = json.load(f)
+                
+                # Inicializar limpiador semántico
+                cleaner = SemanticCleaner(similarity_threshold=0.7, language='spanish')
+                
+                # Realizar limpieza semántica
+                logger.info("Realizando limpieza semántica...")
+                cleaned_json = cleaner.clean_consolidated_json(json_data)
+                
+                if cleaned_json:
+                    # Guardar JSON limpio
+                    logger.info(f"Guardando JSON limpio en: {clean_output_json}")
+                    save_to_json(cleaned_json, clean_output_json)
+                    
+                    # Convertir a Markdown
+                    logger.info(f"Convirtiendo a formato Markdown y guardando en: {clean_output_md}")
+                    markdown_converter = MarkdownConverter()
+                    markdown_converter.convert_to_markdown(cleaned_json, clean_output_md)
+                    
+                    # Actualizar estadísticas
+                    clean_duration = time.time() - clean_start_time
+                    stats["timings_seconds"]["semantic_cleaning"] = round(clean_duration, 2)
+                    
+                    # Actualizar el archivo de estadísticas
+                    save_stats(stats, paths['processing_stats_json'])
+                    
+                    logger.info(f"Limpieza semántica completada en {clean_duration:.2f} seg.")
+                    
+                    # --- 12.1: Corregir extracción de textos de Facebook en archivos limpios ---
+                    if os.path.exists(os.path.join(project_root, 'output', f'facebook_texts_{today_date_for_filename}.json')):
+                        logger.info("--- Paso 12.1: Integrando textos de Facebook en archivos limpios ---")
+                        try:
+                            fix_result = fix_facebook_texts_extraction(today_date_for_filename)
+                            if fix_result:
+                                logger.info("Textos de Facebook integrados correctamente en archivos limpios")
+                            else:
+                                logger.warning("No se pudieron integrar los textos de Facebook en archivos limpios")
+                        except Exception as e:
+                            logger.error(f"Error al integrar textos de Facebook: {e}", exc_info=True)
+                            logger.warning("La integración de textos de Facebook falló, pero el proceso principal continúa.")
+                else:
+                    logger.warning("La limpieza semántica no produjo resultados. Verificar el archivo consolidado.")
+            else:
+                logger.warning(f"No se encontró el archivo consolidado {consolidated_output_path}. Omitiendo limpieza semántica.")
+        except Exception as e:
+            logger.error(f"Error durante la limpieza semántica: {e}", exc_info=True)
+            logger.warning("La limpieza semántica falló, pero el proceso principal continúa.")
 
     except KeyboardInterrupt:
          logger.warning("Proceso interrumpido por el usuario (Ctrl+C).")
