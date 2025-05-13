@@ -24,8 +24,8 @@ Thumbs.db
 /cache/
 
 # Logs generados
-/codigo/logs/*
-!codigo/logs/.gitkeep
+#/codigo/logs/*
+#!codigo/logs/.gitkeep
 
 # Archivos de salida temporales
 /output/*
