@@ -109,19 +109,22 @@ class SimilarityAnalyzer:
                 return 1.0
             return 0.0
     
-    def is_similar(self, text1, text2):
+    def is_similar(self, text1, text2, threshold=None):
         """
         Determina si dos textos son similares según el umbral configurado.
         
         Args:
             text1 (str): Primer texto
             text2 (str): Segundo texto
+            threshold (float, optional): Umbral de similitud personalizado. Si no se proporciona,
+                                        se usa el umbral por defecto.
             
         Returns:
             bool: True si los textos son similares, False en caso contrario
         """
         similarity = self.compute_similarity(text1, text2)
-        return similarity >= self.similarity_threshold
+        threshold = threshold if threshold is not None else self.similarity_threshold
+        return similarity >= threshold
     
     def find_similar_paragraphs(self, source_paragraphs, target_paragraphs):
         """

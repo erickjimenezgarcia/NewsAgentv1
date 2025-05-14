@@ -107,7 +107,7 @@ class SemanticCleaner:
         Extrae textos de datos de imágenes.
         
         Args:
-            image_data (dict): Datos de imágenes
+            image_data (list): Lista de datos de imágenes
             
         Returns:
             list: Lista de textos extraídos
@@ -118,16 +118,17 @@ class SemanticCleaner:
             return texts
             
         # Extraer textos de cada imagen
-        for image_key, image_info in image_data.items():
-            text = image_info.get('text', '')
-            if text:
+        for image_info in image_data:
+            text = image_info.get('extracted_text', '')
+            if text and not image_info.get('error'):
                 texts.append({
                     'source': 'image',
-                    'source_key': image_key,
+                    'source_key': image_info.get('image_filename'),
                     'text': text,
                     'metadata': {
-                        'url': image_key,
-                        'description': image_info.get('metadata', {}).get('description', '')
+                        'url': image_info.get('image_filename'),
+                        'description': '',
+                        'perceptual_hash': image_info.get('perceptual_hash', '')
                     },
                     'relevance_score': 0.5  # Valor predeterminado para textos de imágenes
                 })
@@ -151,7 +152,7 @@ class SemanticCleaner:
             
         # Extraer textos de cada post de Facebook
         for fb_key, fb_info in facebook_data.items():
-            text = fb_info.get('text', '')
+            text = fb_info.get('extracted_text', '')
             if text:
                 texts.append({
                     'source': 'facebook',
@@ -197,8 +198,11 @@ class SemanticCleaner:
                 if j in processed_indices or i == j:
                     continue
                     
-                # Verificar similitud
-                if self.similarity_analyzer.is_similar(text_item['text'], other_text_item['text']):
+                # Verificar similitud con umbral ajustado para Facebook
+                similarity_threshold = self.similarity_threshold
+                if text_item['source'] == 'facebook' and other_text_item['source'] == 'facebook':
+                    similarity_threshold = 0.85  # Umbral más alto para Facebook
+                if self.similarity_analyzer.is_similar(text_item['text'], other_text_item['text'], threshold=similarity_threshold):
                     current_group.append(other_text_item)
                     processed_indices.add(j)
             

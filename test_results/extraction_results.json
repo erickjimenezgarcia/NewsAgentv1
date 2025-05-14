@@ -1,0 +1,85 @@
+{
+  "timestamp": "2025-05-13T16:03:21.013624",
+  "extraction_results": {
+    "facebook": [
+      {
+        "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02jjxa5vMavsFyt2VVpMfg7aLimbMDQw21agnBHdsiyWfSL6BomtXekrcmNyiKkviNl&id=100062993063417",
+        "success": true,
+        "content_length": 0,
+        "has_title": false,
+        "extraction_time": "2025-05-13T16:03:26.041817"
+      },
+      {
+        "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02ozZBtnBo2bLjaHnXZ4TTZygwN3fjLhwdZEwab7R7vyUj8k8DKoUsC4rey5YfaEbel&id=100072108931277",
+        "success": true,
+        "content_length": 0,
+        "has_title": false,
+        "extraction_time": "2025-05-13T16:03:31.048576"
+      }
+    ],
+    "youtube": [
+      {
+        "url": "https://www.youtube.com/watch?v=IETbsSm-ka0",
+        "success": true,
+        "content_length": 0,
+        "has_title": false,
+        "extraction_time": "2025-05-13T16:03:35.067039"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=XxWSnIdKpgo",
+        "success": true,
+        "content_length": 0,
+        "has_title": false,
+        "extraction_time": "2025-05-13T16:03:39.088713"
+      }
+    ],
+    "news": [
+      {
+        "url": "https://rpp.pe/economia/economia/sunass-se-requiere-s-138000-millones-para-cerrar-la-brecha-de-agua-potable-y-saneamiento-en-30-anos-noticia-1628807",
+        "success": true,
+        "content_length": 0,
+        "has_title": false,
+        "extraction_time": "2025-05-13T16:03:42.107491"
+      },
+      {
+        "url": "https://larepublica.pe/sociedad/2025/04/14/trujillo-y-distritos-de-la-libertad-tendran-cortes-de-agua-por-limpieza-de-reservorios-de-sedalib-hasta-mayo-zonas-y-horarios-afectados-1105202",
+        "success": true,
+        "content_length": 0,
+        "has_title": false,
+        "extraction_time": "2025-05-13T16:03:45.126036"
+      }
+    ]
+  },
+  "similarity_analysis": {
+    "facebook": [
+      {
+        "file1": "facebook_1.json",
+        "file2": "facebook_2.json",
+        "url1": "https://www.facebook.com/permalink.php?story_fbid=pfbid02jjxa5vMavsFyt2VVpMfg7aLimbMDQw21agnBHdsiyWfSL6BomtXekrcmNyiKkviNl&id=100062993063417",
+        "url2": "https://www.facebook.com/permalink.php?story_fbid=pfbid02ozZBtnBo2bLjaHnXZ4TTZygwN3fjLhwdZEwab7R7vyUj8k8DKoUsC4rey5YfaEbel&id=100072108931277",
+        "similarity": 0.0,
+        "is_duplicate": false
+      }
+    ],
+    "youtube": [
+      {
+        "file1": "youtube_1.json",
+        "file2": "youtube_2.json",
+        "url1": "https://www.youtube.com/watch?v=IETbsSm-ka0",
+        "url2": "https://www.youtube.com/watch?v=XxWSnIdKpgo",
+        "similarity": 0.0,
+        "is_duplicate": false
+      }
+    ],
+    "news": [
+      {
+        "file1": "news_1.json",
+        "file2": "news_2.json",
+        "url1": "https://rpp.pe/economia/economia/sunass-se-requiere-s-138000-millones-para-cerrar-la-brecha-de-agua-potable-y-saneamiento-en-30-anos-noticia-1628807",
+        "url2": "https://larepublica.pe/sociedad/2025/04/14/trujillo-y-distritos-de-la-libertad-tendran-cortes-de-agua-por-limpieza-de-reservorios-de-sedalib-hasta-mayo-zonas-y-horarios-afectados-1105202",
+        "similarity": 0.0,
+        "is_duplicate": false
+      }
+    ]
+  }
+}

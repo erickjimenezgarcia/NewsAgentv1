@@ -266,7 +266,7 @@ class MarkdownConverter:
         md_text = "## Contenido de Redes Sociales\n\n"
         
         for fb_key, fb_info in facebook_data.items():
-            text = fb_info.get('text', '')
+            text = fb_info.get('extracted_text', '')
             
             md_text += f"### Publicación\n\n"
             md_text += f"**Fuente:** {fb_key}\n\n"

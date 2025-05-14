@@ -1,0 +1,52 @@
+{
+    "https://imacorpplataforma.com/wp-content/uploads/2025/05/06-05-2025-C4-ANIEGO-EN-VENTANILLA-AFECTO-A-COLEGIO-PRIMERA-EDICION.mp4": {
+        "context": "otura de una tubería y lares. (América)",
+        "error": "Content type 'video/mp4' is not an image",
+        "content_type": "video/mp4",
+        "filepath": "C:\\Jerson\\SUNASS\\2025\\5_May\\NewsAgent\\input\\Images\\downloads\\06052025\\img_1_be57c13d_06052025.mp4",
+        "filename": "img_1_be57c13d_06052025.mp4",
+        "size": 34572743,
+        "download_timestamp": "2025-05-14T02:41:49.214853"
+    },
+    "https://imacorpplataforma.com/wp-content/uploads/2025/05/06-05-2025-EXITOSA-ANIEGO-EN-AV-TOMAS-VALLE-EN-EL-CALLAO.mp3": {
+        "context": "una tubería en medio icana, Exitosa)",
+        "error": "Content type 'audio/mpeg' is not an image",
+        "content_type": "audio/mpeg",
+        "filepath": "C:\\Jerson\\SUNASS\\2025\\5_May\\NewsAgent\\input\\Images\\downloads\\06052025\\img_2_c92d4982_06052025.mp3",
+        "filename": "img_2_c92d4982_06052025.mp3",
+        "size": 1604336,
+        "download_timestamp": "2025-05-14T02:41:07.731706"
+    },
+    "http://imacorpplataforma.com/wp-content/uploads/2025/05/EL-PERUANO-ECONOMIKA-4-5-BUSCAMOS-UNA-ECONOMIA-MAS-SOSTENIBLE-05-05-2025.jpg": {
+        "context": "ctos”, señaló, Elvis García nam. (El Peruano)",
+        "filepath": "C:\\Jerson\\SUNASS\\2025\\5_May\\NewsAgent\\input\\Images\\downloads\\06052025\\img_6_c180ea3a_06052025.jpg",
+        "filename": "img_6_c180ea3a_06052025.jpg",
+        "content_type": "image/jpeg",
+        "size": 1122167,
+        "download_timestamp": "2025-05-14T02:41:05.205307"
+    },
+    "http://imacorpplataforma.com/wp-content/uploads/2025/05/EL-PERUANO-POLITICA-2-UNEN-ESFUERZOS-PARA-CONSERVAR-BOSQUES-05-05-2025-scaled.jpg": {
+        "context": "s años, informó la vicemin Soto. (El Peruano)",
+        "filepath": "C:\\Jerson\\SUNASS\\2025\\5_May\\NewsAgent\\input\\Images\\downloads\\06052025\\img_3_7b273d74_06052025.jpg",
+        "filename": "img_3_7b273d74_06052025.jpg",
+        "content_type": "image/jpeg",
+        "size": 858252,
+        "download_timestamp": "2025-05-14T02:41:05.251146"
+    },
+    "http://imacorpplataforma.com/wp-content/uploads/2025/05/EXPRESO-POLITICA-5-CONGRESO-PEDIRA-MOCION-DE-CENSURA-CONTRA-ADRIANZEN-05-05-2025.jpg": {
+        "context": "avía no ha conseguid emier. (Expreso)",
+        "filepath": "C:\\Jerson\\SUNASS\\2025\\5_May\\NewsAgent\\input\\Images\\downloads\\06052025\\img_4_9e84a0e9_06052025.jpg",
+        "filename": "img_4_9e84a0e9_06052025.jpg",
+        "content_type": "image/jpeg",
+        "size": 331801,
+        "download_timestamp": "2025-05-14T02:41:03.103553"
+    },
+    "http://imacorpplataforma.com/wp-content/uploads/2025/05/EL-PERUANO-ECONOMIA-11-MEF-SE-AGILIZARA-LA-EJECUCION-DE-GRANDES-PROYECTOS-DE-INVERSION-05-05-2025-scaled.jpg": {
+        "context": "con un cronograma qu guró. (El Peruano)",
+        "filepath": "C:\\Jerson\\SUNASS\\2025\\5_May\\NewsAgent\\input\\Images\\downloads\\06052025\\img_5_391db554_06052025.jpg",
+        "filename": "img_5_391db554_06052025.jpg",
+        "content_type": "image/jpeg",
+        "size": 936303,
+        "download_timestamp": "2025-05-14T02:41:04.722997"
+    }
+}
