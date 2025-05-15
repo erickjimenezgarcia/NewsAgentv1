@@ -42,6 +42,35 @@ Thumbs.db
 # Mantener estructura de carpetas vacías
 !*/.gitkeep
 
+# Excluir todo el contenido de input por defecto
+/input/*
+
+# Permitir la estructura de directorios principal
+!/input/
+!/input/Images/
+!/input/In/
+!/input/Out/
+!/input/Social/
+!/input/Stats/
+
+# Permitir subdirectorios específicos pero excluir su contenido
+!/input/Images/downloads/
+!/input/Images/downloads/**/
+!/input/Out/scraped_pdf_**/
+
+# Excluir explícitamente tipos de archivos en todas las subcarpetas de input
+/input/**/*.json
+/input/**/*.csv
+/input/**/*.jpg
+/input/**/*.jpeg
+/input/**/*.png
+/input/**/*.gif
+/input/**/*.mp3
+/input/**/*.mp4
+/input/**/*.pdf
+
+# Mantener estructura de carpetas vacías
+!/**/.gitkeep
 # RAG - incluir todo el contenido
 !/RAG/
 !/RAG/*
