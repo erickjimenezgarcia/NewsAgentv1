@@ -27,13 +27,31 @@ def fix_facebook_texts_extraction(date_str):
     Returns:
         bool: True si se corrigió correctamente, False en caso contrario
     """
-    # Rutas de archivos
-    base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..'))
-    facebook_path = os.path.join(base_path, 'output', f'facebook_texts_{date_str}.json')
-    consolidated_path = os.path.join(base_path, 'output', f'consolidated_{date_str}.json')
-    clean_dir = os.path.join(base_path, 'output', 'clean')
+    # Rutas de archivos - Usar rutas relativas al proyecto
+    # Determinar la raíz del proyecto (2 niveles arriba de semantic_cleaner)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    lib_dir = os.path.dirname(current_dir)
+    codigo_dir = os.path.dirname(lib_dir)
+    project_root = os.path.dirname(codigo_dir)
+    
+    # Construir rutas absolutas usando la raíz del proyecto
+    facebook_path = os.path.join(project_root, 'output', f'facebook_texts_{date_str}.json')
+    consolidated_path = os.path.join(project_root, 'output', f'consolidated_{date_str}.json')
+    clean_dir = os.path.join(project_root, 'output', 'clean')
     clean_json_path = os.path.join(clean_dir, f'clean_{date_str}.json')
     clean_md_path = os.path.join(clean_dir, f'clean_{date_str}.md')
+    
+    # Imprimir rutas para depuración
+    logger.info(f"Ruta del proyecto: {project_root}")
+    logger.info(f"Buscando archivo de Facebook en: {facebook_path}")
+    
+    # Si el archivo no existe en la ruta principal, verificar en la ruta alternativa (para compatibilidad)
+    if not os.path.exists(facebook_path):
+        alt_facebook_path = os.path.join(os.path.dirname(project_root), 'output', f'facebook_texts_{date_str}.json')
+        logger.info(f"Archivo no encontrado, probando ruta alternativa: {alt_facebook_path}")
+        if os.path.exists(alt_facebook_path):
+            facebook_path = alt_facebook_path
+            logger.info(f"Usando ruta alternativa para el archivo de Facebook: {facebook_path}")
     
     # Verificar que los archivos existan
     if not os.path.exists(facebook_path):
