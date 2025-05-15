@@ -31,9 +31,9 @@ Thumbs.db
 !/logs/
 !/logs/*
 
-# Archivos de salida temporales
-/output/*
-!output/.gitkeep
+# Directorio de salida - incluir todo el contenido
+!/output/
+!/output/**
 
 # Credenciales y claves API (importante para seguridad)
 /credentials/*
