@@ -41,3 +41,7 @@ Thumbs.db
 
 # Mantener estructura de carpetas vacías
 !*/.gitkeep
+
+# RAG - incluir todo el contenido
+!/RAG/
+!/RAG/*
