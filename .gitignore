@@ -74,3 +74,4 @@ Thumbs.db
 # RAG - incluir todo el contenido
 !/RAG/
 !/RAG/*
+node_modules
