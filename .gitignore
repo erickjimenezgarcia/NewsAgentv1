@@ -85,6 +85,7 @@ Thumbs.db
 /RAG/data/*.json
 /RAG/__pycache__/
 /RAG/**/__pycache__/
+node_modules
 
 # Incluir archivos específicos de RAG que son necesarios
 !/RAG/data/.gitkeep
