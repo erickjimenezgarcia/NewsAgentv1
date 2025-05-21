@@ -1,0 +1,58 @@
+flowchart TD
+    %% ——— colores vivos ———
+    classDef entrada  fill:#ffb347,stroke:#333,stroke-width:1px,color:#000000
+    classDef proceso  fill:#66c2ff,stroke:#333,stroke-width:1px,color:#000000
+    classDef decision fill:#66e3b6,stroke:#333,stroke-width:1px,color:#000000
+    classDef salida   fill:#ff8080,stroke:#333,stroke-width:1px,color:#000000
+
+    %% Inicio y entrada
+    Start([Inicio]) --> PDFInput[/"PDF Diario (boletín)\n07052025.pdf"/]
+    class PDFInput entrada
+
+    %% Extracción de texto estructurado del PDF
+    PDFInput --> TextExtraction["Extracción de texto del PDF\n(text_extractor.py)"]
+    class TextExtraction proceso
+
+    %% Extracción de enlaces del PDF
+    TextExtraction --> LinkExtraction["Extracción de enlaces del PDF\n(pdf_processor.py)"]
+    class LinkExtraction proceso
+    
+    %% Filtrado de URLs procesadas previamente
+    LinkExtraction --> HistoryCheck{"¿URL ya procesada?\n(history_tracker.py)"}
+    class HistoryCheck decision
+    
+    HistoryCheck -->|Sí| SkipURL["Omitir URL"]
+    class SkipURL proceso
+    
+    HistoryCheck -->|No| ClassifyURL["Clasificar URL\n(url_classifier.py)"]
+    class ClassifyURL proceso
+    
+    %% Procesamiento por tipo
+    ClassifyURL --> UrlType{{"Tipo de URL"}}
+    class UrlType decision
+    
+    UrlType -->|HTML| HTMLProcess["Procesar HTML\n(html_scraper.py)"]
+    class HTMLProcess proceso
+    
+    UrlType -->|Imagen| ImageProcess["Descargar Imagen\n(image_processor.py)"]
+    class ImageProcess proceso
+    
+    UrlType -->|Facebook| FacebookProcess["Procesar Facebook\n(facebook_processor.py)"]
+    class FacebookProcess proceso
+    
+    %% Procesamiento de imágenes con IA
+    ImageProcess --> ImageAPI["Extraer texto con IA\n(api_client.py)"]
+    class ImageAPI proceso
+    
+    %% Extracción de texto de Facebook PDFs
+    FacebookProcess --> PDFGeneration["Generar PDF de página"]
+    class PDFGeneration proceso
+    
+    PDFGeneration --> FacebookTextExtract["Extraer texto del PDF"]
+    class FacebookTextExtract proceso
+    
+    %% Consolidación
+    HTMLProcess --> Consolidation["Consolidación de\nResultados"]
+    ImageAPI --> Consolidation
+    FacebookTextExtract --> Consolidation
+    class Consolidation proceso

@@ -23,30 +23,34 @@ Thumbs.db
 # Archivos de caché
 /cache/
 
+# Archivos de caché de embeddings
+**/embeddings_cache/
+/embeddings_cache/
+
 # Base directory - incluir carpeta pero excluir subdirectorios
 /base/*
 !/base/.gitkeep
 
-# Logs - incluir todo el contenido
-!/logs/
-!/logs/*
+# Logs - excluir contenido pero mantener estructura
+/logs/*
+!/logs/.gitkeep
 
-# Directorio de salida - incluir todo el contenido
-!/output/
-!/output/**
+# Directorio de salida - excluir contenido pero mantener estructura
+/output/*
+!/output/.gitkeep
 
 # Credenciales y claves API (importante para seguridad)
 /credentials/*
-!credentials/.gitkeep
+!/credentials/.gitkeep
 
 # Mantener estructura de carpetas vacías
 !*/.gitkeep
 
 # Excluir todo el contenido de input por defecto
 /input/*
+!/input/.gitkeep
 
 # Permitir la estructura de directorios principal
-!/input/
 !/input/Images/
 !/input/In/
 !/input/Out/
@@ -55,8 +59,11 @@ Thumbs.db
 
 # Permitir subdirectorios específicos pero excluir su contenido
 !/input/Images/downloads/
-!/input/Images/downloads/**/
-!/input/Out/scraped_pdf_**/
+/input/Images/downloads/*
+!/input/Images/downloads/.gitkeep
+!/input/Out/scraped_pdf_*/
+/input/Out/scraped_pdf_*/*
+!/input/Out/scraped_pdf_*/.gitkeep
 
 # Excluir explícitamente tipos de archivos en todas las subcarpetas de input
 /input/**/*.json
@@ -69,8 +76,22 @@ Thumbs.db
 /input/**/*.mp4
 /input/**/*.pdf
 
-# Mantener estructura de carpetas vacías
-!/**/.gitkeep
-# RAG - incluir todo el contenido
+# RAG - incluir todo el contenido excepto caché y datos temporales
 !/RAG/
-!/RAG/*
+!/RAG/**
+/RAG/embeddings_cache/
+/RAG/logs/
+/RAG/output/
+/RAG/data/*.json
+/RAG/__pycache__/
+/RAG/**/__pycache__/
+
+# Incluir archivos específicos de RAG que son necesarios
+!/RAG/data/.gitkeep
+!/RAG/config.yaml
+!/RAG/*.py
+
+# Excluir archivos de respaldo
+*.bak
+~$*
+*.tmp

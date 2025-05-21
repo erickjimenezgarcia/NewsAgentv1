@@ -89,6 +89,7 @@ def identify_file_type(filepath):
     """
     Identifica el tipo de archivo basado en el contenido/cabecera.
     Más preciso que depender solo de la extensión.
+    Detecta específicamente formatos de imagen, audio y video.
     """
     try:
         # Verificar si es imagen primero
@@ -183,6 +184,7 @@ class ImageProcessor:
         Descarga una única imagen desde una URL.
         Gestiona caché basado en la URL.
         Retorna la URL y un diccionario con metadatos o error.
+        Soporta descarga de archivos MP3 y MP4, pero los marca para no ser procesados por la API.
         """
         url = url_info.get("URL")
         context = url_info.get("Context", "")
@@ -229,9 +231,14 @@ class ImageProcessor:
                 is_image = any(path_lower.endswith(ext) for ext in ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'])
             
             # Si definitivamente NO es una imagen, registrar un error
-            if not is_image and any(content_type.startswith(prefix) for prefix in ['audio/', 'video/']):
-                logger.warning(f"URL {url} contiene {content_type}, no una imagen. Se registrará como tipo no válido.")
-                result["error"] = f"Content type '{content_type}' is not an image"
+            # Registrar multimedia como descargada pero no procesable por API de imágenes
+            if 'audio/' in content_type or 'video/' in content_type:
+                # Permitir la descarga pero marcar como NO procesable por la API
+                logger.warning(f"URL {url} contiene {content_type}, no una imagen. Se descargará pero no se procesará con la API.")
+                result["content_type"] = content_type
+                result["skip_api_processing"] = True
+                result["is_media_file"] = True
+                result["media_type"] = "audio" if 'audio/' in content_type else "video"
                 result["content_type"] = content_type
                 # No retornamos aqui - seguimos con la descarga pero registramos que no es imagen
             
@@ -413,6 +420,7 @@ class ImageProcessor:
         """
         Procesa imágenes descargadas usando API de extracción de texto de imágenes.
         Implementa procesamiento adaptativo con control de batch_size y reintentos.
+        Excluye automáticamente archivos MP3, MP4 y otros archivos multimedia no procesables.
         
         Args:
             downloaded_metadata (dict): Metadatos de imágenes descargadas {url: {filepath, filename, ...}}
@@ -667,6 +675,23 @@ class ImageProcessor:
          except Exception as e:
              logger.warning(f"Error comprobando tamaño de archivo {filepath}: {e}")
         
+         # Verificar la extensión del archivo para detectar multimedia (mp3, mp4, etc.)
+         filename = os.path.basename(filepath)
+         if filename.lower().endswith(('.mp3', '.mp4', '.wav', '.avi', '.mov', '.flv', '.wmv', '.ogg')):
+             logger.warning(f"Archivo multimedia detectado por extensión: {filepath}")
+             return {
+                 "image_filename": filename,
+                 "processed_date": datetime.today().strftime('%d%m%Y'),
+                 "extracted_text": "",
+                 "error": "File is multimedia content, not an image",
+                 "_cache_error": True,
+                 "_permanent_error": True,  # Marcar como error permanente
+                 "_error_reason": "Archivo es contenido multimedia, no una imagen",
+                 "detected_type": "multimedia",
+                 "file_extension": os.path.splitext(filename)[1],
+                 "is_media_file": True
+             }
+         
          # Verificar si el archivo es realmente una imagen válida usando la utilidad optimizada
          is_image, image_format = is_valid_image(filepath)
          if not is_image:

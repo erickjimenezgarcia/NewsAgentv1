@@ -17,3 +17,12 @@ ipywidgets>=8.0.0
 scikit-learn
 nltk
 imagehash
+#RAG
+psycopg2-binary>=2.9.9     # Conexión a PostgreSQL con pgvector (si usas Docker)
+pgvector>=0.2.1            # Cliente Python para pgvector
+tenacity>=8.2.2            # Reintentos automáticos en conexiones
+langchain>=0.1.14          # Chunking avanzado y utilidades de RAG (incluye text splitters)
+pytest                     # Testing
+python-dotenv              # Cargar variables de entorno desde .env
+#APP
+streamlit

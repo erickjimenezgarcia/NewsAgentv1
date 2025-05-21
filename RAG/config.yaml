@@ -1,0 +1,51 @@
+# Configuración del sistema RAG para NewsAgent SUNASS
+chunking:
+  chunk_size_chars: 2000          # ~512 tokens en español
+  chunk_overlap_chars: 500         # 25% solapamiento
+  splitter: RecursiveCharacter     # Respeta límites semánticos
+  separators: ["\n\n", "\n", ". ", " "]
+  keep_separator: true
+
+embeddings:
+  model: "text-embedding-model=models/text-embedding-004"
+  dimensions: 768
+  batch_size: 20
+  cache:
+    enabled: true
+    directory: "./embeddings_cache"
+    memory_ttl: 3600            # 1 hora en caché de memoria
+    disk_ttl: 604800            # 1 semana en caché de disco
+
+vector_store:
+  type: "pgvector"
+  connection:
+    host: "localhost"
+    port: 5432
+    database: "newsagent"
+    user: "postgres"
+    password: "postgres"
+  schema: "rag"           # Esquema definido en los scripts Docker
+  table_name: "chunks"     # Tabla definida en los scripts Docker
+  index_type: "hnsw"
+  hnsw_params:
+    ef_construction: 128
+    m: 16
+  batch_size: 100
+
+retrieval:
+  type: "hybrid"
+  vector_weight: 0.6
+  keyword_weight: 0.4
+  semantic_ranker: true
+  recall_k: 50                   # Recall@50 como objetivo
+  final_k: 5                     # Devuelve top-5 para alimentar al LLM
+
+monitoring:
+  enabled: true
+  log_file: "./logs/rag_metrics.log"
+  metrics:
+    - latency
+    - recall
+    - precision
+    - api_usage
+    - storage_growth

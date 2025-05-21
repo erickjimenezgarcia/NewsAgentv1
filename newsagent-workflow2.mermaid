@@ -1,0 +1,44 @@
+flowchart TD
+    %% ——— colores vivos (idénticos) ———
+    classDef entrada  fill:#ffb347,stroke:#333,stroke-width:1px,color:#000000
+    classDef proceso  fill:#66c2ff,stroke:#333,stroke-width:1px,color:#000000
+    classDef decision fill:#66e3b6,stroke:#333,stroke-width:1px,color:#000000
+    classDef salida   fill:#ff8080,stroke:#333,stroke-width:1px,color:#000000
+
+    %% Arranque de esta mitad
+    Consolidation["Consolidación de\nResultados"]
+    class Consolidation proceso
+    
+    %% Limpieza semántica
+    Consolidation --> SemanticCleaning["Limpieza Semántica\n(semantic_cleaner.py)"]
+    class SemanticCleaning proceso
+    
+    SemanticCleaning --> TextSimilarity["Análisis de similitud\n(text_similarity.py)"]
+    class TextSimilarity proceso
+    
+    TextSimilarity --> RemoveDuplicates["Eliminación de\nduplicados"]
+    class RemoveDuplicates proceso
+    
+    RemoveDuplicates --> FacebookFix["Corrección Facebook\n(facebook_extractor_fix.py)"]
+    class FacebookFix proceso
+    
+    %% Generación de salidas
+    FacebookFix --> GenerateJSON["Generar JSON\nde datos limpios"]
+    class GenerateJSON proceso
+    
+    GenerateJSON --> GenerateMarkdown["Convertir a Markdown\n(markdown_converter.py)"]
+    class GenerateMarkdown proceso
+    
+    GenerateMarkdown --> OutputFiles[/"Archivos de salida\n(JSON y Markdown)"/]
+    class OutputFiles salida
+    
+    %% Compilación de estadísticas
+    FacebookFix --> GenerateStats["Generar estadísticas\nde procesamiento"]
+    class GenerateStats proceso
+    
+    GenerateStats --> StatsFile[/"Archivo de estadísticas\n(stats_DDMMYYYY.json)"/]
+    class StatsFile salida
+    
+    %% Fin
+    OutputFiles --> End([Fin])
+    StatsFile --> End

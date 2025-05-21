@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Base de datos PostgreSQL con extensión pgvector
+  postgres:
+    image: ankane/pgvector:latest
+    container_name: sunass-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: newsagent
+    volumes:
+      # Volumen para persistencia de datos
+      - postgres_data:/var/lib/postgresql/data
+      # Script de inicialización para crear extensiones y tablas
+      - ./docker/postgres-init:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - sunass-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Servicios adicionales pueden agregarse aquí
+
+volumes:
+  postgres_data:
+    name: sunass-postgres-data
+
+networks:
+  sunass-network:
+    name: sunass-network

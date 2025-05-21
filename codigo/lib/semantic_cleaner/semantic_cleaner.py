@@ -107,7 +107,7 @@ class SemanticCleaner:
         Extrae textos de datos de imágenes.
         
         Args:
-            image_data (list): Lista de datos de imágenes
+            image_data (dict or list): Datos de imágenes (puede ser diccionario o lista)
             
         Returns:
             list: Lista de textos extraídos
@@ -117,17 +117,37 @@ class SemanticCleaner:
         if not image_data:
             return texts
             
+        # Determinar si image_data es un diccionario o una lista
+        if isinstance(image_data, dict):
+            # Si es un diccionario, iteramos sobre sus valores
+            items_to_process = image_data.values()
+        else:
+            # Si es una lista, la usamos directamente
+            items_to_process = image_data
+            
         # Extraer textos de cada imagen
-        for image_info in image_data:
-            text = image_info.get('extracted_text', '')
+        for image_info in items_to_process:
+            # Verificar si image_info es un diccionario
+            if not isinstance(image_info, dict):
+                continue
+                
+            # Intentar obtener el texto extraído con diferentes claves posibles
+            text = image_info.get('extracted_text', image_info.get('text', ''))
+            
+            # Solo procesar si hay texto y no hay error
             if text and not image_info.get('error'):
+                # Obtener nombre de archivo o URL para identificación
+                identifier = image_info.get('image_filename', 
+                                         image_info.get('filename', 
+                                                     image_info.get('url', 'unknown_image')))
+                
                 texts.append({
                     'source': 'image',
-                    'source_key': image_info.get('image_filename'),
+                    'source_key': identifier,
                     'text': text,
                     'metadata': {
-                        'url': image_info.get('image_filename'),
-                        'description': '',
+                        'url': identifier,
+                        'description': image_info.get('description', ''),
                         'perceptual_hash': image_info.get('perceptual_hash', '')
                     },
                     'relevance_score': 0.5  # Valor predeterminado para textos de imágenes
