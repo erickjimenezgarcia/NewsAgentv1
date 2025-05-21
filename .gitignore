@@ -96,3 +96,9 @@ node_modules
 *.bak
 ~$*
 *.tmp
+
+# Archivos temporales en docker/postgres-init
+docker/postgres-init/*.bak
+docker/postgres-init/*.tmp
+docker/postgres-init/*~
+!docker/postgres-init/*.sql
