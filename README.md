@@ -14,7 +14,7 @@ Herramienta para la extracción, procesamiento y análisis de noticias desde PDF
 
 ## Requisitos
 
-- Python 3.8 o superior
+- Python 3.8 - 3.11
 - Dependencias en `requirements.txt`
 - Credenciales de API (Google Gemini)
 

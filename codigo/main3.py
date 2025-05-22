@@ -5,6 +5,7 @@ import logging
 from datetime import datetime
 import time
 import json
+from content_deduplicator import ContentDeduplicator
 
 # Asegurarse de que el directorio 'lib' esté en el path para imports
 current_dir = os.path.dirname(os.path.abspath(__file__))
