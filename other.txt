@@ -22,6 +22,8 @@ urllib3>=1.26.0
 # pytest>=6.2.0
 # pillow>=8.0.0 # Si se necesita manipulación de imágenes (ej. para tests o crear dummies)
 
+
+
 #--------configuracion FastApi-------
 # pip install fastapi uvicorn
 # uvicorn api_server:app --reload // ejecutar el servidor

@@ -30,20 +30,15 @@
             target="_blank"
             class="flex ms-2 md:me-24"
           >
-            <img
-              src="../assets/logo_sunass.png"
-              class="h-8 me-3"
-              alt="Sunass Logo"
-            />
             <span
-              class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white"
-              >Sunass</span
+              class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white"
+              >Agente de noticias</span
             >
           </a>
         </div>
 
         <!-- search -->
-        <form class=" w-lg ">
+        <form class="w-lg">
           <label
             for="default-search"
             class="mb-1 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -72,13 +67,13 @@
             <input
               type="search"
               id="default-search"
-              class="block w-full p-2 ps-10 text-sm rounded-lg  bg-white dark:placeholder-gray-400 dark:focus:border-blue-500"
+              class="block w-full p-2 ps-10 text-sm rounded-lg bg-white dark:placeholder-gray-400 dark:focus:border-blue-500"
               placeholder="Buscar documentos ..."
               required
             />
             <button
               type="submit"
-              class=" text-white absolute end-2.5 bottom-1 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-md text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              class="text-white absolute end-2.5 bottom-1 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-md text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Buscar
             </button>
@@ -88,21 +83,17 @@
 
         <div class="flex items-center">
           <div class="flex items-center ms-3">
-            <div>
-              <button
-                type="button"
-                class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                aria-expanded="false"
-                data-dropdown-toggle="dropdown-user"
-              >
-                <span class="sr-only">Open user menu</span>
-                <img
-                  class="w-8 h-8 rounded-full"
-                  src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                  alt="user photo"
-                />
-              </button>
-            </div>
+            <a href="">
+              <img
+                class="w-8 h-8 rounded-full mr-1"
+                src="../assets/logo_sunass.png"
+                alt="user photo"
+              />
+            </a>
+            <span
+              class="text-xl font-semibold sm:text-2xl whitespace-nowrap text-white"
+              >Sunass</span
+            >
             <div
               class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-sm shadow-sm dark:bg-gray-700 dark:divide-gray-600"
               id="dropdown-user"

@@ -78,6 +78,7 @@ export async function obtenerUrlsExtraidas(filename) {
 
 
 
+
 export async function obtenerEstado() {
   const response = await fetch(`${API_BASE_URL}/estado/`);
   return await response.json();
