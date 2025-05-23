@@ -1,23 +1,22 @@
 {
   "metadata": {
     "source_pdf": "22042025.pdf",
-    "processing_date": "2025-05-22T16:42:21.855702",
+    "processing_date": "2025-05-23T11:02:17.973378",
     "stats_summary": {
-      "run_timestamp": "2025-05-22T16:42:21.855702",
+      "run_timestamp": "2025-05-23T11:02:17.973378",
       "date_processed": "22042025",
       "total_urls_in_pdf": 103,
-      "new_urls_processed_count": 7,
-      "history_total_urls": 63,
+      "new_urls_processed_count": 3,
+      "history_total_urls": 71,
       "categories": {
-        "html": 3,
-        "social": 4
+        "social": 3
       },
       "html_processing": {
-        "attempted": 3,
-        "processed": 3,
-        "successful": 3,
+        "attempted": 0,
+        "processed": 0,
+        "successful": 0,
         "relevant (>=0.3)": 0,
-        "average_relevance": 0.13333333333333333
+        "average_relevance": 0
       },
       "image_processing": {
         "attempted_download": 0,
@@ -26,18 +25,18 @@
         "successful_api": 0
       },
       "facebook_processing": {
-        "attempted": 3,
-        "successful": 3,
-        "extracted_texts": 3
+        "attempted": 2,
+        "successful": 2,
+        "extracted_texts": 2
       },
       "timings_seconds": {
-        "pdf_extraction": 0.55,
-        "pdf_text_extraction": 1.54,
+        "pdf_extraction": 0.65,
+        "pdf_text_extraction": 0.78,
         "image_download": 0,
-        "html_scraping": 13.53,
+        "html_scraping": 0,
         "image_api": 0,
-        "facebook_processing": 35.33,
-        "facebook_text_extraction": 1.54,
+        "facebook_processing": 31.69,
+        "facebook_text_extraction": 0.78,
         "stats_consolidation": 0.0
       }
     }
@@ -282,20 +281,15 @@
       }
     ],
     "facebook_texts": {
-      "https://www.facebook.com/permalink.php?story_fbid=pfbid0TzCZwTAWQvxGLNMQ77dhngX98TVYedA6pB4XL5ksMGojoTp6ju7V5YawYRwedsACl&id=100092180403233&rdid=fGJGXkUs6xgloihe": {
-        "extracted_text": "Publicación de Chimbot e Comenta\nChimbot e Comenta\n15 de abril  · \nSUNASS PR OMUEVE ADECU ADA CLORACIÓN EN A GUA PO TABLE DE C OLEGIOS DE SANT A Y CASMA\nLa cloración elimina bacterias, virus y otros patógenos que pueden causar enfermedades como  \ndiarrea y cólera.\nA fin de promover el consumo de agua segura y la adecuada prestación del servicio por parte de  \nSedachimbote S. A. en las escuelas, la Superintendencia Nacional de Servicios de Saneamiento  \n(Sunass) monitorea los niveles de cloro en el agua potable de 12 colegios priorizados de las provincias  \nde Santa y Casma.\nSegún el R eglamento de la Calidad del Agua para Consumo Humano, el nivel de cloro residual no  \ndebe ser inferior a 0.5 mg/l ni superior a 1 mg/l para garantizar que el agua sea apta para el consumo  \nhumano. La cloración elimina bacterias, virus y otros patógenos que pueden causar enfermedades  \ncomo diarrea y cólera.\nLos colegios forman parte del Programa Educativo del regulador y son: T eresa Gonzales de F anning,  \nJosé María Arguedas, Enrique Meiggs, José Santos Chocano y Manuel Gonzales Prada, de Chimbote;  \nPedro P ablo Atusparia y Juan V aler Sandoval, de Nuevo Chimbote; R epública de Chile, Mariscal  \nLuzuriaga, Agustin Evans, José Olaya e Inmaculada Concepción, de Casma.\nAdemás, la Sunass orienta y sensibiliza a la comunidad educativa para fomentar prácticas  \nresponsables en el uso y reúso del agua potable. Asimismo, sobre el mantenimiento, limpieza y  \ndesinfección de los tanques de almacenamiento del servicio, que debe realizarse, al menos, dos veces  \nal año, para mantenerse la calidad del agua que consumen los estudiantes.\nLa Sunass tiene a disposición su línea directa en Chimbote (043) 366071 y el Fono Sunass 1899 para  \norientación sobre el servicio de agua potable y alcantarillado y su Programa Educativo. T ambién se  \npuede visitar su oficina de Chimbote en la av. P ardo 272, de 8:30 a. m. a 5:30 p. m.\nIniciar sesión\n\n3\nMe gusta\n Comentar\nIniciar sesión",
+      "https://www.facebook.com/photo?fbid=122113948808817608&set=a.122095373924817608": {
+        "extracted_text": "Foco R egión\n15 de abril  · \n 𝐀 𝐑 𝐄 𝐐 𝐔 𝐈 𝐏 𝐀 : 𝟖 𝟗  % 𝐃 𝐄  𝐔 𝐒 𝐔 𝐀 𝐑 𝐈 𝐎 𝐒  𝐃 𝐄  𝐒 𝐄 𝐃 𝐀 𝐏 𝐀 𝐑  𝐃 𝐄 𝐒 𝐂 𝐎 𝐍 𝐎 𝐂 𝐄  𝐂 𝐔 𝐀 ́𝐍 𝐓 𝐀  𝐀 𝐆 𝐔 𝐀  𝐏 𝐎 𝐓 𝐀 𝐁 𝐋 𝐄  𝐂 𝐎 𝐍 𝐒 𝐔 𝐌 𝐄  𝐀 𝐋  𝐌 𝐄 𝐒\n Una encuesta de Sunass reveló que la gran mayoría de usuarios de Sedapar en Arequipa no sabe cuánta agua\nconsume mensualmente. Solo el 11 % está al tanto de su volumen de consumo y su facturación.\n Además, el 82 % de usuarios que revisan su recibo lo hacen únicamente para ver cuánto deben pagar, y no para\ncontrolar su consumo. Mientras tanto, el 62.8 % considera que su consumo es razona … Ver más\n4 1\nMe gusta\n Comentar\nIniciar sesión\n¿Olvidast e tu contraseña?Ve más en F acebook\nCorreo electrónico o númer …\nContraseña\nIniciar sesión\no\nCrear cuenta nuev a",
         "pdf_path": "C:\\Users\\emers\\Documents\\SUNASS_CAMI_CENTRO\\DEV_SUNASS\\NewsAgent\\base\\22042025\\22042025-2.pdf",
-        "processed_date": "22052025"
+        "processed_date": "23052025"
       },
-      "https://www.facebook.com/groups/142925476261791/permalink/1713016105919379/?rdid=qlREPYVsMHdGHPMI&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2Fp%2F1EaGLriuJo%2F": {
-        "extracted_text": "Huancav elica Noticias | #Huancav elica 👷📝🚰🚰 6,4 mil miembros·\nUnirte al grupo\nHuancav elica Noticias\nDiario Primicia Macr oregional  · 16 de abril  · \n#Huancav elica \n#SUNASS  VERIFICA ABASTECIMIENT O DE A GUA PO TABLE EN ZONAS INTERMEDIAS Y AL TAS TRAS  \nCORTE DEL SERVICIO\nRegulador exhorta a Emapa Huancavelica restablecer el agua potable a la brevedad posible. \n | La Superintendencia Nacional de Servicios de Saneamiento (Sunass) monitorea el  \nabastecimiento alternativo de agua potable, mediante camiones cisterna, tras el corte del servicio  \nque afectó a los sectores 01 San Cristóbal, 02 Puyhuan, 04 Santa Inés P ata, 06 Santa Bárbara, 08 San  \nGerónimo, 09 Ascensión y 10 Pucarumi, debido a fallas en el reservorio de Cconchopata.\n Asimismo, se verifica el abastecimiento en los sectores de las zonas altas 4 (Santa Inés P ata) y 6  \n(Santa Bárbara), donde se realizan trabajos de detección de fugas no visibles con geófonos y la  \ninstalación de una válvula para identificar la pérdida de presión del servicio en el sistema. \n La Sunass monitorea los trabajos de calicatas que realiza la EPS Emapa Huancavelica, en el tramo  \ndetectado para ubicar la fuga no visible, desde el río Disparate hasta el Hospital Departamental.  \nAsimismo, hace seguimiento para que se cumpla con los horarios programados de distribución del  \nagua potable.\n La entidad recuerda que el pago por los servicios deberá ser con base al registro del medidor y,  \nen aquellos casos de asignación de consumo, corresponde solo a los días efectivamente brindados. \n Al respecto, el regulador tiene a disposición sus canales de orientación a los usuarios como el  \nFono Sunass 1899 y la línea directa en Huancavelica (067) 291027, así como su oficina del jr. 28 de  \nAbril n.° 503 – 505, de lunes a viernes de 8:30 a. m. a 5:30 p. m.\nMe gusta\n Comentar\n Comp artir\nIniciar sesión\n¿Olvidast e tu contraseña?Ve más en F acebook\nCorreo electrónico o númer …\nContraseña\nIniciar sesión\no\nCrear cuenta nuev a",
+      "https://www.facebook.com/diarioprimiciahyo/posts/pfbid0MyvvUrEXMwK9JweVexky3uoJu9xYaG5CrP4wLPi25vuo4i4su39fj8bZe4HjAyAYl?rdid=WQIs6UTvdY7Bm09T": {
+        "extracted_text": "Publicación de Diar io Pr imicia Macr oregional\nDiario Primicia Macr oregional\n16 de abril  · \n#Huancav elica \n#SUNASS  VERIFICA ABASTECIMIENT O DE A GUA PO TABLE EN ZONAS INTERMEDIAS Y AL TAS TRAS  \nCORTE DEL SERVICIO\nRegulador exhorta a Emapa Huancavelica restablecer el agua potable a la brevedad posible. \n | La Superintendencia Nacional de Servicios de Saneamiento (Sunass) monitorea el abastecimiento  \nalternativo de agua potable, mediante camiones cisterna, tras el corte del servicio que afectó a los  \nsectores 01 San Cristóbal, 02 Puyhuan, 04 Santa Inés P ata, 06 Santa Bárbara, 08 San Gerónimo, 09  \nAscensión y 10 Pucarumi, debido a fallas en el reservorio de Cconchopata.\n Asimismo, se verifica el abastecimiento en los sectores de las zonas altas 4 (Santa Inés P ata) y 6  \n(Santa Bárbara), donde se realizan trabajos de detección de fugas no visibles con geófonos y la  \ninstalación de una válvula para identificar la pérdida de presión del servicio en el sistema. \n La Sunass monitorea los trabajos de calicatas que realiza la EPS Emapa Huancavelica, en el tramo  \ndetectado para ubicar la fuga no visible, desde el río Disparate hasta el Hospital Departamental.  \nAsimismo, hace seguimiento para que se cumpla con los horarios programados de distribución del  \nagua potable.\n La entidad recuerda que el pago por los servicios deberá ser con base al registro del medidor y, en  \naquellos casos de asignación de consumo, corresponde solo a los días efectivamente brindados. \n Al respecto, el regulador tiene a disposición sus canales de orientación a los usuarios como el  \nFono Sunass 1899 y la línea directa en Huancavelica (067) 291027, así como su oficina del jr. 28 de  \nAbril n.° 503 – 505, de lunes a viernes de 8:30 a. m. a 5:30 p. m.\n2\nMe gusta\n Comentar\nIniciar sesión\n\nIniciar sesión",
         "pdf_path": "C:\\Users\\emers\\Documents\\SUNASS_CAMI_CENTRO\\DEV_SUNASS\\NewsAgent\\base\\22042025\\22042025-1.pdf",
-        "processed_date": "22052025"
-      },
-      "https://www.facebook.com/photo?fbid=629540879905471&set=a.115323967993834": {
-        "extracted_text": "Valle del T ambo Informa\n15 de abril  · \n#VTI\nREPOR TAN QUE 89% DE USU ARIOS DE SED APAR DESC ONOCE CU ÁNTA AGUA PO TABLE C ONSUME\nUna encuesta realizada por la Superintendencia Nacional de Servicios de Saneamiento (Sunass) en Arequipa\nmetropolitana reveló que el 89 % de usuarios de Sedapar no conoce el volumen de agua potable que consume\ncada mes. Esta cifra es preocupante debido a que con este desconocimiento no permite planificar mejor su uso y\nlograr, incluso, un ahorro considerable de dinero.\nAdemás, la muest … Ver más\n1\nMe gusta\n Comentar\nIniciar sesión\n¿Olvidast e tu contraseña?Ve más en F acebook\nCorreo electrónico o númer …\nContraseña\nIniciar sesión\no\nCrear cuenta nuev a",
-        "pdf_path": "C:\\Users\\emers\\Documents\\SUNASS_CAMI_CENTRO\\DEV_SUNASS\\NewsAgent\\base\\22042025\\22042025-3.pdf",
-        "processed_date": "22052025"
+        "processed_date": "23052025"
       }
     }
   }

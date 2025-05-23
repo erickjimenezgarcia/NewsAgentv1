@@ -9973,3 +9973,462 @@ violations {
 2025-05-22 16:42:22,670 - main_orchestrator - INFO - ==================================================
 2025-05-22 16:42:22,670 - main_orchestrator - INFO - PIPELINE FINALIZADO en 51.96 segundos.
 2025-05-22 16:42:22,671 - main_orchestrator - INFO - ==================================================
+2025-05-23 09:26:56,111 - main_orchestrator - INFO - ==================================================
+2025-05-23 09:26:56,112 - main_orchestrator - INFO - INICIANDO PIPELINE DE SCRAPING
+2025-05-23 09:26:56,112 - main_orchestrator - INFO - Usando fecha: 22042025
+2025-05-23 09:26:56,113 - main_orchestrator - INFO - ==================================================
+2025-05-23 09:26:56,126 - lib.config_manager - INFO - Configuración cargada desde C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\config.yaml
+2025-05-23 09:26:56,128 - lib.config_manager - INFO - Clave API de Google cargada desde C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\credentials/api_keys.yaml
+2025-05-23 09:26:56,129 - main_orchestrator - INFO - Configuración y rutas cargadas.
+2025-05-23 09:26:56,130 - lib.history_tracker - INFO - Historial cargado desde C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\codigo\lib\history\processed_urls.json con 63 URLs.
+2025-05-23 09:26:56,130 - main_orchestrator - INFO - Deduplicador optimizado inicializado correctamente
+2025-05-23 09:26:56,131 - lib.request_utils - INFO - Sesión global con reintentos inicializada
+2025-05-23 09:26:56,131 - lib.api_client - INFO - API Gemini configurada con modelo: gemini-1.5-pro-latest
+2025-05-23 09:26:56,132 - lib.image_processor - INFO - Cliente Gemini API inicializado con modelo gemini-1.5-pro-latest
+2025-05-23 09:26:56,132 - main_orchestrator - INFO - Componentes inicializados (History, Scraper, ImageProcessor, FacebookProcessor).
+2025-05-23 09:26:56,132 - main_orchestrator - INFO - --- Paso 1: Extrayendo enlaces del PDF ---
+2025-05-23 09:26:56,179 - lib.pdf_processor - INFO - Abriendo PDF: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025.pdf (8 páginas)
+2025-05-23 09:26:56,664 - lib.pdf_processor - INFO - Se extrajeron 103 enlaces URI (no mailto) de 22042025.pdf.
+2025-05-23 09:26:56,664 - main_orchestrator - INFO - PDF procesado en 0.53 seg. Enlaces encontrados: 103
+2025-05-23 09:26:56,679 - lib.file_manager - INFO - Datos guardados en CSV: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\In\links_extracted_22042025.csv
+2025-05-23 09:26:56,680 - main_orchestrator - INFO - --- Paso 1.1: Extrayendo texto del PDF por secciones ---
+2025-05-23 09:26:56,681 - lib.text_extractor - INFO - Abriendo PDF para extracción de texto: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025.pdf (8 páginas)
+2025-05-23 09:26:56,779 - lib.text_extractor - INFO - Texto del PDF extraído y guardado en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_pdf_22042025\pdf_text_22042025.json
+2025-05-23 09:26:56,780 - lib.text_extractor - INFO - Se encontraron 1 secciones con un total de 8 párrafos
+2025-05-23 09:26:56,780 - main_orchestrator - INFO - Texto del PDF extraído en 0.10 seg. Guardado en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_pdf_22042025\pdf_text_22042025.json
+2025-05-23 09:26:56,781 - main_orchestrator - INFO - --- Paso 2: Filtrando URLs por historial ---
+2025-05-23 09:26:56,781 - lib.history_tracker - INFO - Filtradas 71 URLs ya procesadas del lote actual.
+2025-05-23 09:26:56,781 - main_orchestrator - INFO - URLs nuevas para procesar: 32 (de 103 total)
+2025-05-23 09:26:56,782 - main_orchestrator - INFO - --- Paso 2.1: Analizando duplicados basados en contenido ---
+2025-05-23 09:26:56,782 - selenium_extractor - INFO - SeleniumContentExtractor inicializado con caché en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\cache\dedup\content
+2025-05-23 09:26:56,799 - content_deduplicator - INFO - ContentDeduplicator inicializado con caché en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\cache\dedup
+2025-05-23 09:26:56,799 - content_deduplicator - INFO - Analizando 32 URLs para encontrar duplicados...
+2025-05-23 09:26:56,800 - content_deduplicator - INFO - Procesando 31 URLs del dominio facebook.com
+2025-05-23 09:26:56,824 - content_deduplicator - INFO - Análisis completado en 0.02 segundos
+2025-05-23 09:26:56,824 - content_deduplicator - INFO - URLs totales: 32, Únicas: 1, En grupos: 28
+2025-05-23 09:26:56,824 - content_deduplicator - INFO - Se realizaron 39 comparaciones (1599.2/seg), evitando 0
+2025-05-23 09:26:56,825 - content_deduplicator - INFO - Grupos de duplicados encontrados: 2
+2025-05-23 09:26:56,826 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\duplicates_analysis_22042025.json
+2025-05-23 09:26:56,826 - main_orchestrator - INFO - Análisis de duplicados completado: 29 URLs duplicadas filtradas
+2025-05-23 09:26:56,826 - main_orchestrator - INFO - URLs después de filtrar duplicados: 3
+2025-05-23 09:26:56,826 - main_orchestrator - INFO - Estadísticas de duplicados guardadas en C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\duplicates_analysis_22042025.json
+2025-05-23 09:26:56,827 - main_orchestrator - INFO - --- Paso 3: Clasificando URLs ---
+2025-05-23 09:26:56,827 - url_classifier - INFO - URLClassifier inicializado con umbrales: {'facebook': 0.85, 'youtube': 0.95, 'news': 0.9, 'document': 0.98, 'image': 0.99, 'media': 0.95, 'government': 0.9, 'other': 0.85, 'default': 0.88}
+2025-05-23 09:26:56,828 - main_orchestrator - WARNING - Error en clasificación avanzada: 'dict' object has no attribute 'lower'. Usando clasificación estándar.
+2025-05-23 09:26:56,828 - lib.url_manager - INFO - Clasificación de 3 URLs:
+2025-05-23 09:26:56,829 - lib.url_manager - INFO -  - SOCIAL: 3
+2025-05-23 09:26:56,830 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Social\social_links_22042025_unprocessed.json
+2025-05-23 09:26:56,830 - main_orchestrator - INFO - --- Paso 4: Procesando Imágenes (Descarga) ---
+2025-05-23 09:26:56,831 - main_orchestrator - INFO - No hay nuevas URLs de imágenes para descargar.
+2025-05-23 09:26:56,831 - main_orchestrator - INFO - --- Paso 5: Procesando HTML (Scraping) ---
+2025-05-23 09:26:56,831 - main_orchestrator - INFO - No hay nuevas URLs HTML para scrapear.
+2025-05-23 09:26:56,831 - main_orchestrator - INFO - --- Paso 6: Procesando Imágenes Descargadas (API) ---
+2025-05-23 09:26:56,832 - main_orchestrator - INFO - No hubo imágenes descargadas o ya están procesadas.
+2025-05-23 09:26:56,832 - main_orchestrator - INFO - --- Paso 7: Procesando URLs de Facebook ---
+2025-05-23 09:26:56,832 - main_orchestrator - INFO - Leyendo archivo social para la fecha 22042025: social_links_22042025_unprocessed.json
+2025-05-23 09:26:56,845 - main_orchestrator - INFO - Encontradas 2 URLs de Facebook para procesar
+2025-05-23 09:26:56,845 - main_orchestrator - INFO - Asegurando que exista el directorio de salida: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output
+2025-05-23 09:26:56,846 - lib.facebook_processor - INFO - Iniciando procesamiento paralelo de 2 URLs de Facebook para la fecha 22042025...
+2025-05-23 09:26:56,858 - lib.facebook_processor - INFO - Procesando URL de Facebook (2): https://www.facebook.com/photo?fbid=1169198698550401&set=a.479540714182873
+2025-05-23 09:26:56,859 - lib.facebook_processor - INFO - Procesando URL de Facebook (1): https://www.facebook.com/permalink.php?story_fbid=pfbid06u3kqH3zC7LaCNYixodwUjR7dpgY84Y2HkdEmXaPnNrvy5WSWkCeVUtYzix4ork8l&id=100062993063417&rdid=W7M6TZM9WxOnYRNM
+2025-05-23 09:27:31,821 - lib.facebook_processor - INFO - PDF guardado exitosamente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-1.pdf
+2025-05-23 09:27:33,937 - lib.facebook_processor - INFO - PDF guardado exitosamente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-2.pdf
+2025-05-23 09:27:37,273 - lib.facebook_processor - INFO - Progreso Facebook: 2/2 en 40.43 seg.
+2025-05-23 09:27:37,276 - lib.facebook_processor - INFO - Resultados de Facebook guardados en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_results_22042025.json
+2025-05-23 09:27:37,276 - lib.facebook_processor - INFO - Procesamiento de Facebook completado: 2/2 exitosos en 40.43 segundos.
+2025-05-23 09:27:37,276 - main_orchestrator - INFO - Procesamiento de URLs de Facebook completado en 40.43 seg.
+2025-05-23 09:27:37,277 - lib.history_tracker - INFO - Añadidas 2 nuevas URLs al historial.
+2025-05-23 09:27:37,278 - lib.history_tracker - INFO - Historial guardado en C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\codigo\lib\history\processed_urls.json con 65 URLs.
+2025-05-23 09:27:37,278 - main_orchestrator - INFO - --- Paso 9: Extrayendo Texto de PDFs de Facebook ---
+2025-05-23 09:27:37,402 - lib.facebook_processor - INFO - Texto extraído exitosamente del PDF: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-1.pdf
+2025-05-23 09:27:37,491 - lib.facebook_processor - INFO - Texto extraído exitosamente del PDF: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-2.pdf
+2025-05-23 09:27:37,491 - lib.facebook_processor - INFO - Texto extraído de 2 PDFs de Facebook
+2025-05-23 09:27:37,492 - main_orchestrator - INFO - Extracción de texto de PDFs de Facebook completada en 0.21 seg.
+2025-05-23 09:27:37,492 - main_orchestrator - INFO - Texto extraído de 2 PDFs de Facebook
+2025-05-23 09:27:37,493 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_texts_22042025.json
+2025-05-23 09:27:37,493 - main_orchestrator - INFO - Textos de PDFs de Facebook guardados en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_texts_22042025.json
+2025-05-23 09:27:37,493 - main_orchestrator - INFO - --- Paso 10: Generando Estadísticas y Consolidando ---
+2025-05-23 09:27:37,495 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 09:27:37,496 - lib.file_manager - INFO - Estadísticas guardadas: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 09:27:37,496 - lib.file_manager - INFO - Contenido estadísticas: {'run_timestamp': '2025-05-23T09:27:37.494275', 'date_processed': '22042025', 'total_urls_in_pdf': 103, 'new_urls_processed_count': 3, 'history_total_urls': 65, 'categories': {'social': 3}, 'html_processing': {'attempted': 0, 'processed': 0, 'successful': 0, 'relevant (>=0.3)': 0, 'average_relevance': 0}, 'image_processing': {'attempted_download': 0, 'successful_download': 0, 'attempted_api': 0, 'successful_api': 0}, 'facebook_processing': {'attempted': 2, 'successful': 2, 'extracted_texts': 2}, 'timings_seconds': {'pdf_extraction': 0.53, 'pdf_text_extraction': 0.21, 'image_download': 0, 'html_scraping': 0, 'image_api': 0, 'facebook_processing': 40.43, 'facebook_text_extraction': 0.21, 'stats_consolidation': 0.0}}
+2025-05-23 09:27:37,497 - main_orchestrator - INFO - Estadísticas generadas y guardadas en 0.00 seg.
+2025-05-23 09:27:37,497 - main_orchestrator - INFO - --- Paso 9: Verificando contenido HTML e imágenes existentes ---
+2025-05-23 09:27:37,511 - main_orchestrator - INFO - Cargando contenido HTML de archivo existente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_texts_22042025.json
+2025-05-23 09:27:37,525 - main_orchestrator - INFO - Cargando contenido de imágenes de archivo existente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Images\downloads\22042025\texto_imagenes_api.json
+2025-05-23 09:27:37,538 - main_orchestrator - INFO - Texto del PDF cargado para consolidación desde: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_pdf_22042025\pdf_text_22042025.json
+2025-05-23 09:27:37,541 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\consolidated_22042025.json
+2025-05-23 09:27:37,541 - main_orchestrator - INFO - Resultados consolidados guardados en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\consolidated_22042025.json
+2025-05-23 09:27:37,541 - main_orchestrator - INFO - --- Paso 12: Realizando Limpieza Semántica ---
+2025-05-23 09:27:37,570 - main_orchestrator - INFO - Realizando limpieza semántica...
+2025-05-23 09:27:37,570 - semantic_cleaner - INFO - Iniciando limpieza semántica del archivo consolidado...
+2025-05-23 09:27:37,571 - semantic_cleaner - INFO - Extraídos 8 textos de PDF
+2025-05-23 09:27:37,571 - semantic_cleaner - INFO - Extraídos 3 textos de HTML
+2025-05-23 09:27:37,571 - semantic_cleaner - INFO - Extraídos 0 textos de imágenes
+2025-05-23 09:27:37,572 - semantic_cleaner - INFO - Extraídos 2 textos de Facebook
+2025-05-23 09:27:38,053 - semantic_cleaner - INFO - Se identificaron 13 grupos de textos similares
+2025-05-23 09:27:38,053 - semantic_cleaner - INFO - Se seleccionaron 13 textos representativos
+2025-05-23 09:27:38,054 - semantic_cleaner - INFO - Limpieza semántica completada con éxito
+2025-05-23 09:27:38,054 - main_orchestrator - INFO - Guardando JSON limpio en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.json
+2025-05-23 09:27:38,056 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.json
+2025-05-23 09:27:38,057 - main_orchestrator - INFO - Convirtiendo a formato Markdown y guardando en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.md
+2025-05-23 09:27:38,063 - markdown_converter - INFO - Archivo Markdown guardado en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.md
+2025-05-23 09:27:38,066 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 09:27:38,067 - lib.file_manager - INFO - Estadísticas guardadas: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 09:27:38,067 - lib.file_manager - INFO - Contenido estadísticas: {'run_timestamp': '2025-05-23T09:27:37.494275', 'date_processed': '22042025', 'total_urls_in_pdf': 103, 'new_urls_processed_count': 3, 'history_total_urls': 65, 'categories': {'social': 3}, 'html_processing': {'attempted': 0, 'processed': 0, 'successful': 0, 'relevant (>=0.3)': 0, 'average_relevance': 0}, 'image_processing': {'attempted_download': 0, 'successful_download': 0, 'attempted_api': 0, 'successful_api': 0}, 'facebook_processing': {'attempted': 2, 'successful': 2, 'extracted_texts': 2}, 'timings_seconds': {'pdf_extraction': 0.53, 'pdf_text_extraction': 0.21, 'image_download': 0, 'html_scraping': 0, 'image_api': 0, 'facebook_processing': 40.43, 'facebook_text_extraction': 0.21, 'stats_consolidation': 0.0, 'semantic_cleaning': 0.52}}
+2025-05-23 09:27:38,068 - main_orchestrator - INFO - Limpieza semántica completada en 0.52 seg.
+2025-05-23 09:27:38,068 - main_orchestrator - INFO - --- Paso 12.1: Integrando textos de Facebook en archivos limpios ---
+2025-05-23 09:27:38,068 - facebook_extractor_fix - INFO - Ruta del proyecto: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent
+2025-05-23 09:27:38,069 - facebook_extractor_fix - INFO - Buscando archivo de Facebook en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_texts_22042025.json
+2025-05-23 09:27:38,101 - facebook_extractor_fix - INFO - Estructura de los datos de Facebook: https://www.facebook.com/permalink.php?story_fbid=pfbid06u3kqH3zC7LaCNYixodwUjR7dpgY84Y2HkdEmXaPnNrvy5WSWkCeVUtYzix4ork8l&id=100062993063417&rdid=W7M6TZM9WxOnYRNM
+2025-05-23 09:27:38,102 - facebook_extractor_fix - INFO - Claves en la primera entrada: ['extracted_text', 'pdf_path', 'processed_date']
+2025-05-23 09:27:38,124 - facebook_extractor_fix - INFO - Sección de Facebook añadida al archivo C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.md
+2025-05-23 09:27:38,125 - facebook_extractor_fix - INFO - Se han añadido 2 textos de Facebook al archivo limpio
+2025-05-23 09:27:38,126 - main_orchestrator - INFO - Textos de Facebook integrados correctamente en archivos limpios
+2025-05-23 09:27:38,127 - main_orchestrator - INFO - --- Limpieza Final ---
+2025-05-23 09:27:38,129 - main_orchestrator - INFO - ==================================================
+2025-05-23 09:27:38,130 - main_orchestrator - INFO - PIPELINE FINALIZADO en 42.02 segundos.
+2025-05-23 09:27:38,130 - main_orchestrator - INFO - ==================================================
+2025-05-23 10:54:33,240 - main_orchestrator - INFO - ==================================================
+2025-05-23 10:54:33,241 - main_orchestrator - INFO - INICIANDO PIPELINE DE SCRAPING
+2025-05-23 10:54:33,242 - main_orchestrator - INFO - Usando fecha: 22042025
+2025-05-23 10:54:33,242 - main_orchestrator - INFO - ==================================================
+2025-05-23 10:54:33,248 - lib.config_manager - INFO - Configuración cargada desde C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\config.yaml
+2025-05-23 10:54:33,249 - lib.config_manager - INFO - Clave API de Google cargada desde C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\credentials/api_keys.yaml
+2025-05-23 10:54:33,251 - main_orchestrator - INFO - Configuración y rutas cargadas.
+2025-05-23 10:54:33,253 - lib.history_tracker - INFO - Historial cargado desde C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\codigo\lib\history\processed_urls.json con 65 URLs.
+2025-05-23 10:54:33,255 - main_orchestrator - INFO - Deduplicador optimizado inicializado correctamente
+2025-05-23 10:54:33,260 - lib.api_client - INFO - API Gemini configurada con modelo: gemini-1.5-pro-latest
+2025-05-23 10:54:33,262 - lib.image_processor - INFO - Cliente Gemini API inicializado con modelo gemini-1.5-pro-latest
+2025-05-23 10:54:33,263 - main_orchestrator - INFO - Componentes inicializados (History, Scraper, ImageProcessor, FacebookProcessor).
+2025-05-23 10:54:33,263 - main_orchestrator - INFO - --- Paso 1: Extrayendo enlaces del PDF ---
+2025-05-23 10:54:33,308 - lib.pdf_processor - INFO - Abriendo PDF: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025.pdf (8 páginas)
+2025-05-23 10:54:33,912 - lib.pdf_processor - INFO - Se extrajeron 103 enlaces URI (no mailto) de 22042025.pdf.
+2025-05-23 10:54:33,913 - main_orchestrator - INFO - PDF procesado en 0.65 seg. Enlaces encontrados: 103
+2025-05-23 10:54:33,934 - lib.file_manager - INFO - Datos guardados en CSV: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\In\links_extracted_22042025.csv
+2025-05-23 10:54:33,934 - main_orchestrator - INFO - --- Paso 1.1: Extrayendo texto del PDF por secciones ---
+2025-05-23 10:54:33,936 - lib.text_extractor - INFO - Abriendo PDF para extracción de texto: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025.pdf (8 páginas)
+2025-05-23 10:54:34,050 - lib.text_extractor - INFO - Texto del PDF extraído y guardado en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_pdf_22042025\pdf_text_22042025.json
+2025-05-23 10:54:34,051 - lib.text_extractor - INFO - Se encontraron 1 secciones con un total de 8 párrafos
+2025-05-23 10:54:34,051 - main_orchestrator - INFO - Texto del PDF extraído en 0.12 seg. Guardado en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_pdf_22042025\pdf_text_22042025.json
+2025-05-23 10:54:34,052 - main_orchestrator - INFO - --- Paso 2: Filtrando URLs por historial ---
+2025-05-23 10:54:34,052 - lib.history_tracker - INFO - Filtradas 73 URLs ya procesadas del lote actual.
+2025-05-23 10:54:34,052 - main_orchestrator - INFO - URLs nuevas para procesar: 30 (de 103 total)
+2025-05-23 10:54:34,052 - main_orchestrator - INFO - --- Paso 2.1: Analizando duplicados basados en contenido ---
+2025-05-23 10:54:34,053 - selenium_extractor - INFO - SeleniumContentExtractor inicializado con caché en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\cache\dedup\content
+2025-05-23 10:54:34,056 - content_deduplicator - INFO - ContentDeduplicator inicializado con caché en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\cache\dedup
+2025-05-23 10:54:34,056 - content_deduplicator - INFO - Analizando 30 URLs para encontrar duplicados...
+2025-05-23 10:54:34,057 - content_deduplicator - INFO - Procesando 29 URLs del dominio facebook.com
+2025-05-23 10:54:34,085 - content_deduplicator - INFO - Análisis completado en 0.03 segundos
+2025-05-23 10:54:34,085 - content_deduplicator - INFO - URLs totales: 30, Únicas: 1, En grupos: 26
+2025-05-23 10:54:34,086 - content_deduplicator - INFO - Se realizaron 36 comparaciones (1277.8/seg), evitando 0
+2025-05-23 10:54:34,086 - content_deduplicator - INFO - Grupos de duplicados encontrados: 2
+2025-05-23 10:54:34,088 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\duplicates_analysis_22042025.json
+2025-05-23 10:54:34,088 - main_orchestrator - INFO - Análisis de duplicados completado: 27 URLs duplicadas filtradas
+2025-05-23 10:54:34,089 - main_orchestrator - INFO - URLs después de filtrar duplicados: 3
+2025-05-23 10:54:34,089 - main_orchestrator - INFO - Estadísticas de duplicados guardadas en C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\duplicates_analysis_22042025.json
+2025-05-23 10:54:34,090 - main_orchestrator - INFO - --- Paso 3: Clasificando URLs ---
+2025-05-23 10:54:34,090 - url_classifier - INFO - URLClassifier inicializado con umbrales: {'facebook': 0.85, 'youtube': 0.95, 'news': 0.9, 'document': 0.98, 'image': 0.99, 'media': 0.95, 'government': 0.9, 'other': 0.85, 'default': 0.88}
+2025-05-23 10:54:34,091 - main_orchestrator - WARNING - Error en clasificación avanzada: 'dict' object has no attribute 'lower'. Usando clasificación estándar.
+2025-05-23 10:54:34,092 - lib.url_manager - INFO - Clasificación de 3 URLs:
+2025-05-23 10:54:34,093 - lib.url_manager - INFO -  - SOCIAL: 3
+2025-05-23 10:54:34,095 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Social\social_links_22042025_unprocessed.json
+2025-05-23 10:54:34,096 - main_orchestrator - INFO - --- Paso 4: Procesando Imágenes (Descarga) ---
+2025-05-23 10:54:34,096 - main_orchestrator - INFO - No hay nuevas URLs de imágenes para descargar.
+2025-05-23 10:54:34,097 - main_orchestrator - INFO - --- Paso 5: Procesando HTML (Scraping) ---
+2025-05-23 10:54:34,098 - main_orchestrator - INFO - No hay nuevas URLs HTML para scrapear.
+2025-05-23 10:54:34,099 - main_orchestrator - INFO - --- Paso 6: Procesando Imágenes Descargadas (API) ---
+2025-05-23 10:54:34,100 - main_orchestrator - INFO - No hubo imágenes descargadas o ya están procesadas.
+2025-05-23 10:54:34,101 - main_orchestrator - INFO - --- Paso 7: Procesando URLs de Facebook ---
+2025-05-23 10:54:34,101 - main_orchestrator - INFO - Leyendo archivo social para la fecha 22042025: social_links_22042025_unprocessed.json
+2025-05-23 10:54:34,127 - main_orchestrator - INFO - Encontradas 2 URLs de Facebook para procesar
+2025-05-23 10:54:34,127 - main_orchestrator - INFO - Asegurando que exista el directorio de salida: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output
+2025-05-23 10:54:34,128 - lib.facebook_processor - INFO - Iniciando procesamiento paralelo de 2 URLs de Facebook para la fecha 22042025...
+2025-05-23 10:54:34,135 - lib.facebook_processor - INFO - Procesando URL de Facebook (2): https://www.facebook.com/photo?fbid=9169253469869352&set=a.740299552764828
+2025-05-23 10:54:34,156 - lib.facebook_processor - INFO - Procesando URL de Facebook (1): https://www.facebook.com/permalink.php?story_fbid=pfbid0reYaJGKSrrrM5sH1sZBTvPsm8im1uhSwyjzjmE433Meqhw21yPtjcWuFU6LZfnb1l&id=100072108931277&rdid=h4uCPExW0ybiyePi
+2025-05-23 10:55:08,778 - lib.facebook_processor - INFO - PDF guardado exitosamente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-1.pdf
+2025-05-23 10:55:11,102 - lib.facebook_processor - INFO - PDF guardado exitosamente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-2.pdf
+2025-05-23 10:55:14,743 - lib.facebook_processor - INFO - Progreso Facebook: 2/2 en 40.61 seg.
+2025-05-23 10:55:14,745 - lib.facebook_processor - INFO - Resultados de Facebook guardados en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_results_22042025.json
+2025-05-23 10:55:14,746 - lib.facebook_processor - INFO - Procesamiento de Facebook completado: 2/2 exitosos en 40.62 segundos.
+2025-05-23 10:55:14,746 - main_orchestrator - INFO - Procesamiento de URLs de Facebook completado en 40.62 seg.
+2025-05-23 10:55:14,746 - lib.history_tracker - INFO - Añadidas 2 nuevas URLs al historial.
+2025-05-23 10:55:14,747 - lib.history_tracker - INFO - Historial guardado en C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\codigo\lib\history\processed_urls.json con 67 URLs.
+2025-05-23 10:55:14,748 - main_orchestrator - INFO - --- Paso 9: Extrayendo Texto de PDFs de Facebook ---
+2025-05-23 10:55:14,918 - lib.facebook_processor - INFO - Texto extraído exitosamente del PDF: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-1.pdf
+2025-05-23 10:55:15,790 - lib.facebook_processor - INFO - Texto extraído exitosamente del PDF: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-2.pdf
+2025-05-23 10:55:15,790 - lib.facebook_processor - INFO - Texto extraído de 2 PDFs de Facebook
+2025-05-23 10:55:15,791 - main_orchestrator - INFO - Extracción de texto de PDFs de Facebook completada en 1.04 seg.
+2025-05-23 10:55:15,791 - main_orchestrator - INFO - Texto extraído de 2 PDFs de Facebook
+2025-05-23 10:55:15,793 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_texts_22042025.json
+2025-05-23 10:55:15,795 - main_orchestrator - INFO - Textos de PDFs de Facebook guardados en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_texts_22042025.json
+2025-05-23 10:55:15,795 - main_orchestrator - INFO - --- Paso 10: Generando Estadísticas y Consolidando ---
+2025-05-23 10:55:15,797 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 10:55:15,798 - lib.file_manager - INFO - Estadísticas guardadas: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 10:55:15,798 - lib.file_manager - INFO - Contenido estadísticas: {'run_timestamp': '2025-05-23T10:55:15.796015', 'date_processed': '22042025', 'total_urls_in_pdf': 103, 'new_urls_processed_count': 3, 'history_total_urls': 67, 'categories': {'social': 3}, 'html_processing': {'attempted': 0, 'processed': 0, 'successful': 0, 'relevant (>=0.3)': 0, 'average_relevance': 0}, 'image_processing': {'attempted_download': 0, 'successful_download': 0, 'attempted_api': 0, 'successful_api': 0}, 'facebook_processing': {'attempted': 2, 'successful': 2, 'extracted_texts': 2}, 'timings_seconds': {'pdf_extraction': 0.65, 'pdf_text_extraction': 1.04, 'image_download': 0, 'html_scraping': 0, 'image_api': 0, 'facebook_processing': 40.62, 'facebook_text_extraction': 1.04, 'stats_consolidation': 0.0}}
+2025-05-23 10:55:15,799 - main_orchestrator - INFO - Estadísticas generadas y guardadas en 0.00 seg.
+2025-05-23 10:55:15,799 - main_orchestrator - INFO - --- Paso 9: Verificando contenido HTML e imágenes existentes ---
+2025-05-23 10:55:15,801 - main_orchestrator - INFO - Cargando contenido HTML de archivo existente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_texts_22042025.json
+2025-05-23 10:55:15,803 - main_orchestrator - INFO - Cargando contenido de imágenes de archivo existente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Images\downloads\22042025\texto_imagenes_api.json
+2025-05-23 10:55:15,824 - main_orchestrator - INFO - Texto del PDF cargado para consolidación desde: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_pdf_22042025\pdf_text_22042025.json
+2025-05-23 10:55:15,828 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\consolidated_22042025.json
+2025-05-23 10:55:15,828 - main_orchestrator - INFO - Resultados consolidados guardados en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\consolidated_22042025.json
+2025-05-23 10:55:15,829 - main_orchestrator - INFO - --- Paso 12: Realizando Limpieza Semántica ---
+2025-05-23 10:55:15,857 - main_orchestrator - INFO - Realizando limpieza semántica...
+2025-05-23 10:55:15,857 - semantic_cleaner - INFO - Iniciando limpieza semántica del archivo consolidado...
+2025-05-23 10:55:15,858 - semantic_cleaner - INFO - Extraídos 8 textos de PDF
+2025-05-23 10:55:15,858 - semantic_cleaner - INFO - Extraídos 3 textos de HTML
+2025-05-23 10:55:15,858 - semantic_cleaner - INFO - Extraídos 0 textos de imágenes
+2025-05-23 10:55:15,859 - semantic_cleaner - INFO - Extraídos 2 textos de Facebook
+2025-05-23 10:55:16,619 - semantic_cleaner - INFO - Se identificaron 13 grupos de textos similares
+2025-05-23 10:55:16,620 - semantic_cleaner - INFO - Se seleccionaron 13 textos representativos
+2025-05-23 10:55:16,620 - semantic_cleaner - INFO - Limpieza semántica completada con éxito
+2025-05-23 10:55:16,620 - main_orchestrator - INFO - Guardando JSON limpio en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.json
+2025-05-23 10:55:16,623 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.json
+2025-05-23 10:55:16,623 - main_orchestrator - INFO - Convirtiendo a formato Markdown y guardando en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.md
+2025-05-23 10:55:16,629 - markdown_converter - INFO - Archivo Markdown guardado en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.md
+2025-05-23 10:55:16,630 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 10:55:16,631 - lib.file_manager - INFO - Estadísticas guardadas: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 10:55:16,631 - lib.file_manager - INFO - Contenido estadísticas: {'run_timestamp': '2025-05-23T10:55:15.796015', 'date_processed': '22042025', 'total_urls_in_pdf': 103, 'new_urls_processed_count': 3, 'history_total_urls': 67, 'categories': {'social': 3}, 'html_processing': {'attempted': 0, 'processed': 0, 'successful': 0, 'relevant (>=0.3)': 0, 'average_relevance': 0}, 'image_processing': {'attempted_download': 0, 'successful_download': 0, 'attempted_api': 0, 'successful_api': 0}, 'facebook_processing': {'attempted': 2, 'successful': 2, 'extracted_texts': 2}, 'timings_seconds': {'pdf_extraction': 0.65, 'pdf_text_extraction': 1.04, 'image_download': 0, 'html_scraping': 0, 'image_api': 0, 'facebook_processing': 40.62, 'facebook_text_extraction': 1.04, 'stats_consolidation': 0.0, 'semantic_cleaning': 0.8}}
+2025-05-23 10:55:16,631 - main_orchestrator - INFO - Limpieza semántica completada en 0.80 seg.
+2025-05-23 10:55:16,632 - main_orchestrator - INFO - --- Paso 12.1: Integrando textos de Facebook en archivos limpios ---
+2025-05-23 10:55:16,632 - facebook_extractor_fix - INFO - Ruta del proyecto: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent
+2025-05-23 10:55:16,632 - facebook_extractor_fix - INFO - Buscando archivo de Facebook en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_texts_22042025.json
+2025-05-23 10:55:16,686 - facebook_extractor_fix - INFO - Estructura de los datos de Facebook: https://www.facebook.com/permalink.php?story_fbid=pfbid0reYaJGKSrrrM5sH1sZBTvPsm8im1uhSwyjzjmE433Meqhw21yPtjcWuFU6LZfnb1l&id=100072108931277&rdid=h4uCPExW0ybiyePi
+2025-05-23 10:55:16,686 - facebook_extractor_fix - INFO - Claves en la primera entrada: ['extracted_text', 'pdf_path', 'processed_date']
+2025-05-23 10:55:16,712 - facebook_extractor_fix - INFO - Sección de Facebook añadida al archivo C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.md
+2025-05-23 10:55:16,713 - facebook_extractor_fix - INFO - Se han añadido 2 textos de Facebook al archivo limpio
+2025-05-23 10:55:16,714 - main_orchestrator - INFO - Textos de Facebook integrados correctamente en archivos limpios
+2025-05-23 10:55:16,714 - main_orchestrator - INFO - --- Limpieza Final ---
+2025-05-23 10:55:16,714 - main_orchestrator - INFO - ==================================================
+2025-05-23 10:55:16,715 - main_orchestrator - INFO - PIPELINE FINALIZADO en 43.48 segundos.
+2025-05-23 10:55:16,715 - main_orchestrator - INFO - ==================================================
+2025-05-23 10:59:26,357 - main_orchestrator - INFO - ==================================================
+2025-05-23 10:59:26,357 - main_orchestrator - INFO - INICIANDO PIPELINE DE SCRAPING
+2025-05-23 10:59:26,358 - main_orchestrator - INFO - Usando fecha: 22042025
+2025-05-23 10:59:26,359 - main_orchestrator - INFO - ==================================================
+2025-05-23 10:59:26,361 - lib.config_manager - INFO - Configuración cargada desde C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\config.yaml
+2025-05-23 10:59:26,363 - lib.config_manager - INFO - Clave API de Google cargada desde C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\credentials/api_keys.yaml
+2025-05-23 10:59:26,364 - main_orchestrator - INFO - Configuración y rutas cargadas.
+2025-05-23 10:59:26,365 - lib.history_tracker - INFO - Historial cargado desde C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\codigo\lib\history\processed_urls.json con 67 URLs.
+2025-05-23 10:59:26,365 - main_orchestrator - INFO - Deduplicador optimizado inicializado correctamente
+2025-05-23 10:59:26,366 - lib.api_client - INFO - API Gemini configurada con modelo: gemini-1.5-pro-latest
+2025-05-23 10:59:26,366 - lib.image_processor - INFO - Cliente Gemini API inicializado con modelo gemini-1.5-pro-latest
+2025-05-23 10:59:26,366 - main_orchestrator - INFO - Componentes inicializados (History, Scraper, ImageProcessor, FacebookProcessor).
+2025-05-23 10:59:26,367 - main_orchestrator - INFO - --- Paso 1: Extrayendo enlaces del PDF ---
+2025-05-23 10:59:26,385 - lib.pdf_processor - INFO - Abriendo PDF: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025.pdf (8 páginas)
+2025-05-23 10:59:26,934 - lib.pdf_processor - INFO - Se extrajeron 103 enlaces URI (no mailto) de 22042025.pdf.
+2025-05-23 10:59:26,935 - main_orchestrator - INFO - PDF procesado en 0.57 seg. Enlaces encontrados: 103
+2025-05-23 10:59:26,939 - lib.file_manager - INFO - Datos guardados en CSV: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\In\links_extracted_22042025.csv
+2025-05-23 10:59:26,940 - main_orchestrator - INFO - --- Paso 1.1: Extrayendo texto del PDF por secciones ---
+2025-05-23 10:59:26,941 - lib.text_extractor - INFO - Abriendo PDF para extracción de texto: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025.pdf (8 páginas)
+2025-05-23 10:59:27,038 - lib.text_extractor - INFO - Texto del PDF extraído y guardado en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_pdf_22042025\pdf_text_22042025.json
+2025-05-23 10:59:27,039 - lib.text_extractor - INFO - Se encontraron 1 secciones con un total de 8 párrafos
+2025-05-23 10:59:27,039 - main_orchestrator - INFO - Texto del PDF extraído en 0.10 seg. Guardado en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_pdf_22042025\pdf_text_22042025.json
+2025-05-23 10:59:27,040 - main_orchestrator - INFO - --- Paso 2: Filtrando URLs por historial ---
+2025-05-23 10:59:27,040 - lib.history_tracker - INFO - Filtradas 75 URLs ya procesadas del lote actual.
+2025-05-23 10:59:27,041 - main_orchestrator - INFO - URLs nuevas para procesar: 28 (de 103 total)
+2025-05-23 10:59:27,041 - main_orchestrator - INFO - --- Paso 2.1: Analizando duplicados basados en contenido ---
+2025-05-23 10:59:27,041 - selenium_extractor - INFO - SeleniumContentExtractor inicializado con caché en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\cache\dedup\content
+2025-05-23 10:59:27,043 - content_deduplicator - INFO - ContentDeduplicator inicializado con caché en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\cache\dedup
+2025-05-23 10:59:27,043 - content_deduplicator - INFO - Analizando 28 URLs para encontrar duplicados...
+2025-05-23 10:59:27,043 - content_deduplicator - INFO - Procesando 27 URLs del dominio facebook.com
+2025-05-23 10:59:27,057 - content_deduplicator - INFO - Análisis completado en 0.01 segundos
+2025-05-23 10:59:27,057 - content_deduplicator - INFO - URLs totales: 28, Únicas: 1, En grupos: 24
+2025-05-23 10:59:27,058 - content_deduplicator - INFO - Se realizaron 33 comparaciones (2338.6/seg), evitando 0
+2025-05-23 10:59:27,058 - content_deduplicator - INFO - Grupos de duplicados encontrados: 2
+2025-05-23 10:59:27,059 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\duplicates_analysis_22042025.json
+2025-05-23 10:59:27,060 - main_orchestrator - INFO - Análisis de duplicados completado: 24 URLs duplicadas filtradas
+2025-05-23 10:59:27,060 - main_orchestrator - INFO - URLs después de filtrar duplicados: 4
+2025-05-23 10:59:27,060 - main_orchestrator - INFO - Estadísticas de duplicados guardadas en C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\duplicates_analysis_22042025.json
+2025-05-23 10:59:27,060 - main_orchestrator - INFO - --- Paso 3: Clasificando URLs ---
+2025-05-23 10:59:27,060 - url_classifier - INFO - URLClassifier inicializado con umbrales: {'facebook': 0.85, 'youtube': 0.95, 'news': 0.9, 'document': 0.98, 'image': 0.99, 'media': 0.95, 'government': 0.9, 'other': 0.85, 'default': 0.88}
+2025-05-23 10:59:27,061 - main_orchestrator - WARNING - Error en clasificación avanzada: 'dict' object has no attribute 'lower'. Usando clasificación estándar.
+2025-05-23 10:59:27,061 - lib.url_manager - INFO - Clasificación de 4 URLs:
+2025-05-23 10:59:27,061 - lib.url_manager - INFO -  - SOCIAL: 4
+2025-05-23 10:59:27,062 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Social\social_links_22042025_unprocessed.json
+2025-05-23 10:59:27,062 - main_orchestrator - INFO - --- Paso 4: Procesando Imágenes (Descarga) ---
+2025-05-23 10:59:27,063 - main_orchestrator - INFO - No hay nuevas URLs de imágenes para descargar.
+2025-05-23 10:59:27,063 - main_orchestrator - INFO - --- Paso 5: Procesando HTML (Scraping) ---
+2025-05-23 10:59:27,063 - main_orchestrator - INFO - No hay nuevas URLs HTML para scrapear.
+2025-05-23 10:59:27,064 - main_orchestrator - INFO - --- Paso 6: Procesando Imágenes Descargadas (API) ---
+2025-05-23 10:59:27,064 - main_orchestrator - INFO - No hubo imágenes descargadas o ya están procesadas.
+2025-05-23 10:59:27,064 - main_orchestrator - INFO - --- Paso 7: Procesando URLs de Facebook ---
+2025-05-23 10:59:27,065 - main_orchestrator - INFO - Leyendo archivo social para la fecha 22042025: social_links_22042025_unprocessed.json
+2025-05-23 10:59:27,086 - main_orchestrator - INFO - Encontradas 3 URLs de Facebook para procesar
+2025-05-23 10:59:27,087 - main_orchestrator - INFO - Asegurando que exista el directorio de salida: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output
+2025-05-23 10:59:27,087 - lib.facebook_processor - INFO - Iniciando procesamiento paralelo de 3 URLs de Facebook para la fecha 22042025...
+2025-05-23 10:59:27,100 - lib.facebook_processor - INFO - Procesando URL de Facebook (3): https://www.facebook.com/photo/?fbid=721410753566836&set=a.257328239975092
+2025-05-23 10:59:27,100 - lib.facebook_processor - INFO - Procesando URL de Facebook (2): https://www.facebook.com/photo/?fbid=721410753566836&set=a.257328239975092
+2025-05-23 10:59:27,101 - lib.facebook_processor - INFO - Procesando URL de Facebook (1): https://www.facebook.com/permalink.php?story_fbid=pfbid0gdz3Jt9XeV6CqoTTNaicfRqxFMk6MWSbX8L6CTS62eJjBpGkZjMWC4T2ym5HrUTHl&id=100065273659654&rdid=uFgc1hNpAT2S3DpG
+2025-05-23 10:59:52,676 - lib.facebook_processor - INFO - PDF guardado exitosamente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-3.pdf
+2025-05-23 10:59:54,025 - lib.facebook_processor - INFO - PDF guardado exitosamente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-1.pdf
+2025-05-23 10:59:54,817 - lib.facebook_processor - INFO - PDF guardado exitosamente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-2.pdf
+2025-05-23 10:59:58,771 - lib.facebook_processor - INFO - Progreso Facebook: 3/3 en 31.68 seg.
+2025-05-23 10:59:58,773 - lib.facebook_processor - INFO - Resultados de Facebook guardados en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_results_22042025.json
+2025-05-23 10:59:58,773 - lib.facebook_processor - INFO - Procesamiento de Facebook completado: 2/3 exitosos en 31.69 segundos.
+2025-05-23 10:59:58,774 - main_orchestrator - INFO - Procesamiento de URLs de Facebook completado en 31.69 seg.
+2025-05-23 10:59:58,774 - lib.history_tracker - INFO - Añadidas 2 nuevas URLs al historial.
+2025-05-23 10:59:58,775 - lib.history_tracker - INFO - Historial guardado en C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\codigo\lib\history\processed_urls.json con 69 URLs.
+2025-05-23 10:59:58,776 - main_orchestrator - INFO - --- Paso 9: Extrayendo Texto de PDFs de Facebook ---
+2025-05-23 10:59:58,950 - lib.facebook_processor - INFO - Texto extraído exitosamente del PDF: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-2.pdf
+2025-05-23 10:59:59,577 - lib.facebook_processor - INFO - Texto extraído exitosamente del PDF: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-1.pdf
+2025-05-23 10:59:59,578 - lib.facebook_processor - INFO - Texto extraído de 2 PDFs de Facebook
+2025-05-23 10:59:59,578 - main_orchestrator - INFO - Extracción de texto de PDFs de Facebook completada en 0.80 seg.
+2025-05-23 10:59:59,578 - main_orchestrator - INFO - Texto extraído de 2 PDFs de Facebook
+2025-05-23 10:59:59,579 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_texts_22042025.json
+2025-05-23 10:59:59,580 - main_orchestrator - INFO - Textos de PDFs de Facebook guardados en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_texts_22042025.json
+2025-05-23 10:59:59,580 - main_orchestrator - INFO - --- Paso 10: Generando Estadísticas y Consolidando ---
+2025-05-23 10:59:59,582 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 10:59:59,582 - lib.file_manager - INFO - Estadísticas guardadas: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 10:59:59,583 - lib.file_manager - INFO - Contenido estadísticas: {'run_timestamp': '2025-05-23T10:59:59.581105', 'date_processed': '22042025', 'total_urls_in_pdf': 103, 'new_urls_processed_count': 4, 'history_total_urls': 69, 'categories': {'social': 4}, 'html_processing': {'attempted': 0, 'processed': 0, 'successful': 0, 'relevant (>=0.3)': 0, 'average_relevance': 0}, 'image_processing': {'attempted_download': 0, 'successful_download': 0, 'attempted_api': 0, 'successful_api': 0}, 'facebook_processing': {'attempted': 3, 'successful': 2, 'extracted_texts': 2}, 'timings_seconds': {'pdf_extraction': 0.57, 'pdf_text_extraction': 0.8, 'image_download': 0, 'html_scraping': 0, 'image_api': 0, 'facebook_processing': 31.69, 'facebook_text_extraction': 0.8, 'stats_consolidation': 0.0}}
+2025-05-23 10:59:59,583 - main_orchestrator - INFO - Estadísticas generadas y guardadas en 0.00 seg.
+2025-05-23 10:59:59,583 - main_orchestrator - INFO - --- Paso 9: Verificando contenido HTML e imágenes existentes ---
+2025-05-23 10:59:59,584 - main_orchestrator - INFO - Cargando contenido HTML de archivo existente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_texts_22042025.json
+2025-05-23 10:59:59,585 - main_orchestrator - INFO - Cargando contenido de imágenes de archivo existente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Images\downloads\22042025\texto_imagenes_api.json
+2025-05-23 10:59:59,603 - main_orchestrator - INFO - Texto del PDF cargado para consolidación desde: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_pdf_22042025\pdf_text_22042025.json
+2025-05-23 10:59:59,606 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\consolidated_22042025.json
+2025-05-23 10:59:59,606 - main_orchestrator - INFO - Resultados consolidados guardados en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\consolidated_22042025.json
+2025-05-23 10:59:59,607 - main_orchestrator - INFO - --- Paso 12: Realizando Limpieza Semántica ---
+2025-05-23 10:59:59,626 - main_orchestrator - INFO - Realizando limpieza semántica...
+2025-05-23 10:59:59,627 - semantic_cleaner - INFO - Iniciando limpieza semántica del archivo consolidado...
+2025-05-23 10:59:59,627 - semantic_cleaner - INFO - Extraídos 8 textos de PDF
+2025-05-23 10:59:59,627 - semantic_cleaner - INFO - Extraídos 3 textos de HTML
+2025-05-23 10:59:59,627 - semantic_cleaner - INFO - Extraídos 0 textos de imágenes
+2025-05-23 10:59:59,628 - semantic_cleaner - INFO - Extraídos 2 textos de Facebook
+2025-05-23 11:00:00,437 - semantic_cleaner - INFO - Se identificaron 13 grupos de textos similares
+2025-05-23 11:00:00,437 - semantic_cleaner - INFO - Se seleccionaron 13 textos representativos
+2025-05-23 11:00:00,438 - semantic_cleaner - INFO - Limpieza semántica completada con éxito
+2025-05-23 11:00:00,438 - main_orchestrator - INFO - Guardando JSON limpio en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.json
+2025-05-23 11:00:00,440 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.json
+2025-05-23 11:00:00,441 - main_orchestrator - INFO - Convirtiendo a formato Markdown y guardando en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.md
+2025-05-23 11:00:00,445 - markdown_converter - INFO - Archivo Markdown guardado en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.md
+2025-05-23 11:00:00,446 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 11:00:00,446 - lib.file_manager - INFO - Estadísticas guardadas: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 11:00:00,447 - lib.file_manager - INFO - Contenido estadísticas: {'run_timestamp': '2025-05-23T10:59:59.581105', 'date_processed': '22042025', 'total_urls_in_pdf': 103, 'new_urls_processed_count': 4, 'history_total_urls': 69, 'categories': {'social': 4}, 'html_processing': {'attempted': 0, 'processed': 0, 'successful': 0, 'relevant (>=0.3)': 0, 'average_relevance': 0}, 'image_processing': {'attempted_download': 0, 'successful_download': 0, 'attempted_api': 0, 'successful_api': 0}, 'facebook_processing': {'attempted': 3, 'successful': 2, 'extracted_texts': 2}, 'timings_seconds': {'pdf_extraction': 0.57, 'pdf_text_extraction': 0.8, 'image_download': 0, 'html_scraping': 0, 'image_api': 0, 'facebook_processing': 31.69, 'facebook_text_extraction': 0.8, 'stats_consolidation': 0.0, 'semantic_cleaning': 0.84}}
+2025-05-23 11:00:00,447 - main_orchestrator - INFO - Limpieza semántica completada en 0.84 seg.
+2025-05-23 11:00:00,448 - main_orchestrator - INFO - --- Paso 12.1: Integrando textos de Facebook en archivos limpios ---
+2025-05-23 11:00:00,448 - facebook_extractor_fix - INFO - Ruta del proyecto: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent
+2025-05-23 11:00:00,448 - facebook_extractor_fix - INFO - Buscando archivo de Facebook en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_texts_22042025.json
+2025-05-23 11:00:00,488 - facebook_extractor_fix - INFO - Estructura de los datos de Facebook: https://www.facebook.com/photo/?fbid=721410753566836&set=a.257328239975092
+2025-05-23 11:00:00,489 - facebook_extractor_fix - INFO - Claves en la primera entrada: ['extracted_text', 'pdf_path', 'processed_date']
+2025-05-23 11:00:00,506 - facebook_extractor_fix - INFO - Sección de Facebook añadida al archivo C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.md
+2025-05-23 11:00:00,507 - facebook_extractor_fix - INFO - Se han añadido 2 textos de Facebook al archivo limpio
+2025-05-23 11:00:00,507 - main_orchestrator - INFO - Textos de Facebook integrados correctamente en archivos limpios
+2025-05-23 11:00:00,507 - main_orchestrator - INFO - --- Limpieza Final ---
+2025-05-23 11:00:00,507 - main_orchestrator - INFO - ==================================================
+2025-05-23 11:00:00,508 - main_orchestrator - INFO - PIPELINE FINALIZADO en 34.15 segundos.
+2025-05-23 11:00:00,508 - main_orchestrator - INFO - ==================================================
+2025-05-23 11:01:44,657 - main_orchestrator - INFO - ==================================================
+2025-05-23 11:01:44,657 - main_orchestrator - INFO - INICIANDO PIPELINE DE SCRAPING
+2025-05-23 11:01:44,657 - main_orchestrator - INFO - Usando fecha: 22042025
+2025-05-23 11:01:44,657 - main_orchestrator - INFO - ==================================================
+2025-05-23 11:01:44,658 - lib.config_manager - INFO - Configuración cargada desde C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\config.yaml
+2025-05-23 11:01:44,659 - lib.config_manager - INFO - Clave API de Google cargada desde C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\credentials/api_keys.yaml
+2025-05-23 11:01:44,660 - main_orchestrator - INFO - Configuración y rutas cargadas.
+2025-05-23 11:01:44,660 - lib.history_tracker - INFO - Historial cargado desde C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\codigo\lib\history\processed_urls.json con 69 URLs.
+2025-05-23 11:01:44,661 - main_orchestrator - INFO - Deduplicador optimizado inicializado correctamente
+2025-05-23 11:01:44,661 - lib.api_client - INFO - API Gemini configurada con modelo: gemini-1.5-pro-latest
+2025-05-23 11:01:44,662 - lib.image_processor - INFO - Cliente Gemini API inicializado con modelo gemini-1.5-pro-latest
+2025-05-23 11:01:44,662 - main_orchestrator - INFO - Componentes inicializados (History, Scraper, ImageProcessor, FacebookProcessor).
+2025-05-23 11:01:44,663 - main_orchestrator - INFO - --- Paso 1: Extrayendo enlaces del PDF ---
+2025-05-23 11:01:44,686 - lib.pdf_processor - INFO - Abriendo PDF: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025.pdf (8 páginas)
+2025-05-23 11:01:45,317 - lib.pdf_processor - INFO - Se extrajeron 103 enlaces URI (no mailto) de 22042025.pdf.
+2025-05-23 11:01:45,318 - main_orchestrator - INFO - PDF procesado en 0.65 seg. Enlaces encontrados: 103
+2025-05-23 11:01:45,324 - lib.file_manager - INFO - Datos guardados en CSV: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\In\links_extracted_22042025.csv
+2025-05-23 11:01:45,324 - main_orchestrator - INFO - --- Paso 1.1: Extrayendo texto del PDF por secciones ---
+2025-05-23 11:01:45,325 - lib.text_extractor - INFO - Abriendo PDF para extracción de texto: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025.pdf (8 páginas)
+2025-05-23 11:01:45,442 - lib.text_extractor - INFO - Texto del PDF extraído y guardado en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_pdf_22042025\pdf_text_22042025.json
+2025-05-23 11:01:45,443 - lib.text_extractor - INFO - Se encontraron 1 secciones con un total de 8 párrafos
+2025-05-23 11:01:45,443 - main_orchestrator - INFO - Texto del PDF extraído en 0.12 seg. Guardado en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_pdf_22042025\pdf_text_22042025.json
+2025-05-23 11:01:45,443 - main_orchestrator - INFO - --- Paso 2: Filtrando URLs por historial ---
+2025-05-23 11:01:45,444 - lib.history_tracker - INFO - Filtradas 78 URLs ya procesadas del lote actual.
+2025-05-23 11:01:45,444 - main_orchestrator - INFO - URLs nuevas para procesar: 25 (de 103 total)
+2025-05-23 11:01:45,444 - main_orchestrator - INFO - --- Paso 2.1: Analizando duplicados basados en contenido ---
+2025-05-23 11:01:45,445 - selenium_extractor - INFO - SeleniumContentExtractor inicializado con caché en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\cache\dedup\content
+2025-05-23 11:01:45,446 - content_deduplicator - INFO - ContentDeduplicator inicializado con caché en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\cache\dedup
+2025-05-23 11:01:45,446 - content_deduplicator - INFO - Analizando 25 URLs para encontrar duplicados...
+2025-05-23 11:01:45,447 - content_deduplicator - INFO - Procesando 24 URLs del dominio facebook.com
+2025-05-23 11:01:45,466 - content_deduplicator - INFO - Análisis completado en 0.02 segundos
+2025-05-23 11:01:45,466 - content_deduplicator - INFO - URLs totales: 25, Únicas: 1, En grupos: 22
+2025-05-23 11:01:45,466 - content_deduplicator - INFO - Se realizaron 30 comparaciones (1554.6/seg), evitando 0
+2025-05-23 11:01:45,467 - content_deduplicator - INFO - Grupos de duplicados encontrados: 2
+2025-05-23 11:01:45,468 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\duplicates_analysis_22042025.json
+2025-05-23 11:01:45,468 - main_orchestrator - INFO - Análisis de duplicados completado: 22 URLs duplicadas filtradas
+2025-05-23 11:01:45,468 - main_orchestrator - INFO - URLs después de filtrar duplicados: 3
+2025-05-23 11:01:45,468 - main_orchestrator - INFO - Estadísticas de duplicados guardadas en C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\duplicates_analysis_22042025.json
+2025-05-23 11:01:45,469 - main_orchestrator - INFO - --- Paso 3: Clasificando URLs ---
+2025-05-23 11:01:45,469 - url_classifier - INFO - URLClassifier inicializado con umbrales: {'facebook': 0.85, 'youtube': 0.95, 'news': 0.9, 'document': 0.98, 'image': 0.99, 'media': 0.95, 'government': 0.9, 'other': 0.85, 'default': 0.88}
+2025-05-23 11:01:45,469 - main_orchestrator - WARNING - Error en clasificación avanzada: 'dict' object has no attribute 'lower'. Usando clasificación estándar.
+2025-05-23 11:01:45,469 - lib.url_manager - INFO - Clasificación de 3 URLs:
+2025-05-23 11:01:45,470 - lib.url_manager - INFO -  - SOCIAL: 3
+2025-05-23 11:01:45,471 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Social\social_links_22042025_unprocessed.json
+2025-05-23 11:01:45,471 - main_orchestrator - INFO - --- Paso 4: Procesando Imágenes (Descarga) ---
+2025-05-23 11:01:45,471 - main_orchestrator - INFO - No hay nuevas URLs de imágenes para descargar.
+2025-05-23 11:01:45,471 - main_orchestrator - INFO - --- Paso 5: Procesando HTML (Scraping) ---
+2025-05-23 11:01:45,472 - main_orchestrator - INFO - No hay nuevas URLs HTML para scrapear.
+2025-05-23 11:01:45,472 - main_orchestrator - INFO - --- Paso 6: Procesando Imágenes Descargadas (API) ---
+2025-05-23 11:01:45,472 - main_orchestrator - INFO - No hubo imágenes descargadas o ya están procesadas.
+2025-05-23 11:01:45,473 - main_orchestrator - INFO - --- Paso 7: Procesando URLs de Facebook ---
+2025-05-23 11:01:45,473 - main_orchestrator - INFO - Leyendo archivo social para la fecha 22042025: social_links_22042025_unprocessed.json
+2025-05-23 11:01:45,492 - main_orchestrator - INFO - Encontradas 2 URLs de Facebook para procesar
+2025-05-23 11:01:45,492 - main_orchestrator - INFO - Asegurando que exista el directorio de salida: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output
+2025-05-23 11:01:45,493 - lib.facebook_processor - INFO - Iniciando procesamiento paralelo de 2 URLs de Facebook para la fecha 22042025...
+2025-05-23 11:01:45,506 - lib.facebook_processor - INFO - Procesando URL de Facebook (1): https://www.facebook.com/diarioprimiciahyo/posts/pfbid0MyvvUrEXMwK9JweVexky3uoJu9xYaG5CrP4wLPi25vuo4i4su39fj8bZe4HjAyAYl?rdid=WQIs6UTvdY7Bm09T
+2025-05-23 11:01:45,506 - lib.facebook_processor - INFO - Procesando URL de Facebook (2): https://www.facebook.com/photo?fbid=122113948808817608&set=a.122095373924817608
+2025-05-23 11:02:11,134 - lib.facebook_processor - INFO - PDF guardado exitosamente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-2.pdf
+2025-05-23 11:02:12,227 - lib.facebook_processor - INFO - PDF guardado exitosamente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-1.pdf
+2025-05-23 11:02:17,179 - lib.facebook_processor - INFO - Progreso Facebook: 2/2 en 31.69 seg.
+2025-05-23 11:02:17,181 - lib.facebook_processor - INFO - Resultados de Facebook guardados en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_results_22042025.json
+2025-05-23 11:02:17,181 - lib.facebook_processor - INFO - Procesamiento de Facebook completado: 2/2 exitosos en 31.69 segundos.
+2025-05-23 11:02:17,182 - main_orchestrator - INFO - Procesamiento de URLs de Facebook completado en 31.69 seg.
+2025-05-23 11:02:17,182 - lib.history_tracker - INFO - Añadidas 2 nuevas URLs al historial.
+2025-05-23 11:02:17,184 - lib.history_tracker - INFO - Historial guardado en C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\codigo\lib\history\processed_urls.json con 71 URLs.
+2025-05-23 11:02:17,185 - main_orchestrator - INFO - --- Paso 9: Extrayendo Texto de PDFs de Facebook ---
+2025-05-23 11:02:17,333 - lib.facebook_processor - INFO - Texto extraído exitosamente del PDF: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-2.pdf
+2025-05-23 11:02:17,969 - lib.facebook_processor - INFO - Texto extraído exitosamente del PDF: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\base\22042025\22042025-1.pdf
+2025-05-23 11:02:17,970 - lib.facebook_processor - INFO - Texto extraído de 2 PDFs de Facebook
+2025-05-23 11:02:17,971 - main_orchestrator - INFO - Extracción de texto de PDFs de Facebook completada en 0.78 seg.
+2025-05-23 11:02:17,971 - main_orchestrator - INFO - Texto extraído de 2 PDFs de Facebook
+2025-05-23 11:02:17,972 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_texts_22042025.json
+2025-05-23 11:02:17,972 - main_orchestrator - INFO - Textos de PDFs de Facebook guardados en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_texts_22042025.json
+2025-05-23 11:02:17,973 - main_orchestrator - INFO - --- Paso 10: Generando Estadísticas y Consolidando ---
+2025-05-23 11:02:17,974 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 11:02:17,974 - lib.file_manager - INFO - Estadísticas guardadas: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 11:02:17,974 - lib.file_manager - INFO - Contenido estadísticas: {'run_timestamp': '2025-05-23T11:02:17.973378', 'date_processed': '22042025', 'total_urls_in_pdf': 103, 'new_urls_processed_count': 3, 'history_total_urls': 71, 'categories': {'social': 3}, 'html_processing': {'attempted': 0, 'processed': 0, 'successful': 0, 'relevant (>=0.3)': 0, 'average_relevance': 0}, 'image_processing': {'attempted_download': 0, 'successful_download': 0, 'attempted_api': 0, 'successful_api': 0}, 'facebook_processing': {'attempted': 2, 'successful': 2, 'extracted_texts': 2}, 'timings_seconds': {'pdf_extraction': 0.65, 'pdf_text_extraction': 0.78, 'image_download': 0, 'html_scraping': 0, 'image_api': 0, 'facebook_processing': 31.69, 'facebook_text_extraction': 0.78, 'stats_consolidation': 0.0}}
+2025-05-23 11:02:17,975 - main_orchestrator - INFO - Estadísticas generadas y guardadas en 0.00 seg.
+2025-05-23 11:02:17,975 - main_orchestrator - INFO - --- Paso 9: Verificando contenido HTML e imágenes existentes ---
+2025-05-23 11:02:17,976 - main_orchestrator - INFO - Cargando contenido HTML de archivo existente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_texts_22042025.json
+2025-05-23 11:02:17,977 - main_orchestrator - INFO - Cargando contenido de imágenes de archivo existente: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Images\downloads\22042025\texto_imagenes_api.json
+2025-05-23 11:02:17,991 - main_orchestrator - INFO - Texto del PDF cargado para consolidación desde: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Out\scraped_pdf_22042025\pdf_text_22042025.json
+2025-05-23 11:02:17,994 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\consolidated_22042025.json
+2025-05-23 11:02:17,994 - main_orchestrator - INFO - Resultados consolidados guardados en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\consolidated_22042025.json
+2025-05-23 11:02:17,995 - main_orchestrator - INFO - --- Paso 12: Realizando Limpieza Semántica ---
+2025-05-23 11:02:18,013 - main_orchestrator - INFO - Realizando limpieza semántica...
+2025-05-23 11:02:18,013 - semantic_cleaner - INFO - Iniciando limpieza semántica del archivo consolidado...
+2025-05-23 11:02:18,014 - semantic_cleaner - INFO - Extraídos 8 textos de PDF
+2025-05-23 11:02:18,014 - semantic_cleaner - INFO - Extraídos 3 textos de HTML
+2025-05-23 11:02:18,014 - semantic_cleaner - INFO - Extraídos 0 textos de imágenes
+2025-05-23 11:02:18,015 - semantic_cleaner - INFO - Extraídos 2 textos de Facebook
+2025-05-23 11:02:18,604 - semantic_cleaner - INFO - Se identificaron 13 grupos de textos similares
+2025-05-23 11:02:18,604 - semantic_cleaner - INFO - Se seleccionaron 13 textos representativos
+2025-05-23 11:02:18,604 - semantic_cleaner - INFO - Limpieza semántica completada con éxito
+2025-05-23 11:02:18,605 - main_orchestrator - INFO - Guardando JSON limpio en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.json
+2025-05-23 11:02:18,607 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.json
+2025-05-23 11:02:18,607 - main_orchestrator - INFO - Convirtiendo a formato Markdown y guardando en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.md
+2025-05-23 11:02:18,611 - markdown_converter - INFO - Archivo Markdown guardado en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.md
+2025-05-23 11:02:18,612 - lib.file_manager - INFO - Datos guardados en JSON: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 11:02:18,613 - lib.file_manager - INFO - Estadísticas guardadas: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\input\Stats\stats_22042025.json
+2025-05-23 11:02:18,613 - lib.file_manager - INFO - Contenido estadísticas: {'run_timestamp': '2025-05-23T11:02:17.973378', 'date_processed': '22042025', 'total_urls_in_pdf': 103, 'new_urls_processed_count': 3, 'history_total_urls': 71, 'categories': {'social': 3}, 'html_processing': {'attempted': 0, 'processed': 0, 'successful': 0, 'relevant (>=0.3)': 0, 'average_relevance': 0}, 'image_processing': {'attempted_download': 0, 'successful_download': 0, 'attempted_api': 0, 'successful_api': 0}, 'facebook_processing': {'attempted': 2, 'successful': 2, 'extracted_texts': 2}, 'timings_seconds': {'pdf_extraction': 0.65, 'pdf_text_extraction': 0.78, 'image_download': 0, 'html_scraping': 0, 'image_api': 0, 'facebook_processing': 31.69, 'facebook_text_extraction': 0.78, 'stats_consolidation': 0.0, 'semantic_cleaning': 0.62}}
+2025-05-23 11:02:18,613 - main_orchestrator - INFO - Limpieza semántica completada en 0.62 seg.
+2025-05-23 11:02:18,614 - main_orchestrator - INFO - --- Paso 12.1: Integrando textos de Facebook en archivos limpios ---
+2025-05-23 11:02:18,614 - facebook_extractor_fix - INFO - Ruta del proyecto: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent
+2025-05-23 11:02:18,614 - facebook_extractor_fix - INFO - Buscando archivo de Facebook en: C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\facebook_texts_22042025.json
+2025-05-23 11:02:18,649 - facebook_extractor_fix - INFO - Estructura de los datos de Facebook: https://www.facebook.com/photo?fbid=122113948808817608&set=a.122095373924817608
+2025-05-23 11:02:18,650 - facebook_extractor_fix - INFO - Claves en la primera entrada: ['extracted_text', 'pdf_path', 'processed_date']
+2025-05-23 11:02:18,668 - facebook_extractor_fix - INFO - Sección de Facebook añadida al archivo C:\Users\emers\Documents\SUNASS_CAMI_CENTRO\DEV_SUNASS\NewsAgent\output\clean\clean_22042025.md
+2025-05-23 11:02:18,668 - facebook_extractor_fix - INFO - Se han añadido 2 textos de Facebook al archivo limpio
+2025-05-23 11:02:18,668 - main_orchestrator - INFO - Textos de Facebook integrados correctamente en archivos limpios
+2025-05-23 11:02:18,669 - main_orchestrator - INFO - --- Limpieza Final ---
+2025-05-23 11:02:18,669 - main_orchestrator - INFO - ==================================================
+2025-05-23 11:02:18,669 - main_orchestrator - INFO - PIPELINE FINALIZADO en 34.01 segundos.
+2025-05-23 11:02:18,670 - main_orchestrator - INFO - ==================================================

@@ -67,7 +67,7 @@
           </div>
         </div>
         <p class="text-gray-500 mt-4 text-sm md:text-base text-center">
-          Formatos soportados : PDF...
+          Formatos soportados : PDF
         </p>
       </div>
 

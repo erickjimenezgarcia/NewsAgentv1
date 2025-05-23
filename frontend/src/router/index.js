@@ -10,7 +10,7 @@ const routes = [
     path: '/',
     component: MainView,
     children: [
-      { path: '', redirect: '/dashboard' },
+      { path: '', redirect: '/procesar' },
       { path: 'procesar', component: Procesar },
       { path: 'dashboard', component: Dashboard },
       { path: 'chat', component: Chat },

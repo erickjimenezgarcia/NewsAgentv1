@@ -25,16 +25,10 @@
               ></path>
             </svg>
           </button>
-          <a
-            href="https://www.gob.pe/sunass"
-            target="_blank"
-            class="flex ms-2 md:me-24"
-          >
             <span
               class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white"
               >Agente de noticias</span
             >
-          </a>
         </div>
 
         <!-- search -->

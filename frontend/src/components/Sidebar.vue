@@ -5,7 +5,7 @@
 <template>
   <aside
     id="logo-sidebar"
-    class="fixed top-5 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+    class="fixed top-5 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full  border-r border-gray-200 sm:translate-x-0 bg-gray-800 dborder-gray-700"
     aria-label="Sidebar"
   >
     <div class="h-full px-3 pb-4 overflow-y-auto bg-gray-800">
@@ -15,7 +15,7 @@
             to="/procesar"
             class="flex items-center p-3  rounded-lg text-white hover:bg-gray-100 dark:hover:bg-blue-700 group"
           >
-            <img src="../assets/procesar.png" class="shrink-0 w-9 h-9" alt="icon-procesar">
+            <img src="../assets/convert.png" class="shrink-0 w-9 h-9" alt="icon-procesar">
             <span class="ms-3">Extracción</span>
           </router-link>
         </li>
