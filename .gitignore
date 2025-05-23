@@ -39,6 +39,10 @@ Thumbs.db
 /output/*
 !/output/.gitkeep
 
+# Permitir archivos clean markdown en output/clean/
+!/output/clean/
+!/output/clean/clean_*.md
+
 # Credenciales y claves API (importante para seguridad)
 /credentials/*
 !/credentials/.gitkeep
