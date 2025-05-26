@@ -38,7 +38,7 @@
             <div class="w-full bg-gray-200 rounded-full h-4">
               <div
                 class="bg-blue-500 h-4 rounded-full transition-all duration-300"
-                :style="{ width: '100%' }"
+                :style="{ width: progress + '%' }"
               ></div>
             </div>
             <p class="text-blue-500 mt-2">Cargando archivo...</p>
@@ -56,56 +56,32 @@
             Procesar
           </button>
 
-          <div v-if="processing" class="w-full mt-6">
+          <!-- <div v-if="processing" class="w-full mt-6">
             <div class="w-full bg-gray-200 rounded-full h-4">
               <div
                 class="bg-green-500 h-4 rounded-full transition-all duration-300"
-                :style="{ width: progress + '%' }"
+                :style="{ width: mdProgress + '%' }"
               ></div>
             </div>
-            <p class="text-green-500 mt-2">Procesando... {{ progress }}%</p>
-          </div>
+            <p class="text-green-500 mt-2">Procesando... {{ mdProgress }}%</p>
+          </div> -->
         </div>
         <p class="text-gray-500 mt-4 text-sm md:text-base text-center">
           Formatos soportados : PDF
         </p>
       </div>
 
-      <!-- configuration of selecters of parameters -->
-      <!-- <div
-        class="mt-4 flex flex-col md:flex-row gap-4 items-center bg-gray-200"
-      >
-        <label>
-          Prompt:
-          <select v-model="prompt" class="ml-2 border rounded px-2 py-1">
-            <option value="simple">Simple</option>
-            <option value="detallado">Detallado</option>
-            <option value="estructurado">Estructurado</option>
-            <option value="anti-ruido">Anti-ruido</option>
-          </select>
-        </label>
-        <label>
-          Batch size:
-          <input
-            type="number"
-            v-model.number="batchSize"
-            min="1"
-            max="10"
-            class="ml-2 border rounded px-2 py-1 w-16"
-          />
-        </label>
-        <label>
-          Pausa (seg):
-          <input
-            type="number"
-            v-model.number="pauseSeconds"
-            min="1"
-            max="300"
-            class="ml-2 border rounded px-2 py-1 w-20"
-          />
-        </label>
-      </div> -->
-      <!-- ----------- -->
+      <div v-if="processed && mdStatus !== 'done'" class="w-full mt-6">
+        <div class="w-full bg-gray-200 rounded-full h-4">
+          <div
+            class="bg-green-500 h-4 rounded-full transition-all duration-300"
+            :style="{ width: mdProgress + '%' }"
+          ></div>
+        </div>
+        <p class="text-green-500 mt-2">Procesando... {{ mdProgress }}%</p>
+      </div>
+
+
 
       <div v-if="processed" class="bg-white rounded-lg shadow-sm p-6">
         <div class="text-center">
@@ -171,7 +147,6 @@
         {{ estado.message }}
       </div>
 
-
       <!-- codigo de testeo -->
       <div v-if="estado && estado.message" class="mt-4 text-blue-700">
         {{ estado.message }} <br />
@@ -188,7 +163,12 @@
 
 <script setup>
 import { ref } from "vue";
-import { upload_pdf, procesar_pdf, descargarMarkdown, obtenerUrlsExtraidas } from "../api"; // importing modules from API.js
+import {
+  procesar_pdf,
+  descargarMarkdown,
+  obtenerUrlsExtraidas,
+  upload_pdf_with_progress,
+} from "../api"; // importing modules from API.js
 
 //reactives variables
 const prompt = ref("simple");
@@ -202,6 +182,9 @@ const loading = ref(false);
 const processing = ref(false);
 const processed = ref(false);
 const progress = ref(0);
+const mdProgress = ref(0);
+const mdStatus = ref("processing");
+let ws = null;
 
 /**
  * File upload event
@@ -211,9 +194,20 @@ const progress = ref(0);
 async function handleFileChange(event) {
   const file = event.target.files[0];
   if (file && file.type === "application/pdf") {
+    // validate name of file
+    if (nameFileValidate(file.name) === false) {
+      alert(
+        "⚠️ El nombre del archivo no es válido, deber seguir el formato: ddmmyyyy  ( ejemplo:22042025 ) "
+      );
+      return;
+    }
+
     loading.value = true;
+    progress.value = 0;
     try {
-      const res = await upload_pdf(file);
+      const res = await upload_pdf_with_progress(file, (percent) => {
+        progress.value = percent;
+      });
       fileName.value = res.filename;
       fileSelected.value = true;
     } catch {
@@ -221,6 +215,8 @@ async function handleFileChange(event) {
     } finally {
       loading.value = false;
     }
+  } else {
+    alert("Solo se permiten archivos PDF.");
   }
 }
 
@@ -231,6 +227,10 @@ async function handleFileChange(event) {
  */
 async function iniciarProcesamiento() {
   processing.value = true;
+
+  //llamando a websocket
+  conectarWebSocketProgreso(fileName.value.replace(/\.pdf$/i, ""));
+
   try {
     const resultado = await procesar_pdf({
       filename: fileName.value,
@@ -240,7 +240,9 @@ async function iniciarProcesamiento() {
     });
     estado.value = resultado;
     // Obtenr las URLs extraídas despues de procesar el PDF
-    const urls = await obtenerUrlsExtraidas(fileName.value.replace(/\.pdf$/i, ""));
+    const urls = await obtenerUrlsExtraidas(
+      fileName.value.replace(/\.pdf$/i, "")
+    );
     estado.value.urls = urls;
     processed.value = true;
   } catch {
@@ -273,9 +275,19 @@ async function handleDescargarMarkdown() {
 async function handleDrop(event) {
   const file = event.dataTransfer.files[0];
   if (file && file.type === "application/pdf") {
+    // validate name of file
+    if (nameFileValidate(file.name) === false) {
+      alert(
+        "⚠️ El nombre del archivo no es válido, deber seguir el formato: ddmmyyyy  ( ejemplo:22042025 ) "
+      );
+      return;
+    }
     loading.value = true;
+    progress.value = 0;
     try {
-      const res = await upload_pdf(file);
+      const res = await upload_pdf_with_progress(file, (percent) => {
+        progress.value = percent;
+      });
       fileName.value = res.filename;
       fileSelected.value = true;
     } catch (err) {
@@ -289,10 +301,6 @@ async function handleDrop(event) {
     alert("Solo se permiten archivos PDF.");
   }
 }
-
-
-
-
 
 /**
  * Function to get the status of the process
@@ -321,4 +329,49 @@ function resetProcess() {
   progress.value = 0;
   downloadUrl.value = "";
 }
+
+/**
+ * Function to validate the file name
+ * @param {string} name - The file name
+ * @returns {boolean} - True if valid, false otherwise
+ */
+function nameFileValidate(name) {
+  const match = name.match(/^(\d{2})(\d{2})(\d{4})\.pdf$/i);
+  if (!match) {
+    return false;
+  }
+  return true;
+}
+
+
+
+/**
+ * return progress bar
+ * @param filename 
+ * @returns
+ */
+function conectarWebSocketProgreso(filename) {
+  // Cambia la URL si tu backend no está en localhost:8000
+  ws = new WebSocket(`ws://localhost:8000/ws/status/${filename}`);
+
+  ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    mdProgress.value = data.progress;
+    mdStatus.value = data.status;
+    
+    console.log(mdProgress.value, mdStatus.value);
+    // Aquí puedes mostrar la barra de progreso usando mdProgress y mdStatus
+    // Ejemplo: mostrar barra si mdStatus.value !== 'done'
+  };
+
+  ws.onclose = () => {
+    console.log("WebSocket cerrado");
+  };
+
+  ws.onerror = (e) => {
+    console.error("WebSocket error:", e);
+  };
+}
+
+
 </script>

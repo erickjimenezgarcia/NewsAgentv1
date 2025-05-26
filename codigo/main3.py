@@ -7,6 +7,13 @@ import time
 import json
 from content_deduplicator import ContentDeduplicator
 
+
+# actualizar estado de proceso de la barra de avance
+def actualizar_estado_md(filename, progress, status="processing"):
+    status_path = os.path.join("input", "Stats", f"stats_bart_{filename}.json")
+    with open(status_path, "w", encoding="utf-8") as f:
+        json.dump({"progress": progress, "status": status}, f)
+
 # Asegurarse de que el directorio 'lib' esté en el path para imports
 current_dir = os.path.dirname(os.path.abspath(__file__))
 lib_path = os.path.join(current_dir, 'lib')
@@ -84,6 +91,9 @@ def run_pipeline(custom_date_str=None):
     logger.info("INICIANDO PIPELINE DE SCRAPING")
     logger.info(f"Usando fecha: {today_date_for_filename}")
     logger.info("==================================================")
+
+    #actualizando estado de proceso de la barra de avance
+    actualizar_estado_md(today_date_for_filename, 0, "processing")
 
     # --- 1. Cargar Configuración y Rutas ---
     try:
@@ -230,6 +240,9 @@ def run_pipeline(custom_date_str=None):
         # --- 5. Clasificar URLs con sistema mejorado ---
         logger.info("--- Paso 3: Clasificando URLs ---")
         
+        # actualizando estado de proceso de la barra de avance
+        actualizar_estado_md(today_date_for_filename, 20, "processing")
+
         # Clasificación mejorada con subcategorías
         if ENHANCED_MODULES_AVAILABLE:
             try:
@@ -347,6 +360,9 @@ def run_pipeline(custom_date_str=None):
         # --- 8. Procesar Imágenes Descargadas (API) ---
         logger.info("--- Paso 6: Procesando Imágenes Descargadas (API) ---")
         
+        # actualizar estado de proceso de la barra de avance
+        actualizar_estado_md(today_date_for_filename, 40, "processing")
+
         # Comprobar si hay imágenes descargadas, ya sea de la ejecución actual o existentes
         if downloaded_image_metadata:
             # Imágenes descargadas en esta ejecución
@@ -396,6 +412,9 @@ def run_pipeline(custom_date_str=None):
         # --- 9. Procesar URLs de Facebook ---
         logger.info("--- Paso 7: Procesando URLs de Facebook ---")
         
+        #actualizar estado de proceso de la barra de avance
+        actualizar_estado_md(today_date_for_filename, 50, "processing")
+
         # Búsqueda de URLs de Facebook en archivos sociales
         facebook_links = []
         
@@ -474,6 +493,9 @@ def run_pipeline(custom_date_str=None):
         logger.info("--- Paso 9: Extrayendo Texto de PDFs de Facebook ---")
         facebook_pdf_texts = {}
         
+        #actualizar estado de proceso de la barra de avance
+        actualizar_estado_md(today_date_for_filename, 75, "processing")
+
         if processed_data["facebook"]:
             pdf_text_start = time.time()
             facebook_pdf_texts = facebook_processor.extract_text_from_all_pdfs(processed_data["facebook"])
@@ -495,6 +517,7 @@ def run_pipeline(custom_date_str=None):
         # --- 11. Generar Estadísticas y Consolidar ---
         logger.info("--- Paso 10: Generando Estadísticas y Consolidando ---")
         stats_start_time = time.time()
+
         # Cálculos de estadísticas (sin cambios aquí, parecen correctos)
         total_html_processed = len(processed_data["html"])
         successful_html = sum(1 for data in processed_data["html"].values() if "error" not in data)
@@ -723,6 +746,8 @@ def run_pipeline(custom_date_str=None):
         logger.info(f"PIPELINE FINALIZADO en {total_duration:.2f} segundos.")
         logger.info("==================================================")
 
+        #actualizar estado de proceso de la barra de avance
+        actualizar_estado_md(today_date_for_filename, 100, "processing")
 
 # -------------------------------
 # Punto de entrada

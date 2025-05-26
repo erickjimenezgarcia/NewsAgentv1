@@ -1,0 +1,144 @@
+{
+  "metadata": {
+    "source_pdf": "22052025.pdf",
+    "processing_date": "2025-05-26T14:47:03.967024",
+    "stats_summary": {
+      "run_timestamp": "2025-05-26T14:47:03.967024",
+      "date_processed": "22052025",
+      "total_urls_in_pdf": 51,
+      "new_urls_processed_count": 1,
+      "history_total_urls": 201,
+      "categories": {
+        "social": 1
+      },
+      "html_processing": {
+        "attempted": 0,
+        "processed": 0,
+        "successful": 0,
+        "relevant (>=0.3)": 0,
+        "average_relevance": 0
+      },
+      "image_processing": {
+        "attempted_download": 0,
+        "successful_download": 0,
+        "attempted_api": 0,
+        "successful_api": 0
+      },
+      "facebook_processing": {
+        "attempted": 0,
+        "successful": 0,
+        "extracted_texts": 0
+      },
+      "timings_seconds": {
+        "pdf_extraction": 0.32,
+        "pdf_text_extraction": 0.05,
+        "image_download": 0,
+        "html_scraping": 0,
+        "image_api": 0,
+        "facebook_processing": 0,
+        "facebook_text_extraction": 0.05,
+        "stats_consolidation": 0.0
+      }
+    }
+  },
+  "extracted_content": {
+    "pdf_paragraphs": {
+      "CONTENIDO_INICIAL": [
+        {
+          "metadata": {
+            "description": "Jueves, 22 de mayo de...",
+            "url": ""
+          },
+          "text": "Jueves, 22 de mayo de 2025 Normas Legales PCM. Decreto Supremo N° 066-2025-PCM.- Decreto Supremo que prorroga el Estado de Emergencia en varios distritos de algunas provincias de los departamentos de Amazonas, Áncash, Apurímac, Arequipa, Ayacucho, Cajamarca, Cusco, Huancavelica, Huánuco, Ica, Junín, La Libertad, Lima, Loreto, Madre de Dios, Piura, Puno, San Martín, Tacna y Ucayali, por impacto de daños a consecuencia de intensas precipitaciones pluviales. (El Peruano, Normas Legales) PCM. Decreto Supremo N° 067-2025-PCM.- Decreto Supremo que declara el Estado de Emergencia en varios distritos de algunas provincias del departamento de Loreto por impacto de daños a consecuencia de intensas precipitaciones pluviales. (El Peruano, Normas Legales) Notas de prensa de Sunass Empresas de agua están obligadas a instalar nuevos puntos de muestreo para garantizar niveles de cloro óptimos. Las 50 empresas prestadoras de agua potable del país tendrán que ajustar y mejorar sus procedimientos de cloración con el fin de brindar un servicio óptimo y de calidad a los usuarios, tras la publicación, en el diario oficial El Peruano, de la modificatoria del Reglamento de Calidad de la Prestación de los Servicios de Saneamiento. (Radio Activa, Radio Cultural, Radio Candarave) Huancavelica: Sunass verifica abastecimiento de agua potable ante suspensión del servicio. La Sunass monitorea el abastecimiento alternativo del agua potable, mediante camiones cisterna, tras el corte del servicio que afectó a los sectores San Cristóbal, Puyhuan, Santa Inés Pata, Santa Bárbara, San Gerónimo, Ascensión y Pucarumi, debido a la rotura de la línea de conducción de la captación Callqui. (Diario Primicia, Digital Press, Anota.pe, Más Noticias, Agua & Ambiente, Verde.pe, Studio 1, Reporteros Perú) Tacna: Sunass realizó microaudiencia ante constantes atoros del desagüe y falta de tapas de buzones en la JV La Unión. La Sunass realizó una microaudiencia, en el marco de su programa ¡Participa, vecino!, entre los vecinos de la junta vecinal (JV) La Unión, del distrito Coronel Gregorio Albarracín, y representantes de la EPS Tacna, ante los atoros del desagüe. (Correo, Radio Cultural, Radio Candarave, Radio Activa, Radio RCC 99.3 FM, Radio RCC Facebook, Radio RCC 99.3 FM “RCC informando”, Radio RCC Facebook) Alertas De interés nacional el sistema de agua potable y saneamiento del distrito de Eten Puerto. El Pleno del Congreso aprobó el dictamen recaído en el Proyecto de Ley 5613, que propone declarar de necesidad pública e interés nacional la ampliación y el mejoramiento del sistema de agua potable y saneamiento en el distrito de Eten Puerto, en la provincia de Chiclayo, departamento de Lambayeque. (Congreso) Presidente del Congreso respalda gestión para que centro poblado La Joya cuente con servicio de agua potable. El presidente del Congreso, Eduardo Salhuana, se reunió",
+          "page": 1
+        },
+        {
+          "metadata": {
+            "description": "con el alcalde del centro...",
+            "url": ""
+          },
+          "text": "con el alcalde del centro poblado La Joya (Tambopata, Madre de Dios), Ronald Vilca Condori, quien expuso la crítica situación que afronta más de 25 mil habitantes por la falta de acceso a agua potable. (Congreso) Agua potable en Puno: gerente de Emsapuno afirma seguridad y pide acelerar proyectos de saneamiento. Luis Aguilar Coaquira, gerente de Emsapuno, asegura que el agua que llega a los hogares de Puno es apta para el consumo, los análisis de laboratorio descartan la presencia de plomo y mercurio, lo que busca dar confianza a la población preocupada por la calidad del servicio. (Pachamama) Alcaldesa de Ascope faltó a reunión clave para integración de Casa Grande a Sedalib. El alcalde distrital de Casa Grande, John Vargas, señaló que el pasado 19 de mayo se tuvo programada una reunión importante con funcionarios del MVCS, Otass, Sunass, Municipalidad de Ascope y Defensoría del Pueblo, con la finalidad de que su comuna se integre a la administración de Sedalib, sin embargo, la alcaldesa de Ascope, María Rosario del Cortijo, brilló por su ausencia. (Macronorte) La Libertad: se politiza integración de agua y alcantarillado a Sedalib en Casa Grande. La alcaldesa de Ascope fue duramente criticada por no permitir que el agua y el alcantarillado del distrito de Casa Grande pasen a ser administrados por Sedalib. El alcalde John Vargas sostuvo que hay un trasfondo político. (Sol TV) Trujillo: vecinos del Porvenir exigen fin de obra inconclusa. La obra inconclusa en la calle José Béjar, en el distrito El Porvenir de Trujillo, genera malestar entre los vecinos. La acumulación constante de polvo afecta negocios, viviendas y la salud de los moradores. La empresa Sedalib ejecuta el cambio de redes de agua y alcantarillado, pero ya pasaron más de dos meses sin señales claras de avance efectivo. (Sol TV) Pistas del Centro Histórico de Trujillo se hunden. El Centro Histórico de Trujillo se sigue hundiendo debido al mal estado de las redes de alcantarillado. Esta vez, una tubería colapsó en la quinta cuadra del jirón Independencia, a media cuadra de la plaza de armas, lo que originó la aparición de un forado en esa parte de la ciudad. (Correo, Correo.pe) Tacna. Sin agua hace una semana, reclama poblador de calle Cajamarca, en asociación El Porvenir. Pide solución a EPS. (Uno) Tacna: mujer resulta herida tras caer a buzón de desagüe. Una mujer de 50 años resultó herida luego de caer a un buzón de desagüe. Ella caminaba por la vereda hasta que pisó un espacio con tierra, hundiéndose y cayéndose en el lugar. La obra se realiza en el centro de la ciudad frente a la avenida Grau, en su cruce con la calle Arica. (Uno) Fugas de desagüe y aniegos en Tacna agravan la crisis entre la EPS y los ciudadanos. En las últimas semanas, diversos sectores de Tacna han sido escenario de fugas de desagüe y aniegos que han afectado la calidad de vida de sus habitantes. En el Cono Norte, una fuga de agua potable en la avenida Circunvalación, frente al Instituto Vigil, convirtió la zona en un canal improvisado. Jimmy Silva, jefe de distribución de la EPS, explicó que la rotura de la caja de registro pudo haber sido causada por la manipulación de terceros o por la caída de una piedra de gran tamaño. (Exitosa) Tacna: aguas servidas inundaron negocio. Vivienda y colegio fueron afectados en la salida a Tarata. Careció de respuesta rápida por parte de la EPS y hay pérdidas materiales.",
+          "page": 2
+        },
+        {
+          "metadata": {
+            "description": "Se trata de un negocio...",
+            "url": ""
+          },
+          "text": "Se trata de un negocio de comida y este problema ha generado que todo quede insalubre. (Exitosa Tacna) Se registró aniego de agua potable en el cercado de Tacna. Por rotura de tubería de agua potable a la altura de la calle Piura. El agua discurrió hasta los rieles del tren, en el otro extremo de la ciudad. (Radio RCC) Tacna: controlan fuga en abrazadera y área verde del Cono Norte. En dos puntos del Cono Norte de la ciudad hubo fuga de agua potable. Desde tempranas horas en Circunvalación frente al instituto Vigil, reportaron que la zona era prácticamente un canal desde la zona de área verde. Personal de la EPS informó acerca de la rotura de la caja de registro, al parecer por manipulación de terceros o alguien dejó caer una piedra de gran tamaño, agregó Jimmy Silva, jefe de distribución de la EPS. (Uno) Demora injustificada impide reinicio de obra de saneamiento de más de S/2 millones paralizada en Huaral desde el 2018. La Contraloría alertó al Gobierno Regional de Lima sobre la demora injustificada en la elaboración del expediente técnico del saldo de obra para el mejoramiento de los servicios de agua y desagüe en el asentamiento humano El Ángel en la ciudad de Huaral, proyecto que se encuentra paralizado desde el 2018 y tiene un costo total de S/2 487 800. (Contraloría) Vecinos de la zona S de Huaycán denunciaron que llevan cerca de un mes sin agua potable. Ante esta situación, se dirigieron hacia los trabajadores de Sedapal que laboraban en los alrededores, exigiendo una explicación clara y una solución inmediata. El personal de Sedapal informó que la interrupción del servicio se debe a una obstrucción en las tuberías y que aún están tratando de ubicar el punto exacto del problema. (Órbita TV) Piura. Colapsan desagües en el distrito de Negritos. Los vecinos de la calle Nueva Espernza, en el distrito de Negritos, atraviesan el colapso de desagües. (Correo) Nuestro sector Ministerio de Vivienda y Municipalidad de Julcán suscriben convenio para mejorar el servicio de agua y saneamiento en Carrapalday Alto. El MVCS y la Municipalidad Provincial de Julcán suscribieron un convenio de cooperación interinstitucional para financiar y supervisar la ejecución del proyecto “Mejoramiento del servicio de agua potable e instalación de unidades básicas sanitarias en el centro poblado de Carrapalday Alto, distrito y provincia de Julcán”, en la región La Libertad. (Vivienda) Más de 100 pueblos de Santa, Casma y Huarmey serán beneficiados con hidrojets. Más de 100 pueblos de las provincias del Santa, Casma y Huarmey se beneficiarán con dos camiones hidrojets gestionados por la congresista Lady Camones, quien logró este compromiso en reunión con el ministro Francisco Whittembury y el presidente del directorio de Sedachimbote, Víctor Síchez. (Diario de Chimbote) Insisten en propuesta que optimiza la operación y el mantenimiento de la infraestructura de drenaje pluvial. La Comisión de Vivienda y Construcción aprobó el dictamen que recomienda la insistencia de la autógrafa de ley (PL 07529/2023-CR) que propone la Ley que modifica el Decreto Legislativo 1356, Decreto Legislativo que aprueba",
+          "page": 3
+        },
+        {
+          "metadata": {
+            "description": "la Ley general de drenaje...",
+            "url": ""
+          },
+          "text": "la Ley general de drenaje pluvial, para optimizar la operación y el mantenimiento de la infraestructura de drenaje pluvial. (Congreso Comunicaciones) Huánuco: distribuyen agua potable mediante cisternas en asentamientos urbanos. Representantes del MVCS y de la EPS Seda Huánuco afirmaron que realizaron una jornada de supervisión del reparto gratuito de agua potable a pobladores que no cuentan con acceso regular al servicio, en zonas urbanas de Huánuco, Amarilis, Pillco Marca, Tingo María y Aucayacu. (Ahora) Más de 1,400 personas beneficiadas con acceso a agua segura en el 2024. Solo en el 2024, el proyecto Softys Contigo ha permitido la instalación de 47 soluciones de agua -en Cañete y San Juan de Lurigancho (Lima)-, así como la instalación de un sistema de potabilización de agua en 5 comunidades. (Zoom Empresarial) Medioambiente Gobierno realizó más de 300 acciones preventivas frente a temporada de lluvias. A fin de afrontar mejor las temporadas de lluvias intensas, el Gobierno efectuó durante el presente año 369 acciones preventivas en todo el país, informó el MVCS. (Andina) Política / Economía Congresista Wilson Soto exige a la presidenta Boluarte intervenir ante grave irregularidad en Ositran. El congresista Wilson Soto Palacios, mediante el Oficio N.° 01126-2024-2025-WSP-CR, ha solicitado formalmente a la presidenta de la República, Dina Boluarte, que evalúe y corrija la situación irregular en la que opera actualmente el Ositran. Advirtió que, desde octubre de 2023, Ositran no cuenta con su Consejo Directivo, órgano máximo de dirección colegiada, lo cual ha generado una grave concentración de poder en la presidenta ejecutiva Verónica Zambrano Copello, quien viene adoptando decisiones unilaterales sin sustento colegiado. (Congreso) Velocidad de internet. El Osiptel ha revelado los últimos datos de la velocidad del internet fijo que disfrutan las familias en el Perú. Así, en abril, la velocidad media de descarga de internet fijo en Perú supera los 200 Mbps. (Expreso) Apoyan financiamiento sostenible. El Ministerio de Economía y Finanzas (MEF) brindará herramientas al Sistema Nacional de Promoción de la Inversión Privada (SNPIP) para asegurar el financiamiento sostenible de los proyectos de infraestructura durante los próximos años. El titular del MEF, Raúl Pérez-Reyes, recalcó que su despacho evalúa modificar algunos aspectos de la nueva ley de asociaciones público-privadas (APP), de la regulación de obras por impuestos (OxI) y de las condiciones de gobernanza bajo las cuales ProInversión tendrá una mayor participación en el SNPIP. (El Peruano) \"Vamos a observar reforma de las APP para hacerle mejoras ´no menores´\". La principal reforma planteada por el exministro de Economía y Finanzas, José Salardi, fue el impulso a una nueva ley para las Asociaciones Público-Privadas (APP). Antes de salir del Ministerio de Economía y Finanzas (MEF), dejó la norma a un paso para su promulgación. Pero ahora, el nuevo titular del MEF, Raúl Pérez Reyes, adelantó a Gestión que presentarán",
+          "page": 4
+        },
+        {
+          "metadata": {
+            "description": "observaciones a la autógrafa estos...",
+            "url": ""
+          },
+          "text": "observaciones a la autógrafa estos días. Asimismo, reconoció el impulso de la gestión anterior a las APP, pero se alineó con las críticas que tiene el Consejo Fiscal. (Gestión) Impulsan consensos en beneficio de población. El presidente del Consejo de Ministros, Eduardo Arana, inició una nueva etapa de diálogo y coordinación con los titulares de los poderes Legislativo, Eduardo Salhuana, y Judicial, Janet Tello, a fin de mejorar los canales de comunicación con ambas entidades y trabajar en conjunto en favor de la ciudadanía. (El Peruano) OCDE reconoce avance en la educación en el Perú. En el primer día del Foro Mundial de Educación que se realiza en Londres, la Organización para la Cooperación y el Desarrollo Económico (OCDE) destacó los avances logrados por el Perú en los últimos años y resaltó que nuestro país está por encima del promedio OCDE en 7 de 9 indicadores educativos. Durante su ponencia, el director de Educación y Competencias de la OCDE, Andreas Schleicher, afirmó que, en el Perú, la secundaria incompleta se redujo del 28% al 22% y que el 90.5% de niños accede a la educación infantil. (El Peruano)",
+          "page": 5
+        }
+      ]
+    },
+    "html_pages": {},
+    "image_texts": [
+      {
+        "image_filename": "img_3_ca89977f_22052025.jpg",
+        "processed_date": "23052025",
+        "extracted_text": "",
+        "error": "API error: ResourceExhausted - 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 12\n}\n]",
+        "perceptual_hash": "e4c6939cda528db4",
+        "_cache_error": true,
+        "_permanent_error": true,
+        "_error_reason": "Imagen demasiado pesada o compleja para procesar"
+      },
+      {
+        "image_filename": "img_1_ca8f800f_22052025.jpg",
+        "processed_date": "23052025",
+        "extracted_text": "",
+        "error": "API error: ResourceExhausted - 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 6\n}\n]",
+        "perceptual_hash": "b8c5c138cece939c",
+        "_cache_error": true,
+        "_permanent_error": true,
+        "_error_reason": "Imagen demasiado pesada o compleja para procesar"
+      },
+      {
+        "image_filename": "img_2_d74eba34_22052025.jpg",
+        "processed_date": "23052025",
+        "extracted_text": "",
+        "error": "API error: ResourceExhausted - 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 1\n}\n]",
+        "perceptual_hash": "cbb4d2692d4e89ca",
+        "_cache_error": true,
+        "_permanent_error": true,
+        "_error_reason": "Imagen demasiado pesada o compleja para procesar"
+      },
+      {
+        "image_filename": "img_4_1a0897a2_22052025.jpg",
+        "processed_date": "23052025",
+        "extracted_text": "",
+        "error": "API error: ResourceExhausted - 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 52\n}\n]",
+        "perceptual_hash": "ad3d86c2c2d0e9e9",
+        "_cache_error": true,
+        "_permanent_error": true,
+        "_error_reason": "Imagen demasiado pesada o compleja para procesar"
+      },
+      {
+        "image_filename": "img_6_bb5addb4_22052025.jpg",
+        "processed_date": "23052025",
+        "extracted_text": "",
+        "error": "API error: ResourceExhausted - 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 38\n}\n]",
+        "perceptual_hash": "f03b8e8c69359578",
+        "_cache_error": true,
+        "_permanent_error": true,
+        "_error_reason": "Imagen demasiado pesada o compleja para procesar"
+      }
+    ],
+    "facebook_texts": {}
+  }
+}

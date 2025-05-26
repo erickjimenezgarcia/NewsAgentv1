@@ -26,7 +26,7 @@
             </svg>
           </button>
             <span
-              class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white"
+              class="self-center text-xl  sm:text-2xl whitespace-nowrap text-white font-lato font-semibold"
               >Agente de noticias</span
             >
         </div>

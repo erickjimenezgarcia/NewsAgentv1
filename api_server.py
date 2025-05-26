@@ -2,11 +2,11 @@
 import os
 import sys
 import csv
-from fastapi import FastAPI, BackgroundTasks, UploadFile, File
-from fastapi.responses import JSONResponse, PlainTextResponse, FileResponse
+import asyncio
+from fastapi import FastAPI, UploadFile, WebSocket, File
+from fastapi.responses import JSONResponse,FileResponse
 from pydantic import BaseModel
-from typing import Optional
-from datetime import datetime
+
 
 project_root = os.path.dirname(os.path.abspath(__file__))
 code_dir = os.path.join(project_root, "codigo")
@@ -111,6 +111,16 @@ async def urls_extraidas(namefile: str):
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 
+#---- checking status of the process of the PDF
+@app.websocket("/ws/status/{filename}")
+async def websocket_progreso(websocket: WebSocket, filename: str):
+    await websocket.accept()
+    try:
+        for progress, status in [(0, "processing"), (10, "processing"), (40, "processing"), (60, "processing"), (90, "processing"), (100, "done")]:
+            await websocket.send_json({"progress": progress, "status": status})
+        await websocket.close()
+    except Exception as e:
+        await websocket.close()
 
 #----agregando CORS para permitir peticiones desde cualquier origen
 from fastapi.middleware.cors import CORSMiddleware

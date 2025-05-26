@@ -1,0 +1,539 @@
+{
+  "metadata": {
+    "source_pdf": "12052025.pdf",
+    "processing_date": "2025-05-23T18:37:30.501844",
+    "stats_summary": {
+      "run_timestamp": "2025-05-23T18:37:30.501844",
+      "date_processed": "12052025",
+      "total_urls_in_pdf": 29,
+      "new_urls_processed_count": 29,
+      "history_total_urls": 187,
+      "categories": {
+        "html": 20,
+        "images": 9
+      },
+      "html_processing": {
+        "attempted": 20,
+        "processed": 17,
+        "successful": 17,
+        "relevant (>=0.3)": 10,
+        "average_relevance": 0.4176470588235294
+      },
+      "image_processing": {
+        "attempted_download": 9,
+        "successful_download": 4,
+        "attempted_api": 4,
+        "successful_api": 0
+      },
+      "facebook_processing": {
+        "attempted": 0,
+        "successful": 0,
+        "extracted_texts": 0
+      },
+      "timings_seconds": {
+        "pdf_extraction": 0.38,
+        "pdf_text_extraction": 0.05,
+        "image_download": 937.79,
+        "html_scraping": 6.38,
+        "image_api": 154.8,
+        "facebook_processing": 0,
+        "facebook_text_extraction": 0.05,
+        "stats_consolidation": 0.0
+      }
+    }
+  },
+  "extracted_content": {
+    "pdf_paragraphs": {
+      "CONTENIDO_INICIAL": [
+        {
+          "metadata": {
+            "description": "Fwd: Resumen informativo | Del...",
+            "url": ""
+          },
+          "text": "Fwd: Resumen informativo | Del 10 a 12 de mayo de 2025",
+          "page": 1
+        },
+        {
+          "metadata": {
+            "description": "Del 10 a 12 de...",
+            "url": ""
+          },
+          "text": "Del 10 a 12 de mayo de 2025 NORMAS LEGALES",
+          "page": 1
+        },
+        {
+          "metadata": {
+            "description": "PCM. Resolución de Secretaría de...",
+            "url": ""
+          },
+          "text": "PCM. Resolución de Secretaría de Gestión Pública N° 003-2025-PCM-SGP.- Aprueban el “Plan de Asistencia Técnica con enfoque territorial al Gobierno Subnacional en materias de modernización de la gestión pública para el año 2025”. (El Peruano, Normas Legales) MVCS. Resolución Ministerial N° 129-2025-VIVIENDA.- Aprueban el Plan Operativo Institucional Multianual 2026-2028 del Pliego 037: Ministerio de Vivienda Construcción y Saneamiento. (El Peruano, Normas Legales)",
+          "page": 1
+        }
+      ],
+      "NOTICIAS - SUNASS": [
+        {
+          "metadata": {
+            "description": "Chimbote: JAAP El Castillo garantiza...",
+            "url": ""
+          },
+          "text": "Chimbote: JAAP El Castillo garantiza agua segura para 470 habitantes y es reconocida por la Sunass. En un contexto donde gran parte de las zonas rurales del país aún carecen de acceso a agua potable debidamente tratada, una organización comunal del distrito de Chimbote está demostrando que sí es posible garantizar este derecho básico con recursos limitados y compromiso comunitario. Se trata de la Junta Administradora de Servicios de Saneamiento (JAAP) El Castillo, que fue",
+          "page": 1
+        },
+        {
+          "metadata": {
+            "description": "23/5/25, 6:12 p.m. Gmail -...",
+            "url": ""
+          },
+          "text": "23/5/25, 6:12 p.m. Gmail - Fwd: Resumen informativo | Del 10 a 12 de mayo de 2025",
+          "page": 1
+        },
+        {
+          "metadata": {
+            "description": "1/4",
+            "url": "https://mail.google.com/mail/u/1/?ik=d562a37fff&view=pt&search=all&permmsgid=msg-f:1832954410666719477&simpl=msg-f:1832954410666719477"
+          },
+          "text": "https://mail.google.com/mail/u/1/?ik=d562a37fff&view=pt&search=all&permmsgid=msg-f:1832954410666719477&simpl=msg-f:1832954410666719477 1/4",
+          "page": 1
+        },
+        {
+          "metadata": {
+            "description": "reconocida por la Sunass como...",
+            "url": ""
+          },
+          "text": "reconocida por la Sunass como organización modelo por su destacado sistema de cloración del agua para consumo humano. (RSD)",
+          "page": 2
+        },
+        {
+          "metadata": {
+            "description": "Loreto: alertan deficiencias en la...",
+            "url": ""
+          },
+          "text": "Loreto: alertan deficiencias en la calidad de agua potable. La Superintendencia Nacional de Servicios de Saneamiento (Sunass), en coordinación con la Empresa Prestadora de Servicios (EPS) Sedaloreto, realizó un monitoreo en las zonas inundables de Iquitos, Punchana y Belén para evaluar la calidad del agua potable ante el incremento del nivel de los ríos. (La Región)",
+          "page": 2
+        },
+        {
+          "metadata": {
+            "description": "El Estado a tu Servicio:...",
+            "url": ""
+          },
+          "text": "El Estado a tu Servicio: especialización de alumnos en saneamiento. La Sunass contribuye, cada año, a la formación especializada de 60 estudiantes egresados de todo el país de las carreras de Derecho, Ingeniería y Economía, a través del Programa de Extensión Universitaria (PEU). (TV Perú, TV Perú)",
+          "page": 2
+        }
+      ],
+      "ALERTAS": [
+        {
+          "metadata": {
+            "description": "Barranco: reportan aniego en el...",
+            "url": ""
+          },
+          "text": "Barranco: reportan aniego en el cruce de los jirones Martinto y Tacna [VIDEO]. Gonzalo Lecca se comunicó con el Rotafono de RPP parar informar un aniego en el cruce de los jirones Pedro Martinto y Tacna, en el distrito limeño de Barranco desde hace tres días. (Rotafono) Equipo Lava Jato presenta acusación contra 14 personas por caso de planta de Huachipa y Ramal Norte. El equipo especial de fiscales del caso Lava Jato presentó su acusación contra 12 personas y dos representantes de la empresa brasileña Camargo Correa por el proyecto “Lote 1, 2, 3 – Bocatoma, Planta de Tratamiento de Huachipa y Ramal Norte”. Según información a la que accedió El Comercio, se trata de funcionarios de Sedapal y supervisores de obra, además de representantes de la empresa brasileña, integrantes del Consorcio Huachipa, a cargo de la ejecución de la referida obra. (El Comercio, Andina) Seda Ayacucho investigará consumos atípicos tras quejas por recibos de agua. Ante las múltiples quejas de usuarios por presuntos incrementos en sus recibos de agua durante el mes de abril, Seda Ayacucho confirmó que detectó casos de facturación atípica y anunció que ya inició las verificaciones domiciliarias correspondientes. (Jornada) Seda Ayacucho recoge muestras en Huanta por posible contaminación de agua. Técnicos de Seda Ayacucho, Sunass y la Uersan de la Diresa realizaron una inspección conjunta en la ciudad de Huanta tras reportes de contaminación del servicio de agua potable. La diligencia se llevó a cabo en seis domicilios de zonas afectadas y dos puntos de red, según confirmó la Seda. (Jornada) Percy Rosario Martell sería expectorado del directorio de Sedalib. El director de Sedalib, Frank Sánchez, señaló que el presidente del Directorio de la citada empresa, Percy Rosario Martell, ha incurrido en una causal de conclusión de su designación, tras presentar una demanda contra la Junta de Accionistas. (Macronorte)",
+          "page": 2
+        },
+        {
+          "metadata": {
+            "description": "Protesta frente al Ministerio de...",
+            "url": ""
+          },
+          "text": "Protesta frente al Ministerio de Vivienda por cierre de programas. Se registró una protesta en los exteriores del MVCS, ubicado en San Isidro, luego del anuncio del ministro de Economía, sobre la extinción de catorce programas públicos. “Estamos siendo afectados más de cuatro mil trabajadores, sin contar nuestras familias. Lo que ha hecho el Gobierno es una improvisación. No ha habido diálogo previo ni alternativas claras”, señaló secretaria adjunta del Sindicato del Programa Nacional de Saneamiento Urbano. (Canal N)",
+          "page": 2
+        }
+      ],
+      "SECTOR": [
+        {
+          "metadata": {
+            "description": "MVCS capacitó a las EPS...",
+            "url": ""
+          },
+          "text": "MVCS capacitó a las EPS de Amazonas y San Martín sobre evaluación del riesgo ante desastres naturales. El MVCS desarrolló en la ciudad de Moyobamba, un taller de capacitación sobre evaluación de riesgos ante desastres originados por causas naturales, en el cual participaron gerentes y profesionales de la EPS Moyobamba, EMAPA San Martín, EMAPAB (Bagua) y EPSSMU (Utcubamba), de las regiones de San Martín y Amazonas respectivamente. (Vivienda) Perú y Japón articulan esfuerzos para impulsar proyectos de agua y reordenamiento urbano en Lima y Callao. El MVCS y la Embajada de Japón en el Perú sostuvieron una reunión en la que se ratificó el apoyo del país asiático, en impulsar iniciativas que permitan asegurar el abastecimiento hídrico para los próximos años en las ciudades de Lima y Callao, en favor de más de 11 millones de personas. Para ello se impulsarán nuevas líneas de financiamiento a los grandes proyectos que aseguren la disponibilidad de nuevas fuentes de agua. (Vivienda, Andina)",
+          "page": 2
+        },
+        {
+          "metadata": {
+            "description": "23/5/25, 6:12 p.m. Gmail -...",
+            "url": ""
+          },
+          "text": "23/5/25, 6:12 p.m. Gmail - Fwd: Resumen informativo | Del 10 a 12 de mayo de 2025",
+          "page": 2
+        },
+        {
+          "metadata": {
+            "description": "2/4",
+            "url": "https://mail.google.com/mail/u/1/?ik=d562a37fff&view=pt&search=all&permmsgid=msg-f:1832954410666719477&simpl=msg-f:1832954410666719477"
+          },
+          "text": "https://mail.google.com/mail/u/1/?ik=d562a37fff&view=pt&search=all&permmsgid=msg-f:1832954410666719477&simpl=msg-f:1832954410666719477 2/4",
+          "page": 2
+        },
+        {
+          "metadata": {
+            "description": "Cusco: MVCS suscribe convenio para...",
+            "url": ""
+          },
+          "text": "Cusco: MVCS suscribe convenio para desarrollo de proyecto de agua potable y alcantarillado en Saylla. El MVCS suscribió un convenio tripartito con la Municipalidad Distrital de Saylla y la EPS SEDACUSCO, para el desarrollo del proyecto de agua potable y alcantarillado en favor de más de 4 mil personas de esta jurisdicción. El proyecto de inversión, valorizado en más de S/19.6 millones, permitirá también la implementación de la PTAR Angostura. (Vivienda) Más de 1,400 personas fueron beneficiadas con acceso a agua segura en el 2024. En nuestro país, más de 3.1 millones de personas (9.3 % de la población) no tienen acceso a agua potable, y más de 7.2 millones (22.8 %) carecen de un sistema de saneamiento adecuado, según datos del MVCS. En ese sentido, se ha gestionado un proyecto de instalación de sistemas de cloración automática de aguas subterráneas en las comunidades de su zona de influencia en Cañete. (Andina) Otass: este 12 de mayo vence plazo de inscripción a la subasta pública de agua residual cruda de PTAR Yaurilla – Ica. En el marco de buenas prácticas que promuevan la economía circular, EMAPICA, bajo la dirección del Otass, puso en marcha la convocatoria de la segunda subasta pública para aquellas empresas e industrias interesadas en adquirir aguas residuales sin tratamiento. (Otass) Otass capacita a sus representantes regionales. El Otass capacita a sus representantes regionales en un taller con 18 empresas. El presidente ejecutivo del Otass, Luis Hernán Contreras Bonilla, refiere que el foro busca reflotar a las empresas que están en situación crítica. (TV Perú Noticias)",
+          "page": 3
+        }
+      ],
+      "MEDIOAMBIENTE": [
+        {
+          "metadata": {
+            "description": "Agro peruano creció 4 %...",
+            "url": ""
+          },
+          "text": "Agro peruano creció 4 % en el primer trimestre. En el primer trimestre del año, el agro peruano se expandió 4 %, impulsado por diversas estrategias de acción que el gobierno despliega en el país y la normalización de las condiciones climáticas, informó el Ministerio de Desarrollo Agrario y Riego (Midagri). El respaldo del sector ha sido fundamental con proyectos productivos que están impulsando diversas cadenas de valor con planes de negocio, proporcionados por el programa Agroideas, financiamiento con Agrobanco y más agua para riego, que gracias a AgroRural, Sierra Azul y el Programa Subsectorial de Irrigaciones (PSI) implementan pozos, reservorios y llevan riego tecnificado para las zonas rurales. (El Peruano)",
+          "page": 3
+        }
+      ],
+      "POLÍTICA / ECONOMÍA": [
+        {
+          "metadata": {
+            "description": "BCR: La economía habría crecido...",
+            "url": ""
+          },
+          "text": "BCR: La economía habría crecido 4.5 % durante marzo. En marzo del presente año, la actividad económica peruana habría registrado una expansión de alrededor de 4.5 % y, de esta manera, acumularía un incremento cercano a 4% en el primer trimestre del 2025, proyectó el gerente central de estudios económicos del Banco Central de Reserva (BCR), Adrián Armas. Explicó que las cifras de marzo se vieron favorecidas por un efecto estadístico relacionado con el calendario de la Semana Santa, que este año tuvo lugar en abril, a diferencia del año anterior. (El Peruano) Informan sobre avances a OCDE. El Ministerio de Relaciones Exteriores informó sobre el progreso de las evaluaciones a nuestro país en su proceso de adhesión a la Organización para la Cooperación y el Desarrollo Económicos (OCDE) durante una reunión en la que participaron embajadores de los países miembros de la citada organización acreditados en el Perú. (El Peruano) ProInversión promueve proyectos en EE. UU. Como parte de la visita de la delegación oficial peruana a la ciudad de Salt Lake City, Utah (Estados Unidos), con motivo de la cumbre internacional Crossroads of the World International Trade Summit 2025, el director ejecutivo de la Agencia de Promoción de la Inversión Privada (ProInversión), Luis del Carpio, presentó las oportunidades de inversión en el Perú por más de 70,000 millones de dólares. (El Peruano)",
+          "page": 3
+        },
+        {
+          "metadata": {
+            "description": "Sunass, el regulador del agua...",
+            "url": ""
+          },
+          "text": "Sunass, el regulador del agua potable.",
+          "page": 3
+        },
+        {
+          "metadata": {
+            "description": "Pensemos en el medio ambiente...",
+            "url": ""
+          },
+          "text": "Pensemos en el medio ambiente antes de imprimir este documento. Imprime este mensaje solo si es necesario. NOTA DE CONFIDENCIALIDAD: La información contenida en este correo y cualquiera de sus anexos es confidencial. Si usted no es la persona a quien está destinado el correo,",
+          "page": 3
+        },
+        {
+          "metadata": {
+            "description": "23/5/25, 6:12 p.m. Gmail -...",
+            "url": ""
+          },
+          "text": "23/5/25, 6:12 p.m. Gmail - Fwd: Resumen informativo | Del 10 a 12 de mayo de 2025",
+          "page": 3
+        },
+        {
+          "metadata": {
+            "description": "3/4",
+            "url": "https://mail.google.com/mail/u/1/?ik=d562a37fff&view=pt&search=all&permmsgid=msg-f:1832954410666719477&simpl=msg-f:1832954410666719477"
+          },
+          "text": "https://mail.google.com/mail/u/1/?ik=d562a37fff&view=pt&search=all&permmsgid=msg-f:1832954410666719477&simpl=msg-f:1832954410666719477 3/4",
+          "page": 3
+        },
+        {
+          "metadata": {
+            "description": "por favor destrúyalo. No debe...",
+            "url": ""
+          },
+          "text": "por favor destrúyalo. No debe retener, copiar o utilizar este correo para ningún propósito, como tampoco revelar su contenido o parte alguna del mismo. Salvo que la información sea remitida como parte de un procedimiento de acceso a la información pública.",
+          "page": 4
+        },
+        {
+          "metadata": {
+            "description": "23/5/25, 6:12 p.m. Gmail -...",
+            "url": ""
+          },
+          "text": "23/5/25, 6:12 p.m. Gmail - Fwd: Resumen informativo | Del 10 a 12 de mayo de 2025",
+          "page": 4
+        },
+        {
+          "metadata": {
+            "description": "4/4",
+            "url": "https://mail.google.com/mail/u/1/?ik=d562a37fff&view=pt&search=all&permmsgid=msg-f:1832954410666719477&simpl=msg-f:1832954410666719477"
+          },
+          "text": "https://mail.google.com/mail/u/1/?ik=d562a37fff&view=pt&search=all&permmsgid=msg-f:1832954410666719477&simpl=msg-f:1832954410666719477 4/4",
+          "page": 4
+        }
+      ]
+    },
+    "html_pages": {
+      "https://busquedas.elperuano.pe/dispositivo/NL/2398252-1": {
+        "metadata": {
+          "title": "Aprueban el “Plan de Asistencia Técnica con enfoque territorial al Gobierno Subnacional en materias de modernización de la gestión pública para el año 2025”  - RESOLUCION - N° 003-2025-PCM-SGP - PRESIDENCIA DEL CONSEJO DE MINISTROS",
+          "description": "Aprueban el “Plan de Asistencia Técnica con enfoque territorial al Gobierno Subnacional en materias de modernización de la gestión pública para el año 2025”",
+          "url": "https://busquedas.elperuano.pe/dispositivo/NL/2398252-1"
+        },
+        "text": "Aprueban el “Plan de Asistencia Técnica con enfoque territorial al Gobierno Subnacional en materias de modernización de la gestión pública para el año 2025” - RESOLUCION - N° 003-2025-PCM-SGP - PRESIDENCIA DEL CONSEJO DE MINISTROS PDF HTML Cuadernillo Fecha de publicación: 11/05/2025",
+        "content_type": "text/html",
+        "relevance": 0.0,
+        "context": "enfoque territorial al Gob Normas Legales)",
+        "page": 1
+      },
+      "https://busquedas.elperuano.pe/dispositivo/NL/2398206-1": {
+        "metadata": {
+          "title": "Aprueban el Plan Operativo Institucional Multianual 2026-2028 del Pliego 037: Ministerio de Vivienda, Construcción y Saneamiento - RESOLUCION MINISTERIAL - N° 129-2025-VIVIENDA - VIVIENDA, CONSTRUCCION Y SANEAMIENTO",
+          "description": "Aprueban el Plan Operativo Institucional Multianual 2026-2028 del Pliego 037: Ministerio de Vivienda, Construcción y Saneamiento",
+          "url": "https://busquedas.elperuano.pe/dispositivo/NL/2398206-1"
+        },
+        "text": "Aprueban el Plan Operativo Institucional Multianual 2026-2028 del Pliego 037: Ministerio de Vivienda, Construcción y Saneamiento - RESOLUCION MINISTERIAL - N° 129-2025-VIVIENDA - VIVIENDA, CONSTRUCCION Y SANEAMIENTO PDF HTML Cuadernillo Fecha de publicación: 10/05/2025",
+        "content_type": "text/html",
+        "relevance": 0.2,
+        "context": "prueban el Plan Operativo Institucional Multi miento. (El Peruano, Normas Legales)",
+        "page": 1
+      },
+      "https://rotafono.pe/servicios-publicos/barranco-reportan-aniego-en-el-cruce-de-los-jirones-martinto-y-tacna-video-1633928?itlk=iknoticia": {
+        "metadata": {
+          "title": "Barranco: reportan aniego en el cruce de los jirones Martinto y Tacna | VIDEO",
+          "description": "Rotafono de RPP | Los vecinos de esta zona de Barranco indicaron que tampoco tenían agua y exigen a Sedapal que reparen el problema lo antes posible, ya que es el Día de la Madre.",
+          "url": "https://rotafono.pe/servicios-publicos/barranco-reportan-aniego-en-el-cruce-de-los-jirones-martinto-y-tacna-video-1633928?itlk=iknoticia"
+        },
+        "text": "Barranco: reportan aniego en el cruce de los jirones Martinto y Tacna | VIDEO Inicio Enviar Caso Ir a rpp.pe Reporte de errores Copyright © 2023 Descargar Rotafono para Android y disfruta de una mejor experiencia. ✕ Descargar ahora Servicios públicos Barranco: reportan aniego en el cruce de los jirones Martinto y Tacna [VIDEO] Rotafono de RPP | Los vecinos de esta zona de Barranco indicaron que tampoco tenían agua y exigen a Sedapal que reparen el problema lo antes posible, ya que es el Día de la Madre . 11 de Mayo del 2025 17:00:32 pm | Actualizado el 12 de Mayo del 2025 13:23:10 pm | Victor Pacheco Los aniegos y corte de agua son problemas reiterativos en esta zona | Fuente: Rotafono Gonzalo Lecca se comunicó con el Rotafono de RPP parar informar que hay un aniego en el cruce de los jirones Pedro Martinto y Tacna, en el distrito limeño de Barranco desde hace tres días. Este problema se da hoy, domingo 11 de mayo, en plena celebración por el Día de la Madre . Recientemente hubo otro aniego en las inmediaciones de esta intersección. Además, el señor sostuvo que se produjo corte de agua en toda la zona desde el pasado miércoles y que volvió ayer sábado. Sin embargo, volvieron a cortarlo, aparentemente para arreglar esta problemática. El aniego está desde hace varias horas | Fuente: Rotafono Vecinos exigen a Sedapal que solucione el problema de raíz El ciudadano señaló que esta situación se repite en diversas ocasiones todo el año, ya que constantemente se va o hay aniegos. El señor agregó que hace unos meses atrás, Sedapal hizo unos trabajos en este lugar, un cambio de tuberías, pero lo habría hecho mal porque “hay fugas permanentes”. Esta situación hace que haya bastantes cortes de agua para que soluciones el problema de las fugas; también cierran las calles. Todo esto perjudica mucho a los vecinos que viven ahí y no saben hasta cuando estarán así. “Es bastante mortificante tener que liar con los problemas de Sedapal”, sostuvo. El señor Lecca indicó que es un problema sistemático y exhorta a que las autoridades de Sedapal lo arreglen de inmediato. En ese sentido, pidió que solucionen el tema de raíz, para que no sea momentáneo y no vuelvan a tener más. Sedapal responde En relación con la alerta de aniego registrada en los jirones Pedro Martinto y Tacna, en el distrito de Barranco, Sedapal verificó que el aniego de agua potable fue ocasionado por fallas en el empalme realizado por la empresa contratista que presta servicios a Sedapal. \"La avería fue reparada de manera oportuna y satisfactoria. Es importante señalar que este incidente no generó afectación a los predios ubicados en la zona. Una vez concluidos los trabajos de reparación, el servicio de agua potable ha sido restablecido de forma progresiva en el área\", se informó a través de un comunicado. El Rotafono de RPP sigue creciendo al servicio de la ciudadanía. Envíanos audios, videos y fotos de tu denuncia o hecho noticioso a través del WhatsApp 999 001 800 . Descarga la app del Rotafono aquí: https://acortar.link/VBl4Mb o también desde tu computadora en rotafono.pe . La app del Rotafono ya está disponible en Play Store | Fuente: Rotafono Sepa más: Barranco dia de la madre Sedapal corte de agua rotafono Comparte este caso ¿Conoces de un caso similar? Enviar caso Más noticias de Rotafono Niña de Chimbote que se atragantó con una pila es atendida en el INSN Breña Joven con aneurisma internado en clínica de Ecuador es trasladado al Perú Piden ayuda para conseguir cita en Oftalmología para adulto mayor que fue operado por cataratas Villa María del Triunfo: advierten peligro por semáforos malogrados a pocos metros de dos colegios Otros casos similares 19/10/2022 13:03 Comas: pacientes denunciaron demoras en la atención de emergencia en el hospital de Collique 04/07/2023 11:58 Maraña de cables aéreos en desuso invaden calles de Chorrillos 26/10/2022 10:17 Escolares fueron atropelladas y madre solicita acelerar la atención en el hospital de Puno 10/11/2022 17:54 Reportan caída de árbol a metros de ciclovía en la avenida Arequipa Más sitios RPP AudioPlayer Studio 92 La Zona Oxígeno Corazón La Mega Felicidad Descarga el APP Síguenos Mi cuenta Únete a la comunidad de Rotafono Seguir con Facebook Seguir con Google Seguir con Correo ¿Ya tienes cuenta por correo electrónico? Inicia sesión Con el uso de esta plataforma estás aceptando los términos y condiciones Únete a la comunidad de Rotafono Seguir con Facebook Seguir con Google Seguir con Correo ¿Ya tienes cuenta por correo electrónico? Inicia sesión Con el uso de esta plataforma estás aceptando los términos y condiciones Omitir ¡Hola! Ingresa tus datos: Omitir ¡Hola! Por favor, ingresa tus datos Omitir",
+        "content_type": "text/html",
+        "relevance": 0.6000000000000001,
+        "context": "PP parar informar un anie s días. (Rotafono)",
+        "page": 2
+      },
+      "https://elcomercio.pe/politica/justicia/equipo-lava-jato-presenta-acusacion-contra-14-personas-por-caso-de-planta-de-tratamiento-de-huachipa-y-ramal-norte-sedapal-camargo-y-correa-ultimas-noticia/?ref=ecr": {
+        "metadata": {
+          "title": "Equipo Lava Jato presenta acusación contra 14 personas por caso de planta de tratamiento de Huachipa y Ramal Norte | Sedapal | Camargo y Correa | últimas | POLITICA | EL COMERCIO PERÚ",
+          "description": "El equipo especial de fiscales del caso Lava Jato presentó su acusación contra 12 personas y dos representantes de la empresa brasileña Camargo Correa por el proyecto “Lote 1, 2, 3 – Bocatoma, Planta de Tratamiento de Huachipa y Ramal Norte”.",
+          "url": "https://elcomercio.pe/politica/justicia/equipo-lava-jato-presenta-acusacion-contra-14-personas-por-caso-de-planta-de-tratamiento-de-huachipa-y-ramal-norte-sedapal-camargo-y-correa-ultimas-noticia/?ref=ecr"
+        },
+        "text": "Equipo Lava Jato presenta acusación contra 14 personas por caso de planta de tratamiento de Huachipa y Ramal Norte | Sedapal | Camargo y Correa | últimas | POLITICA | EL COMERCIO PERÚ Suscríbete Lo último Portada Edición Impresa Club El Comercio Newsletters Editorial Día 1 Audiencias Vecinales Corresponsales escolares Podcast Reviú Juegos Columnistas Provecho Saltar intro Política Economía ECData Lima Perú Mundo DT Luces TV+ Tecnología y ciencias Somos Bienestar Hogar y Familia Respuestas Mag Viù Vamos Ruedas y Tuercas Casa y Más El Dominical Horóscopo Desde la redacción Videos Archivo El Comercio Blogs WUF Menú Perú Notas contratadas Colecciones El Comercio elcomercio.pe términos y condiciones de uso oficinas concesionarias principios rectores buenas prácticas políticas de privacidad política integrada de gestión derechos arco política de cookies Tabla de la Liga 1: Así quedó el Torneo Apertura 2025 tras el triunfo de Universitario ante Cristal Justicia / Noticias Información basada en hechos y verificada de primera mano por el reportero, o reportada y verificada por fuentes expertas. | Informativo Equipo Lava Jato presenta acusación contra 14 personas por caso de planta de Huachipa y Ramal Norte Están comprendidos funcionarios de Sedapal y supervisores de obra, además de representantes de la empresa brasileña Camargo y Correa. Suman 25 las acusaciones fiscales presentadas. Guillermo Bermejo y Guido Bellido: se inicia la etapa previa al juicio oral por presunta obstrucción a la justicia ¿cuál es la tesis fiscal? JNE busca sancionar a partidos que incurran en firmas falsas: ¿Su proyecto es una salida a la crisis por afiliaciones indebidas? Conforme a los criterios de Saber más Fiscales Geovanna Mori, Germán Juárez, Rafael Vela y José Domingo Pérez, del equipo especial Lava Jato. (Foto: Andina) Redacción EC 09/05/2025 21H07 El equipo especial de fiscales del caso Lava Jato presentó su acusación contra 12 personas y dos representantes de la empresa brasileña Camargo Correa por el proyecto “Lote 1, 2, 3 – Bocatoma, Planta de Tratamiento de Huachipa y Ramal Norte”. Según información a la que accedió El Comercio, se trata de funcionarios de Sedapal y supervisores de obra, además de representantes de la empresa brasileña, integrantes del Consorcio Huachipa , a cargo de la ejecución de la referida obra. Suscríbete gratis al newsletter Mientras Tanto Héctor Villalobos analiza a fondo los hechos políticos que definen la agenda, cada miércoles. Suscríbete LEE MÁS: PJ sobre extinción de dominio: “Nuestro país corre el riesgo de ser incluido en listas de alto riesgo económico y no acceder a la OCDE” A ellos se les imputa los delitos de colusión, cohecho pasivo propio y cohecho activo genérico, en agravio del Estado (representado por Sedapal) por los cuales se ha requerido penas privativas de libertad que oscilan entre los nueve y 15 años. La fiscal provincial Diana Canchihuaman, del equipo especial Lava Jato, ha presentado la acusación. Con este requerimiento suman 25 las acusaciones fiscales presentadas por el Equipo Especial Lava Jato que lidera el fiscal superior Rafael Vela . LEE MÁS: JNJ ratifica vacancia de Rafael Ruiz Hidalgo al desestimar su recurso de reconsideración En 2018 la Contraloría General de la República detectó irregularidades en la suscripción del contrato, ejecución y en la etapa de operación y mantenimiento del proyecto, que habría ocasionado un perjuicio económico de S/91 millones 858 mil. La comisión auditora identificó cinco irregularidades en dicha obra que involucra un monto de contrato equivalente a U$S304 millones 600 mil y que fue adjudicada al Consorcio Huachipa, integrado por la empresa brasileña Camargo Correa y la compañía francesa OTV en el año 2008. LEE MÁS: Alejandro Toledo seguirá en prisión: PJ rechaza su pedido para que cumpla condena por corrupción bajo detención domiciliaria La auditoría comprendió la revisión y análisis de documentos del periodo octubre de 2007 a octubre de 2015. Los resultados fueron remitidos al Primer Despacho de la Fiscalía Supraprovincial Especializada en Delitos de Corrupción de Funcionarios. VIDEO RECOMENDADO TAGS Lava Jato Sedapal Huachipa Ministerio Público Camargo Correa TE PUEDE INTERESAR Nicanor Boluarte y el pedido de restitución de prisión preventiva: Las razones de la fiscalía para insistir con esa medida por Caso Los Waykis en la sombra Papa León XIV defendió la paz y la democracia en Perú: este es su perfil político y las veces que alzó la voz Más de cinco meses desde la última prórroga del Reinfo y el Congreso aún no discute nueva ley de pequeña minería Morgan Quero: ¿Qué delito le imputa la fiscalía y qué camino seguirá la denuncia por sus declaraciones sobre los fallecidos en las protestas? Gobierno busca ahora flexibilizar la ley sobre nepotismo: ¿qué plantea el proyecto y cuáles son las alertas de los expertos? Las más leídas 1 VIDEO: ver resumen y goles del partido, Universitario vs. Sporting Cristal (2-0) por liga 1 2 Ley de Agentes Extranjeros: “Bukele está convirtiendo a El Salvador en una Nicaragua 2.0, ya hizo todo lo del manual″ 3 Juan José Santivañez: Corte Suprema considera que investigación tiene “suficientes elementos de convicción” que lo vinculan con delito de abuso de autoridad Contenido sugerido Contenido GEC “Ningún país del mundo quería aceptarlos”: gobierno de Donald Trump bajo fuego por enviar migrantes a Sudán del Sur MAG. “Me regresé porque las cosas están feas allá”: migrantes hondureños se cansaron del sueño americano y volvieron a casa (con US$1,000 en el bolsillo) MAG. La redada que sacudió a una iglesia en Florida: detención de pastor inmigrante conmueve a una comunidad entera en Tampa MAG. Puso en riesgo la vida de sus hijos: arrestan a ‘Carlitos el Productor’ de “El gordo y la flaca” por conducir ebrio MAG. Un jugador acaba de llevarse $1 millón en Powerball: ¿en qué parte de EE. UU. se vendió el boleto ganador? MAG. “¿De dónde voy a sacar tanto dinero?”: migrantes enfrentan multas de hasta 1.8 millones de dólares en Estados Unidos MAG.",
+        "content_type": "text/html",
+        "relevance": 0.4,
+        "context": "a obra. (El",
+        "page": 2
+      },
+      "https://radiorsd.pe/noticias/chimbote-jaap-el-castillo-garantiza-agua-segura-para-470-habitantes-y-es-reconocida-por-la": {
+        "metadata": {
+          "title": "Chimbote: JAAP El Castillo garantiza agua segura para 470 habitantes y es reconocida por la Sunass",
+          "description": "Junta Administradora de Servicios de Saneamiento se convierte en un modelo a seguir por su eficiente sistema de cloración",
+          "url": "https://radiorsd.pe/noticias/chimbote-jaap-el-castillo-garantiza-agua-segura-para-470-habitantes-y-es-reconocida-por-la"
+        },
+        "text": "Chimbote: JAAP El Castillo garantiza agua segura para 470 habitantes y es reconocida por la Sunass Chimbote: JAAP El Castillo garantiza agua segura para 470 habitantes y es reconocida por la Sunass Creado el Domingo, 11 de Mayo del 2025 06:51:22 pm Junta Administradora de Servicios de Saneamiento se convierte en un modelo a seguir por su eficiente sistema de cloración En un contexto donde gran parte de las zonas rurales del país aún carecen de acceso a agua potable debidamente tratada, una organización comunal del distrito de Chimbote, está demostrando que sí es posible garantizar este derecho básico con recursos limitados y compromiso comunitario. Se trata de la Junta Administradora de Servicios de Saneamiento (JAAP) El Castillo, que fue reconocida por la Superintendencia Nacional de Servicios de Saneamiento (Sunass) como organización modelo por su destacado sistema de cloración del agua para consumo humano. Su labor beneficia a 470 habitantes y contribuye directamente a la prevención de enfermedades como la anemia y la desnutrición , condiciones aún comunes en zonas sin acceso a agua segura. El reconocimiento se entregó durante el VII Taller de Benchmarking de Organizaciones Comunales , realizado simultáneamente en seis provincias de la región. El evento buscó promover buenas prácticas en la formalización de servicios y desinfección del agua entre los prestadores rurales, en un esfuerzo por reducir brechas sanitarias que aún afectan a miles de personas. Según la Sunass, las actividades de fiscalización orientativa revelan serias deficiencias en la calidad del servicio, infraestructura y tratamiento del agua en muchas organizaciones del ámbito rural. En este panorama, la JAAP El Castillo sobresale por su sistema de cloración por goteo, implementado de forma constante y técnica. “La cloración del agua es importante para garantizar una buena calidad del recurso, fundamental para la salud de los niños, los ancianos y de toda la comunidad”, explicó Andrés Flores Obregón, presidente de la JAAP, quien detalló que la cloración se realiza semanalmente. Además de El Castillo, la Sunass también reconoció a otras JASS en Casma, Corongo, Huarmey, Pallasca y Sihuas por sus esfuerzos en mejorar la calidad del agua. Sin embargo, el camino por recorrer aún es largo, y los casos exitosos como este demuestran que el cambio es posible si se trabaja con enfoque comunitario, conocimiento técnico y acompañamiento institucional. (P.C. - RSD Noticias). Tags: cloración Sunass agua potable Chimbote Noticias relacionadas Chimbote: ministra de la Mujer visita la MPS tras plantón de beneficiarias de ollas comunes y comedores populares Chimbote: incautan 7 toneladas de pota extraída ilegalmente y en embarcación clonada Fallece el padre Julio Asián Sparrow, reconocido sacerdote de la Diócesis de Chimbote Bebé que tuvo por 7 días una pila alojada en su esófago fue trasladada a Lima Últimas noticias Chimbote: ministra de la Mujer visita la MPS tras plantón de beneficiarias de ollas comunes y comedores populares Chimbote: incautan 7 toneladas de pota extraída ilegalmente y en embarcación clonada Contraloría detecta deficiencias e incumplimientos en servicio de serenazgo de Casma Gobierno declara el 13 de junio como Día Nacional del Pan Peruano Fallece el padre Julio Asián Sparrow, reconocido sacerdote de la Diócesis de Chimbote Bebé que tuvo por 7 días una pila alojada en su esófago fue trasladada a Lima VIDEO | Ministra de la Mujer cumple hoy agenda de trabajo en la provincia del Santa Áncash: lluvias intensas provocan nuevos daños en Huaraz, Pallasca y Sihuas",
+        "content_type": "text/html",
+        "relevance": 0.9,
+        "context": "reconocida p (RSD)",
+        "page": 2
+      },
+      "https://andina.pe/agencia/noticia-fiscalia-acusa-a-14-implicados-presunta-corrupcion-obra-planta-huachipa-1029086.aspx": {
+        "metadata": {
+          "title": "Fiscalía acusa a 14 implicados por presunta corrupción en obra de planta de Huachipa | Noticias | Agencia Peruana de Noticias Andina",
+          "description": "Últimas noticias de Perú y el mundo sobre política, locales, deportes, culturales, espectáculos, economía, y tecnología en la Agencia Peruana de Noticias Andina",
+          "url": "https://andina.pe/agencia/noticia-fiscalia-acusa-a-14-implicados-presunta-corrupcion-obra-planta-huachipa-1029086.aspx"
+        },
+        "text": "Fiscalía acusa a 14 implicados por presunta corrupción en obra de planta de Huachipa | Noticias | Agencia Peruana de Noticias Andina",
+        "content_type": "text/html",
+        "relevance": 0.0,
+        "context": "resentantes de la emp mercio, Andina)",
+        "page": 2
+      },
+      "https://canaln.pe/actualidad/protesta-frente-al-ministerio-vivienda-cierre-programas-n483301": {
+        "metadata": {
+          "title": "Ministerio de Vivienda: Protesta por cierre de programas | Canal N",
+          "description": "Trabajadores protestan frente al Ministerio de Vivienda por extinción de 14 programas estatales",
+          "url": "https://canaln.pe/actualidad/protesta-frente-al-ministerio-vivienda-cierre-programas-n483301"
+        },
+        "text": "Ministerio de Vivienda: Protesta por cierre de programas | Canal N #AlertaNoticias 998-131604 Actualidad Dina Boluarte Congreso Juan José Santiváñez Actualidad Protesta frente al Ministerio de Vivienda por cierre de programas Trabajadores protestan frente al Ministerio de Vivienda por extinción de 14 programas estatales. / Video: Canal N Más de cuatro mil empleados serían afectados, según sindicatos del Ministerio de Vivienda CT Por Christian Torres Tutiven » Se registra una protesta en los exteriores del Ministerio de Vivienda, Construcción y Saneamiento (MVCS), ubicado en San Isidro, luego del anuncio del ministro de Economía, José Salardi, sobre la extinción de catorce programas públicos en el marco del plan de racionalización del gasto estatal. Los manifestantes ocuparon parte de un carril de la avenida República de Panamá, exigiendo diálogo y una solución urgente ante la posible pérdida masiva de empleos. Entre los programas afectados figuran: Agua Segura para Lima y Callao, Programa de Vivienda Rural, Mejoramiento Integral de Barrios, Saneamiento Urbano, Saneamiento Rural, Subsectorial de Irrigación, Plan COPESCO Nacional, Diversificación Productiva, entre otros vinculados a infraestructura educativa, telecomunicaciones, inversiones en salud y programas descentralizados. “Estamos siendo afectados más de cuatro mil trabajadores, sin contar nuestras familias. Lo que ha hecho el Gobierno es una improvisación. No ha habido diálogo previo ni alternativas claras”, señaló Rosalía, secretaria adjunta del Sindicato del Programa Nacional de Saneamiento Urbano,. Desconocen si serán reubicados Los dirigentes insistieron en que no existe garantía de que los trabajadores sean reubicados, como se había sugerido desde el Ejecutivo. “Es totalmente falso. No hay nada comunicado. Solo hemos tenido una reunión formal con el ministro y luego con su secretaria general, pero sin respuestas concretas”, advirtieron. Por último, anunciaron que, de no obtener resultados, las protestas continuarán y se extenderán hacia otras instancias. “No descartamos movilizaciones frente al Ministerio de Economía o en coordinación con la Confederación de Trabajadores del Perú. Esta es una lucha que recién comienza”, afirmaron. Ver también ANIN: Gobierno extingue 14 programas y pasarán a Unidad Central Proponen vigilancia en programas sociales Gobierno extingue programa Wasi Mikuna escolar Tags Ministerio de Vivienda Ministerio de Economía Protesta Relacionadas Actualidad Janet Tello: El Congreso debe escuchar a los jueces Actualidad Carlos Adrianzén: No es momento de subir ningún sueldo Actualidad Tuesta: El problema del alza de sueldo a Boluarte es político Actualidad Cutervo: Paro provincial bloquea vía Fernando Belaunde Actualidad Bloquean Ramiro Prialé por puente en mal estado Perú Ayacucho: Bloquean carretera para exigir obras de agua y desagüe",
+        "content_type": "text/html",
+        "relevance": 0.4,
+        "context": "diálogo previo ni altern rbano. (Canal N)",
+        "page": 2
+      },
+      "https://www.gob.pe/institucion/vivienda/noticias/1164922-mvcs-capacito-a-las-eps-de-amazonas-y-san-martin-sobre-evaluacion-del-riesgo-ante-desastres-naturales": {
+        "metadata": {
+          "title": "MVCS capacitó a las EPS de Amazonas y San Martín sobre evaluación del riesgo ante desastres - Noticias - Ministerio de Vivienda, Construcción y Saneamiento - Plataforma del Estado Peruano",
+          "description": "Con el objetivo de fortalecer las capacidades de las Empresas Prestadoras de Servicios de Saneamiento (EPS) a nivel nacional, el Ministerio de Vivienda, Construcción y Saneamiento (MVCS) desarrolló en la ciudad de Moyobamba un taller de capacitación sobre evaluación de riesgos...",
+          "url": "https://www.gob.pe/institucion/vivienda/noticias/1164922-mvcs-capacito-a-las-eps-de-amazonas-y-san-martin-sobre-evaluacion-del-riesgo-ante-desastres-naturales"
+        },
+        "text": "MVCS capacitó a las EPS de Amazonas y San Martín sobre evaluación del riesgo ante desastres - Noticias - Ministerio de Vivienda, Construcción y Saneamiento - Plataforma del Estado Peruano Saltar a contenido principal Ministerio de Vivienda, Construcción y Saneamiento MVCS capacitó a las EPS de Amazonas y San Martín sobre evaluación del riesgo ante desastres Nota de prensa Los profesionales de las Empresas Prestadoras de Servicios de Saneamiento recibieron talleres que les permitirán tener las herramientas para asegurar que la población no quede desabastecida. 10 de mayo de 2025 - 6:30 a. m. Con el objetivo de fortalecer las capacidades de las Empresas Prestadoras de Servicios de Saneamiento (EPS) a nivel nacional, el Ministerio de Vivienda, Construcción y Saneamiento (MVCS) desarrolló en la ciudad de Moyobamba un taller de capacitación sobre evaluación de riesgos ante desastres originados por causas naturales, en el cual participaron gerentes y profesionales de la EPS Moyobamba, EMAPA San Martín, EMAPAB (Bagua) y EPSSMU (Utcubamba), de las regiones de San Martín y Amazonas, respectivamente. A través de este taller, el MVCS busca asegurar la disponibilidad de los servicios básicos o su rápida recuperación ante una afectación producida por un desastre ocasionado por fenómenos de origen natural, como sismos, deslizamientos, entre otros, con el fin de que la población no quede desabastecida y puedan contar con agua potable y prevenir enfermedades, las que podrían agudizarse ante este tipo de eventos. El evento se realizó los días 8 y 9 de mayo, y abordó temas como el marco normativo del Sistema Nacional de Gestión del Riesgo de Desastres (SINAGERD), sobre la gestión prospectiva (anticipándose a futuro) del riesgo de desastres, sobre la articulación de metodologías de evaluación del riesgo con instrumentos de planificación, identificación y caracterización de los peligros en un ámbito geográfico, sobre la vulnerabilidad social, económica y ambiental, entre otros. Como parte de las actividades, los participantes realizaron una visita de campo a la captación Rumiyacu, a fin de aplicar in situ los conocimientos adquiridos en el taller e identificar los posibles riesgos ante desastres para efectuar las acciones preventivas correspondientes. Es importante recordar que el Informe de Evaluación del Riesgo de Desastre (EVAR) es un instrumento técnico que ayuda a determinar los niveles de riesgo en la infraestructura existente, así como en los proyectos de agua potable y alcantarillado. Este informe identifica y evalúa los peligros y vulnerabilidades, recomendando medidas para prevenir o mitigar las consecuencias. De esta forma, el Ministerio de Vivienda, Construcción y Saneamiento continúa articulando con las diferentes instituciones con el objetivo de garantizar el acceso a los servicios básicos para todas las personas, especialmente, para las poblaciones vulnerables y en situaciones de riesgo.",
+        "content_type": "text/html",
+        "relevance": 0.6000000000000001,
+        "context": "EMAPA San Martín, EM mente. (Vivienda)",
+        "page": 2
+      },
+      "https://diariolaregion.com/alertan-deficiencias-en-la-calidad-de-agua-potable/": {
+        "metadata": {
+          "title": "Alertan deficiencias en la calidad de agua potable – Diario de Noticias y Actualidad de Loreto – Iquitos – Ucayali – Requena – Datem del Marañon – Mariscal Ramon Castilla – Alto Amazonas – Loreto – Maynas – El Diario Judicial de Loreto",
+          "description": "",
+          "url": "https://diariolaregion.com/alertan-deficiencias-en-la-calidad-de-agua-potable/"
+        },
+        "text": "Alertan deficiencias en la calidad de agua potable – Diario de Noticias y Actualidad de Loreto – Iquitos – Ucayali – Requena – Datem del Marañon – Mariscal Ramon Castilla – Alto Amazonas – Loreto – Maynas – El Diario Judicial de Loreto Saltar al contenido Titulares Dengue: Más de 1.3 millones de intervenciones de control larvario en el 2025 2 meses atrás 2 meses atrás Anuncian recaudación de fondos para el albergue “El Huambrillo” 18 horas atrás 15 horas atrás Presidenta del Poder Judicial expresa beneplácito por promulgación de ley que crea sistema de flagrancia 18 horas atrás 15 horas atrás Gran labor humanitaria del Voluntariado del Hospital Apoyo Iquitos 18 horas atrás 15 horas atrás GOREL-GRDE participa en foro regional sobre la industria como motor de crecimiento nacional 18 horas atrás 15 horas atrás Pese al desplazamiento de la fiscalía de extinción de dominio, policía especializada y PRONABI, no desalojaron inmueble en la calle Abtao 18 horas atrás 14 horas atrás Juez Aldo Atarama encabezó reunión para fortalecer el inventariado de casos judiciales en Corte de Loreto 18 horas atrás 15 horas atrás Poder Judicial presente hoy en pasacalle por la “Semana de la Maternidad Saludable, Segura y Voluntaria” 18 horas atrás 15 horas atrás Solicitan vacancia de alcaldesa por nepotismo y robo sistemático de casi 2 millones de soles 18 horas atrás 14 horas atrás Electro Oriente instala luminarias LED en diversos distritos de Loreto 18 horas atrás 15 horas atrás Municipalidad de Lagunas ha convocado a la I Audiencia Pública de Rendición de Cuentas 2025 18 horas atrás 15 horas atrás Inicio NOTICIAS Alertan deficiencias en la calidad de agua potable En zonas inundables de Iquitos. Monitoreo detecta niveles críticos de cloro residual en viviendas de Punchana, exponiendo a los pobladores a riesgos sanitarios. La Superintendencia Nacional de Servicios de Saneamiento (Sunass), en coordinación con la Empresa Prestadora de Servicios (EPS) Sedaloreto, realizó un monitoreo en las zonas inundables de Iquitos, Punchana y Belén para evaluar la calidad del agua potable ante el incremento del nivel de los ríos. Los resultados arrojaron cifras alarmantes: en seis viviendas del distrito de Punchana se detectaron niveles de cloro residual por debajo del mínimo permitido, fijado en 0.5 mg/L, lo que compromete la salubridad del agua distribuida en estas áreas vulnerables. El cloro residual es fundamental para asegurar que el agua potable llegue a los hogares libre de bacterias y agentes contaminantes. Sin embargo, las conexiones improvisadas en zonas afectadas por las inundaciones, como mangueras y tomas clandestinas, aumentan el riesgo de contaminación, agravado por la acumulación de residuos sólidos alrededor de las viviendas. Las autoridades de Sunass exhortaron a Sedaloreto a fortalecer su presencia en campo y coordinar con los vecinos la revisión de las conexiones domiciliarias en las áreas afectadas. Además, se instó a optimizar las medidas de saneamiento para evitar la propagación de enfermedades hídricas, especialmente en periodos de creciente. La entidad reguladora anunció que continuará con los monitoreos periódicos para garantizar que el servicio de agua potable se distribuya con los estándares de calidad necesarios, en especial en los sectores más vulnerables de la región. (C. Ampuero) Deja una respuesta Cancelar la respuesta Este sitio usa Akismet para reducir el spam. Aprende cómo se procesan los datos de tus comentarios. Noticias relacionadas Anuncian recaudación de fondos para el albergue “El Huambrillo” Region 18 horas atrás 15 horas atrás 0 Poder Judicial presente hoy en pasacalle por la “Semana de la Maternidad Saludable, Segura y Voluntaria” Region 18 horas atrás 15 horas atrás 0 Juez Aldo Atarama encabezó reunión para fortalecer el inventariado de casos judiciales en Corte de Loreto Region 18 horas atrás 15 horas atrás 0 Pese al desplazamiento de la fiscalía de extinción de dominio, policía especializada y PRONABI, no desalojaron inmueble en la calle Abtao Region 18 horas atrás 14 horas atrás 0",
+        "content_type": "text/html",
+        "relevance": 0.9,
+        "context": "inundables de Región)",
+        "page": 2
+      },
+      "https://macronorte.pe/2025/05/10/percy-rosario-martell-seria-expectorado-del-directorio-de-sedalib/": {
+        "metadata": {
+          "title": "Percy Rosario Martell sería expectorado del directorio de Sedalib - Macronorte",
+          "description": "El director de Sedalib, Frank Sánchez, señaló que el presidente del Directorio de la citada empresa, Percy Rosario Martell, ha incurrido en una causal de",
+          "url": "https://macronorte.pe/2025/05/10/percy-rosario-martell-seria-expectorado-del-directorio-de-sedalib/"
+        },
+        "text": "Percy Rosario Martell sería expectorado del directorio de Sedalib - Macronorte Registrarse Inicio Escuela M #AlertaNorte Investigación Noticias La Totora Cultura Opinión Ver Más Cientec Deportes Plan H Economía EMR 2018 Registrarse Recuperación de contraseña Recupera tu contraseña tu correo electrónico TodayNews Inicio Escuela M #AlertaNorte Investigación Noticias La Totora Cultura Opinión Ver Más Cientec Deportes Plan H Economía EMR 2018 Más Inicio #AlertaNorte Percy Rosario Martell sería expectorado del directorio de Sedalib #AlertaNorte Facebook Twitter Pinterest WhatsApp El director de Sedalib, Frank Sánchez, señaló que el presidente del Directorio de la citada empresa, Percy Rosario Martell, ha incurrido en una causal de conclusión de su designación, tras presentar una demanda contra la Junta de Accionistas. En esa línea, también refirió que Rosario Martell ha desistido de la acción de amparo presentada para dejar sin efecto los acuerdos tomados en la última Junta General de Accionistas. “ El actual presidente ha desistido de esta demanda, porque la desesperación no lo ha llevado a pensar bien, porque prácticamente él estaría demandando a Sedalib, ha presentado su desistimiento, pero ya entró en causal de conclusión como director, porque uno para ser director de la empresa no tiene que tener ninguna demanda contra Sedalib o Sedalib te haya demandado ”, mencionó. Ante esta situación, Frank Sánchez pidió a la Junta General de Accionistas evaluar dar por concluida la designación de Rosario Martell como presidente del Directorio, debido a que ha demostrado su desesperación por aferrarse al cargo. “ El señor con la desesperación recién ha presentado su desistimiento entonces acá se tendría que analizar por parte de los accionistas el actuar del señor, porque al desistirse o al verse ya descubierto la desesperación por mantenerse en la presidencia es que ha demandado a Sedalib, pediría a los alcaldes que analicen la conclusión como director ”, aseveró. Cabe precisar que con fecha 25 de abril, Mario Reyna Rodríguez, en calidad de demandado en el proceso de acción de amparo, solicitó a la Primer Juzgado Civil de la Corte Superior de Justicia de La Libertad se incorpore como litisconsorte necesario pasivo a la empresa Sedalib. “ Es urgente y necesario que se incorpore a Sedalib S.A. como litisconsorte necesario pasivo, pues, su intervención garantiza la defensa de dicha institución, asegura el cumplimiento de lo que se resuelva en el presente proceso, y evita nulidades posteriores que pongan en riesgo la vigencia del proceso y ejecución de la sentencia ”, se lee en el documento. Como se ha informado, en Junta Universal de Accionistas de la empresa Sedalib S.A., se acordó dejar sin efecto el acuerdo de directorio aprobando la actualización de su reglamento, la ratificación del presidente del directorio Percy Rosario por un año más y solicitar la intervención del Ministerio Público para investigar hechos con visos de irregularidades. Sin embargo, días después el presidente del Directorio de Sedalib, Percy Rosario Martell, presentó una acción de amparo y la nulidad de dichos acuerdos. Percy Rosario Martell sería expectorado del directorio de Sedalib Artículos relacionados Más del autor Sedalib acusa a municipalidad de Huanchaco de no mostrar interés en el problema del PTAR El Tablazo Municipio de Huanchaco hizo ganar a empresa ESP con puntos de “colindancia” y ante el OSCE lo niegan Consejeros se pronuncian por viaje de vicegobernadora y otros funcionarios al Reino Unido Registrarse ¡Bienvenido! Ingresa en tu cuenta ¿Olvidaste tu contraseña? consigue ayuda Política de privacidad Recuperación de contraseña Recupera tu contraseña Se te ha enviado una contraseña por correo electrónico. RECOMENDACIONES DEL EDITOR ENTRADAS POPULARES Sobrino del congresista Becerril asume jefatura en EsSalud de La Libertad 30 mayo, 2018 ¿Por qué mintió el congresista Daniel Salaverry sobre su título universitario? 15 diciembre, 2016 Esposa de otro oficial ganó 56 contratos con la PNP de... 12 mayo, 2020 CATEGORÍA POPULAR #AlertaNorte 18707 Noticias 7586 Elecciones 2021 381 Economía 289 Plan H 232 Elecciones 2022 199 Cultura 146 Investigación 124 Empresas 98 Sobre Macronorte Contáctenos Política de privacidad ©",
+        "content_type": "text/html",
+        "relevance": 0.0,
+        "context": "ell, ha incurrido en una cau nistas. (Macronorte)",
+        "page": 2
+      },
+      "https://www.gob.pe/institucion/vivienda/noticias/1164757-por-mejores-servicios-basicos-en-cusco-vivienda-suscribe-convenio-para-desarrollo-de-proyecto-de-agua-potable-y-alcantarillado-en-saylla": {
+        "metadata": {
+          "title": "¡Por mejores servicios básicos en Cusco! VIVIENDA suscribe convenio para desarrollo de proyecto de agua potable y alcantarillado en Saylla - Noticias - Ministerio de Vivienda, Construcción y Saneamiento - Plataforma del Estado Peruano",
+          "description": "¡Planificando el acceso a agua segura para más familias cusqueñas! El Ministerio de Vivienda, Construcción y Saneamiento (MVCS), suscribió un convenio tripartito con la Municipalidad Distrital de Saylla y la EPS SEDACUSCO, para el desarrollo del proyecto de agua potable y...",
+          "url": "https://www.gob.pe/institucion/vivienda/noticias/1164757-por-mejores-servicios-basicos-en-cusco-vivienda-suscribe-convenio-para-desarrollo-de-proyecto-de-agua-potable-y-alcantarillado-en-saylla"
+        },
+        "text": "¡Por mejores servicios básicos en Cusco! VIVIENDA suscribe convenio para desarrollo de proyecto de agua potable y alcantarillado en Saylla - Noticias - Ministerio de Vivienda, Construcción y Saneamiento - Plataforma del Estado Peruano Saltar a contenido principal Ministerio de Vivienda, Construcción y Saneamiento ¡Por mejores servicios básicos en Cusco! VIVIENDA suscribe convenio para desarrollo de proyecto de agua potable y alcantarillado en Saylla Nota de prensa Más de 4 mil personas se beneficiarán con obra que permitirá la implementación de una Planta de Tratamiento de Aguas Residuales (PTAR) 9 de mayo de 2025 - 1:44 p. m. ¡Planificando el acceso a agua segura para más familias cusqueñas! El Ministerio de Vivienda, Construcción y Saneamiento (MVCS), suscribió un convenio tripartito con la Municipalidad Distrital de Saylla y la EPS SEDACUSCO, para el desarrollo del proyecto de agua potable y alcantarillado en favor de más de 4 mil personas de esta jurisdicción. Se trata del proyecto de mejoramiento y ampliación del servicio de agua potable urbano, alcantarillado y tratamiento de aguas residuales para la disposición final de la margen derecha de la Vía Nacional Tramo Sector Angostura – centro poblado de Saylla, de la provincia del Cusco. A través del Programa Nacional de Saneamiento Urbano (PNSU), el ministerio brindará apoyo a la EPS SEDACUSCO para la elaboración del expediente técnico de este proyecto que mejorará y ampliará el servicio de agua potable y alcantarillado para las familias del distrito de Saylla, ubicado a más de 3 mil metros sobre el nivel del mar. El proyecto de inversión, valorizado en más de S/19.6 millones, permitirá también la implementación de la Planta de Tratamiento de Aguas Residuales (PTAR). Cabe indicar que, este proyecto forma parte de una cartera de 41 proyectos del PNSU en la región Cusco, por un monto de inversión de S/2,989.68 millones en beneficio de 1.09 millones de personas. Fortaleciendo el equipamiento urbano Como parte de la actividad, a fin de promover el desarrollo urbano en Saylla, el Ministerio de Vivienda, a través del Programa Mejoramiento Integral de Barrios (PMIB), también firmó un acta de compromiso con la municipalidad distrital, con el propósito de desarrollar un proyecto para la creación del servicio de movilidad urbana en la Asociación Pro Vivienda Santa Bárbara. En la actividad participaron el director ejecutivo del Programa Nacional de Saneamiento Urbano (PNSU), el director ejecutivo del Programa Mejoramiento Integral de Barrios (PMIB), el alcalde distrital de Saylla, así como el presidente del directorio de la EPS SEDACUSCO.",
+        "content_type": "text/html",
+        "relevance": 0.6000000000000001,
+        "context": "isdicción. El proyecto de ostura. (Vivienda)",
+        "page": 3
+      },
+      "https://www.gob.pe/institucion/otass/noticias/1164807-otass-este-12-de-mayo-vence-plazo-de-inscripcion-a-la-subasta-publica-de-agua-residual-cruda-de-ptar-yaurilla-ica": {
+        "metadata": {
+          "title": "OTASS: este 12 de mayo vence plazo de inscripción a la subasta pública de agua residual cruda de PTAR Yaurilla - Ica - Noticias - Organismo Técnico de la Administración de los Servicios de Saneamiento - Plataforma del Estado Peruano",
+          "description": "En el marco de buenas prácticas que promuevan la economía circular, la Empresa Municipal de Agua y Alcantarillado de Ica (EMAPICA), bajo la dirección del Organismo Técnico de la Administración de los Servicios de Saneamiento (OTASS), puso en marcha la convocatoria de la...",
+          "url": "https://www.gob.pe/institucion/otass/noticias/1164807-otass-este-12-de-mayo-vence-plazo-de-inscripcion-a-la-subasta-publica-de-agua-residual-cruda-de-ptar-yaurilla-ica"
+        },
+        "text": "OTASS: este 12 de mayo vence plazo de inscripción a la subasta pública de agua residual cruda de PTAR Yaurilla - Ica - Noticias - Organismo Técnico de la Administración de los Servicios de Saneamiento - Plataforma del Estado Peruano Saltar a contenido principal Organismo Técnico de la Administración de los Servicios de Saneamiento OTASS: este 12 de mayo vence plazo de inscripción a la subasta pública de agua residual cruda de PTAR Yaurilla - Ica Nota de prensa Según EMAPICA empresa bajo RAT del OTASS, el postor ganador adquiriría al año, más de 2 millones de metros cúbicos a un precio base de S/ 0,24 por cada mil litros. Oficina de Comunicaciones 9 de mayo de 2025 - 3:21 p. m. En el marco de buenas prácticas que promuevan la economía circular, la Empresa Municipal de Agua y Alcantarillado de Ica (EMAPICA), bajo la dirección del Organismo Técnico de la Administración de los Servicios de Saneamiento (OTASS), puso en marcha la convocatoria de la segunda subasta pública para aquellas empresas e industrias interesadas en adquirir aguas residuales sin tratamiento. De acuerdo con el cronograma, tienen como plazo hasta el lunes 12 de mayo para registrarse en la Unidad de Trámite Documentario de EMAPICA y tener la oportunidad de presentarse al programa de ofertas que se llevará a cabo este 2 de junio. No obstante, el contrato se firmaría el próximo 30 de junio de 2025. “Esta iniciativa, desarrollada en coordinación con el OTASS, impulsa la economía circular del agua y sirve de modelo de inversión sostenible para otras empresas de saneamiento del Perú”, expresó el presidente ejecutivo del OTASS. Según la entidad, en esta segunda subasta se licitarán más de 2 millones de m3 anuales de aguas residuales crudas, por un valor de S/. 0,24 (veinticuatro céntimos de sol) por cada m3. Primera subasta EMAPICA es la empresa de saneamiento pionera en promover el aprovechamiento económico de aguas residuales a nivel nacional. En el 2018, realizó su primera subasta de aguas servidas de la PTAR Cachiche y le otorgó la licitación por 20 años a la empresa agroindustrial AGROKASA. Desde el OTASS se promueve este tipo de iniciativa que representa un pilar clave en el proceso de reflotamiento de EMAPICA, al haber generado un impacto significativo con ingresos anuales de S/. 1.5 millones. Proyectado a 20 años, este resultado se traduce en más de S/ 120 millones, marcando un hito histórico en el sector saneamiento y consolidando a EMAPICA como un referente de gestión eficiente y sostenible. Implementar esta buena práctica permitirá a EMAPICA maximizar su rentabilidad e impulsar su modernización, facilitando la adquisición de equipos de última tecnología y modernos hidrojets de alta presión, ideales para optimizar las tareas de limpieza en la vía pública y elevar la calidad del servicio de saneamiento de más de 200 mil habitantes de Ica. Ica, 9 de mayo de 2025.",
+        "content_type": "text/html",
+        "relevance": 0.6000000000000001,
+        "context": "vocatoria de la segun miento. (Otass)",
+        "page": 3
+      },
+      "https://andina.pe/agencia/noticia-mas-1400-personas-fueron-beneficiadas-acceso-a-agua-segura-el-2024-1029090.aspx": {
+        "metadata": {
+          "title": "Más de 1,400 personas fueron beneficiadas con acceso a agua segura en el 2024 | Noticias | Agencia Peruana de Noticias Andina",
+          "description": "Últimas noticias de Perú y el mundo sobre política, locales, deportes, culturales, espectáculos, economía, y tecnología en la Agencia Peruana de Noticias Andina",
+          "url": "https://andina.pe/agencia/noticia-mas-1400-personas-fueron-beneficiadas-acceso-a-agua-segura-el-2024-1029090.aspx"
+        },
+        "text": "Más de 1,400 personas fueron beneficiadas con acceso a agua segura en el 2024 | Noticias | Agencia Peruana de Noticias Andina",
+        "content_type": "text/html",
+        "relevance": 0.2,
+        "context": "de instalación de siste añete. (Andina)",
+        "page": 3
+      },
+      "https://andina.pe/agencia/noticia-peru-y-japon-buscan-impulsar-proyectos-agua-y-reordenamiento-urbano-lima-y-callao-1029000.aspx": {
+        "metadata": {
+          "title": "Perú y Japón buscan impulsar proyectos de agua y de reordenamiento urbano de Lima y Callao | Noticias | Agencia Peruana de Noticias Andina",
+          "description": "Últimas noticias de Perú y el mundo sobre política, locales, deportes, culturales, espectáculos, economía, y tecnología en la Agencia Peruana de Noticias Andina",
+          "url": "https://andina.pe/agencia/noticia-peru-y-japon-buscan-impulsar-proyectos-agua-y-reordenamiento-urbano-lima-y-callao-1029000.aspx"
+        },
+        "text": "Perú y Japón buscan impulsar proyectos de agua y de reordenamiento urbano de Lima y Callao | Noticias | Agencia Peruana de Noticias Andina",
+        "content_type": "text/html",
+        "relevance": 0.2,
+        "context": "án nuevas líneas de fin vienda, Andina)",
+        "page": 2
+      },
+      "https://jornada.com.pe/seda-ayacucho-recoge-muestras-en-huanta-por-posible-contaminacion-de-agua/": {
+        "metadata": {
+          "title": "SEDA y autoridades analizan agua contaminada en Huanta",
+          "description": "SEDA y Sunass realizaron muestreo en zonas afectadas de Huanta - Ayacucho tras denuncias por contaminación. Hay 57 viviendas abastecidas con piletas públicas.",
+          "url": "https://jornada.com.pe/seda-ayacucho-recoge-muestras-en-huanta-por-posible-contaminacion-de-agua/"
+        },
+        "text": "SEDA y autoridades analizan agua contaminada en Huanta Facebook Instagram TikTok Twitter WhatsApp Youtube PORTADA LOCAL REGIONAL POLÍTICA EDITORIAL JUDICIAL CULTURAL DEPORTES REDES EDICIONES 17.7 C Ayacucho viernes, mayo 23, 2025 Facebook Instagram Youtube Whatsapp Twitter Tiktok PORTADA LOCAL REGIONAL POLÍTICA EDITORIAL JUDICIAL CULTURAL DEPORTES REDES EDICIONES MÁS PORTADA LOCAL REGIONAL POLÍTICA EDITORIAL JUDICIAL CULTURAL DEPORTES REDES EDICIONES Inicio REGIONAL HUANTA SEDA Ayacucho recoge muestras en Huanta por posible contaminación de agua REGIONAL HUANTA SEDA Ayacucho recoge muestras en Huanta por posible contaminación de agua Publicado por Iyari Gomez Castro 9 de mayo de 2025 330 Cuota Facebook Twitter WhatsApp Telegram Copy URL Email Técnicos de SEDA Ayacucho, Sunass y la Uersan de la Diresa realizaron una inspección conjunta en la ciudad de Huanta tras reportes de contaminación del servicio de agua potable. La diligencia se llevó a cabo el 8 de mayo en seis domicilios de zonas afectadas y dos puntos de red, según confirmó la jefa del área de Imagen de SEDA, Nancy Rojas. “Se ha trabajado con un laboratorio acreditado para detectar la posible presencia de hidrocarburos”, manifestó Rojas. La intervención incluye además al laboratorio ALAP y a la gerencia de sucursal de SEDA en Huanta. La funcionaria explicó que los problemas se originaron tras una rotura de tubería, por donde presuntamente ingresó combustible. El caso se encuentra bajo investigación. “No podemos adelantar responsabilidades, pero si corresponde, habrá sanciones correctivas”, afirmó. Actualmente, son 57 los domicilios afectados , aunque se trata de un tramo reducido. Como medida de mitigación, SEDA instaló cuatro piletas públicas para abastecimiento de agua potable y, anteriormente, realizó reparto con cisternas. Las autoridades locales instan a los vecinos a tomar precauciones mientras se culminan los análisis de calidad del agua. El restablecimiento total del servicio dependerá de los resultados. Síguenos también en nuestras redes sociales: Búscanos en Facebook , Twitter , Instagram y además en YouTube . Únete también a nuestro canal informativo de WhatsApp haciendo clic AQUÍ. Cuota Facebook Twitter WhatsApp Telegram Copy URL Email Tags Agua Potable consumo atípico Cortes de agua facturación abril lectura de medidores recibos de agua reclamos de usuarios SEDA Ayacucho Servicios Públicos tarifas de agua Iyari Gomez Castro http://jornada.com.pe Artículo anterior SBS brinda claves para el éxito financiero de los emprendedores ayacuchanos Artículo siguiente Gobierno promulga reforma a la Ley de Extinción de Dominio pese a advertencias del sistema de justicia ARTÍCULOS RELACIONADOS Oscorima ahora señala que no irá a la reelección en el 2026 POLÍTICA R 23 de mayo de 2025 Alerta por sarampión en Perú: Diresa Ayacucho exhorta a vacunar a menores para prevenir casos en la región REGIONAL 23 de mayo de 2025 Ayacucho concentra 359 estaciones de radio y TV: MTC alerta sobre obligaciones en renovaciones REGIONAL 23 de mayo de 2025 Población de San Pedro urge del mejoramiento de su centro de salud REGIONAL 23 de mayo de 2025 En megaoperativo en Ayacucho detienen a funcionarios del programa Wasi Mikuna por presunta corrupción REGIONAL 23 de mayo de 2025 Duras críticas al Gobierno Regional en la primera Audiencia Pública 2025 POLÍTICA R 23 de mayo de 2025 MÁS POPULAR Oscorima ahora señala que no irá a la reelección en el 2026 POLÍTICA R 23 de mayo de 2025 Municipio intensifica formalización de negocios en zonas comerciales de Huamanga LOCAL 23 de mayo de 2025 Red de Salud canceló guardia nocturna en C.S. de Vista Alegre CARMEN ALTO 23 de mayo de 2025 Alerta por sarampión en Perú: Diresa Ayacucho exhorta a vacunar a menores para prevenir casos en la región REGIONAL 23 de mayo de 2025 Cargar más CERRAR",
+        "content_type": "text/html",
+        "relevance": 0.8999999999999999,
+        "context": "agua potable. La (Jornada)",
+        "page": 2
+      },
+      "https://www.gob.pe/institucion/vivienda/noticias/1164942-peru-y-japon-articulan-esfuerzos-para-impulsar-proyectos-de-agua-y-reordenamiento-urbano-en-lima-y-callao": {
+        "metadata": {
+          "title": "Perú y Japón articulan esfuerzos para impulsar proyectos de agua y reordenamiento urbano en Lima y Callao - Noticias - Ministerio de Vivienda, Construcción y Saneamiento - Plataforma del Estado Peruano",
+          "description": "¡Comprometidos con el futuro del país! El Ministerio de Vivienda, Construcción y Saneamiento (MVCS) y la Embajada de Japón en el Perú sostuvieron una reunión en la que se ratificó el apoyo del país asiático, en impulsar iniciativas que permitan asegurar el abastecimiento...",
+          "url": "https://www.gob.pe/institucion/vivienda/noticias/1164942-peru-y-japon-articulan-esfuerzos-para-impulsar-proyectos-de-agua-y-reordenamiento-urbano-en-lima-y-callao"
+        },
+        "text": "Perú y Japón articulan esfuerzos para impulsar proyectos de agua y reordenamiento urbano en Lima y Callao - Noticias - Ministerio de Vivienda, Construcción y Saneamiento - Plataforma del Estado Peruano Saltar a contenido principal Ministerio de Vivienda, Construcción y Saneamiento Perú y Japón articulan esfuerzos para impulsar proyectos de agua y reordenamiento urbano en Lima y Callao Nota de prensa En coordinación con el Ministerio de Vivienda se impulsará el desarrollo de grandes proyectos en agua potable, saneamiento y urbanismo en favor de más de 11 millones de limeños y chalacos. 9 de mayo de 2025 - 7:13 p. m. ¡Comprometidos con el futuro del país! El Ministerio de Vivienda, Construcción y Saneamiento (MVCS) y la Embajada de Japón en el Perú sostuvieron una reunión en la que se ratificó el apoyo del país asiático, en impulsar iniciativas que permitan asegurar el abastecimiento hídrico para los próximos años en las ciudades de Lima y Callao, en favor de más de 11 millones de personas. Para ello se impulsarán nuevas líneas de financiamiento a los grandes proyectos que aseguren la disponibilidad de nuevas fuentes de agua. Además, se coordinaron acciones con respecto a la Guía de Desarrollo Orientado al Transporte, documento elaborado con el apoyo de la Agencia de Cooperación Internacional de Japón (JICA), enfocado en el reordenamiento del tránsito urbano. También se viene organizando el I Seminario Macrorregional de “Gestión del Riesgo de Desastres y Adaptación al Cambio Climático”, que se llevará a cabo los días 22 y 23 de mayo, dirigida a autoridades, funcionarios y técnicos de Gobiernos locales, regionales y público en general, en el que se compartirán experiencias exitosas aplicadas en Japón. En la reunión, realizada en la sede central del Ministerio de Vivienda, participaron el Ministro de Vivienda, el embajador de Japón en el Perú, el jefe de Gabinete de Asesores del MVCS, así como el equipo técnico de la Embajada de Japón.",
+        "content_type": "text/html",
+        "relevance": 0.4,
+        "context": "impulsarán nuevas líne agua. (Vivienda, Andina",
+        "page": 2
+      },
+      "https://jornada.com.pe/seda-ayacucho-investigara-consumos-atipicos-tras-quejas-por-recibos-de-agua/": {
+        "metadata": {
+          "title": "SEDA Ayacucho detecta consumos atípicos en recibos de agua",
+          "description": "La empresa SEDA Ayacucho investiga aumentos inusuales en los recibos tras reportes de usuarios. No habrá cortes mientras duren los reclamos y verificaciones",
+          "url": "https://jornada.com.pe/seda-ayacucho-investigara-consumos-atipicos-tras-quejas-por-recibos-de-agua/"
+        },
+        "text": "SEDA Ayacucho detecta consumos atípicos en recibos de agua Facebook Instagram TikTok Twitter WhatsApp Youtube PORTADA LOCAL REGIONAL POLÍTICA EDITORIAL JUDICIAL CULTURAL DEPORTES REDES EDICIONES 17.7 C Ayacucho viernes, mayo 23, 2025 Facebook Instagram Youtube Whatsapp Twitter Tiktok PORTADA LOCAL REGIONAL POLÍTICA EDITORIAL JUDICIAL CULTURAL DEPORTES REDES EDICIONES MÁS PORTADA LOCAL REGIONAL POLÍTICA EDITORIAL JUDICIAL CULTURAL DEPORTES REDES EDICIONES Inicio LOCAL SEDA Ayacucho investigará consumos atípicos tras quejas por recibos de agua LOCAL SEDA Ayacucho investigará consumos atípicos tras quejas por recibos de agua Publicado por Iyari Gomez Castro 9 de mayo de 2025 197 Cuota Facebook Twitter WhatsApp Telegram Copy URL Email Ante las múltiples quejas de usuarios por presuntos incrementos en sus recibos de agua durante el mes de abril, SEDA Ayacucho confirmó que detectó casos de facturación atípica y anunció que ya inició las verificaciones domiciliarias correspondientes. “En los reclamos hemos identificado consumos que pasaron de 10 o 20 metros cúbicos a 80 o 100 en un mes. Esto también nos ha alarmado”, declaró Nancy Rojas Pillaca, jefa del Departamento de Imagen y Educación Sanitaria de SEDA Ayacucho. La funcionaria explicó que el área de medición y facturación se encuentra evaluando los casos en campo para determinar si existen fugas visibles o no visibles. De acuerdo a SEDA , si se confirma que el alto consumo no fue real, “se facturará al usuario según su promedio histórico de los últimos seis meses”, conforme al reglamento de reclamos. Además, se indicó que mientras esté en curso el proceso, no se puede realizar corte de servicio . Rojas detalló que los días 5 y 6 de mayo, tras el cierre de ventanillas por feriado, se atendieron más de 120 reclamos. En redes sociales, varios usuarios denunciaron que sus recibos pasaron de 30 a montos superiores a 100 e incluso 300 de soles, lo que generó preocupación generalizada. Respecto al trato al cliente, la vocera pidió comprensión mutua: “Capacitamos al personal en atención humanitaria, pero también pedimos a los usuarios que sus reclamos se hagan con respeto”. Finalmente, SEDA reiteró que no se exige ningún pago para atender un reclamo y exhortó a evitar especulaciones. “Ese procedimiento fue eliminado hace más de 15 años”, subrayó Rojas. Síguenos también en nuestras redes sociales: Búscanos en Facebook , Twitter , Instagram y además en YouTube . Únete también a nuestro canal informativo de WhatsApp haciendo clic AQUÍ. Cuota Facebook Twitter WhatsApp Telegram Copy URL Email Tags Agua Potable Ayacucho consumo atípico Cortes de agua facturación abril recibos de agua reclamos usuarios SEDA Ayacucho servicio público tarifas agua Iyari Gomez Castro http://jornada.com.pe Artículo anterior Edwin Gavilán justifica baja ejecución presupuestal en su distrito Artículo siguiente Personas con discapacidad impulsan feria por el Día de la Madre en el Jr. 28 de Julio ARTÍCULOS RELACIONADOS Municipio intensifica formalización de negocios en zonas comerciales de Huamanga LOCAL 23 de mayo de 2025 Red de Salud canceló guardia nocturna en C.S. de Vista Alegre CARMEN ALTO 23 de mayo de 2025 Designan a William Espino como director de Essalud Ayacucho LOCAL 23 de mayo de 2025 Colecta de Magia en Ayacucho benefició a más de 84 niños con cáncer y busca ampliar su casa albergue LOCAL 23 de mayo de 2025 Rutas incumplen las normas de tránsito y aumentan la inseguridad LOCAL 23 de mayo de 2025 Talleres de tejido en Ayacucho ofrecen capacitación para personas con discapacidad y sus familiares ayudándolos a generar ingresos propios LOCAL 22 de mayo de 2025 MÁS POPULAR Oscorima ahora señala que no irá a la reelección en el 2026 POLÍTICA R 23 de mayo de 2025 Municipio intensifica formalización de negocios en zonas comerciales de Huamanga LOCAL 23 de mayo de 2025 Red de Salud canceló guardia nocturna en C.S. de Vista Alegre CARMEN ALTO 23 de mayo de 2025 Alerta por sarampión en Perú: Diresa Ayacucho exhorta a vacunar a menores para prevenir casos en la región REGIONAL 23 de mayo de 2025 Cargar más CERRAR",
+        "content_type": "text/html",
+        "relevance": 0.2,
+        "context": "ho confirmó que detectó entes. (Jornada)",
+        "page": 2
+      }
+    },
+    "image_texts": [
+      {
+        "image_filename": "img_4_af620be1_12052025.jpg",
+        "processed_date": "23052025",
+        "extracted_text": "",
+        "error": "API error: ResourceExhausted - 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 57\n}\n]",
+        "perceptual_hash": "c9f5b6e249494a96",
+        "_cache_error": true,
+        "_permanent_error": true,
+        "_error_reason": "Imagen demasiado pesada o compleja para procesar",
+        "url": "http://imacorpplataforma.com/wp-content/uploads/2025/05/EL-PERUANO-ECONOMIA-11-AGRO-PERUANO-CRECIO-4-EN-EL-PRIMER-TRIMESTRE-11-05-2025.jpg"
+      },
+      {
+        "image_filename": "img_9_dead3ba5_12052025.jpg",
+        "processed_date": "23052025",
+        "extracted_text": "",
+        "error": "API error: ResourceExhausted - 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 50\n}\n]",
+        "perceptual_hash": "ad2dd0d23f2d25d0",
+        "_cache_error": true,
+        "_permanent_error": true,
+        "_error_reason": "Imagen demasiado pesada o compleja para procesar",
+        "url": "http://imacorpplataforma.com/wp-content/uploads/2025/05/EL-PERUANO-ECONOMIA-10-PROINVERSION-PROMUEVE-PROYECTOS-EN-EEUU-11-05-2025-scaled.jpg"
+      },
+      {
+        "image_filename": "img_7_757e4252_12052025.jpg",
+        "processed_date": "23052025",
+        "extracted_text": "",
+        "error": "API error: ResourceExhausted - 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 44\n}\n]",
+        "perceptual_hash": "eabab5e466190b4a",
+        "_cache_error": true,
+        "_permanent_error": true,
+        "_error_reason": "Imagen demasiado pesada o compleja para procesar",
+        "url": "http://imacorpplataforma.com/wp-content/uploads/2025/05/EL-PERUANO-POLITICA-2-INFORMAN-SOBRE-AVANCES-A-OCDE-10-05-2025.jpg"
+      },
+      {
+        "image_filename": "img_6_71611ca8_12052025.jpg",
+        "processed_date": "23052025",
+        "extracted_text": "",
+        "error": "API error: ResourceExhausted - 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. [violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerDayPerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-1.5-pro\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\n, links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, retry_delay {\n  seconds: 34\n}\n]",
+        "perceptual_hash": "adf2d2292cd0d4d5",
+        "_cache_error": true,
+        "_permanent_error": true,
+        "_error_reason": "Imagen demasiado pesada o compleja para procesar",
+        "url": "http://imacorpplataforma.com/wp-content/uploads/2025/05/EL-PERUANO-ECONOMIA-10-BCR-LA-ECONOMIA-HABRIA-CRECIDO-45-DURANTE-MARZO-10-05-2025-scaled.jpg"
+      },
+      {
+        "image_filename": "img_1_9368e41b_12052025.mp4",
+        "processed_date": "23052025",
+        "extracted_text": "",
+        "error": "Image file too large",
+        "_cache_error": true,
+        "_permanent_error": true,
+        "_error_reason": "Imagen demasiado grande (>10MB)",
+        "file_size_mb": 56.55,
+        "url": "http://imacorpplataforma.com/wp-content/uploads/2025/05/09-05-2025-C31-EL-ESTADO-A-TU-SERVICIO-CAPACITACION-DE-ALUMNOS-EN-SANEAMIENTO-.mp4"
+      },
+      {
+        "image_filename": "img_2_c24c5fe3_12052025.mp4",
+        "processed_date": "23052025",
+        "extracted_text": "",
+        "error": "Image file too large",
+        "_cache_error": true,
+        "_permanent_error": true,
+        "_error_reason": "Imagen demasiado grande (>10MB)",
+        "file_size_mb": 65.0,
+        "url": "http://imacorpplataforma.com/wp-content/uploads/2025/05/11-05-2025-C31-SUNASS-ESPECIALIZACION-DE-ALUMNOS-EN-SANEAMIENTO-ESTADO-A-TU-SERVICIO.mp4"
+      },
+      {
+        "image_filename": "img_3_4ec295f1_12052025.mp4",
+        "processed_date": "23052025",
+        "extracted_text": "",
+        "error": "Image file too large",
+        "_cache_error": true,
+        "_permanent_error": true,
+        "_error_reason": "Imagen demasiado grande (>10MB)",
+        "file_size_mb": 137.5,
+        "url": "http://imacorpplataforma.com/wp-content/uploads/2025/05/09-05-2025-C31-TV-PERU-OTASS-CAPACITA-A-REPRESEMTAMTESS-REGIONALES.mp4"
+      }
+    ],
+    "facebook_texts": {}
+  }
+}
