@@ -237,13 +237,14 @@ class MarkdownConverter:
         md_text = "## Contenido de Imágenes\n\n"
         
         for image_key, image_info in image_data.items():
-            text = image_info.get('text', '')
-            
-            md_text += f"### Imagen\n\n"
-            md_text += f"**URL:** [{image_key}]({image_key})\n\n"
+            extracted_text = image_info.get('extracted_text', '')
+            url = image_info.get('url', image_key)
+
+            md_text += f"### Imagen: {image_info.get('image_filename', image_key)}\n\n"
+            md_text += f"**URL:** [{url}]({url})\n\n"
                 
-            if text:
-                sanitized_text = self._sanitize_text(text)
+            if extracted_text:
+                sanitized_text = self._sanitize_text(extracted_text)
                 md_text += f"{sanitized_text}\n\n"
                 
             md_text += "---\n\n"
