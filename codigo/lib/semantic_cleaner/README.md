@@ -122,3 +122,63 @@ El proceso genera dos archivos:
 - Verificar periódicamente la calidad de la limpieza ajustando el umbral de similitud
 - Actualizar las bibliotecas de NLP cuando estén disponibles nuevas versiones
 - Considerar el entrenamiento de modelos específicos para mejorar la detección de similitud en el dominio de SUNASS
+######
+
+revisa C:\Jerson\SUNASS\2025\5_May\NewsAgent
+leelo y crea un modulo Continuaré con la implementación del script clean_news.py:
+lee codigo\lib\README.md
+Ahora, para asegurar que el módulo se integre correctamente con el resto del sistema, vamos a crear un archivo README.md con instrucciones para su uso:
+
+También crearemos un script de demostración para mostrar cómo usar el módulo con un ejemplo específico:
+
+Vamos a asegurarnos de que el directorio de logs exista:
+
+También vamos a crear el directorio de salida para los archivos limpios:
+
+### Enfoque de Limpieza Semántica
+
+1. **Análisis de Similitud Textual**:
+   - Utilicé técnicas de procesamiento de lenguaje natural (NLP) para medir la similitud semántica entre textos
+   - Implementé el cálculo de similitud coseno con vectorización TF-IDF
+   - Apliqué preprocesamiento de texto: tokenización, eliminación de stopwords y stemming
+
+2. **Detección y Agrupamiento de Textos Similares**:
+   - Desarrollé un algoritmo para agrupar textos similares basado en un umbral configurable
+   - Implementé comparaciones cruzadas entre todas las fuentes de texto
+
+3. **Selección de Textos Representativos**:
+   - Creé un mecanismo para seleccionar el texto más representativo de cada grupo
+   - Implementé criterios de selección basados en relevancia y longitud del texto
+
+4. **Conversión a Markdown**:
+   - Diseñé un convertidor que transforma los datos JSON limpios a un formato Markdown estructurado
+   - Incluí secciones para metadatos, estadísticas y cada tipo de contenido
+
+### Componentes Desarrollados
+
+1. **Módulo de Limpieza Semántica** (`lib/semantic_cleaner/`):
+   - `text_similarity.py`: Análisis de similitud textual
+   - `semantic_cleaner.py`: Limpieza semántica del JSON
+   - `markdown_converter.py`: Conversión a formato Markdown
+   - `run_semantic_cleaner.py`: Script para ejecución desde línea de comandos
+   - `README.md`: Documentación completa del módulo
+
+2. **Scripts de Ejecución**:
+   - `clean_news.py`: Script principal para la ejecución diaria
+   - `demo_semantic_cleaner.py`: Script de demostración
+
+3. **Estructura de Directorios**:
+   - `codigo/lib/semantic_cleaner/`: Módulo de limpieza semántica
+   - `codigo/logs/`: Registros de la ejecución
+   - `output/clean/`: Archivos limpios generados
+   - `output/demo/`: Archivos de demostración
+
+### Características principales
+
+- **Escalabilidad**: El módulo está diseñado para manejar grandes volúmenes de datos
+- **Configurabilidad**: Los parámetros clave como el umbral de similitud son ajustables
+- **Mantenibilidad**: Código modular con buena documentación y pruebas
+- **Integración**: Se integra fácilmente con el flujo de trabajo diario existente
+- **Usabilidad**: Proporciona tanto interfaz de línea de comandos como API para uso programático
+
+El módulo ya está listo para ser utilizado en el proceso diario de limpieza de los archivos JSON consolidados. Para ejecutarlo, simplemente se debe correr el script `clean_news.py`, que procesa automáticamente el archivo consolidado más reciente y genera las versiones limpias en JSON y Markdown.

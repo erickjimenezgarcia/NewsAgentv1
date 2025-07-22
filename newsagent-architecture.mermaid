@@ -1,0 +1,109 @@
+flowchart TD
+%% ───── estilos vivos ─────
+classDef orquestador            fill:#ff6600,stroke:#222,stroke-width:2px,color:#000
+classDef configuracion          fill:#00d9ff,stroke:#222,color:#000
+classDef procesamiento_pdf      fill:#ff4d4d,stroke:#222,color:#000
+classDef gestion_urls           fill:#34ff34,stroke:#222,color:#000
+classDef procesamiento_html     fill:#4d4dff,stroke:#222,color:#000
+classDef procesamiento_imagenes fill:#ff4d4d,stroke:#222,color:#000
+classDef procesamiento_facebook fill:#34ff34,stroke:#222,color:#000
+classDef limpieza_semantica     fill:#fff24d,stroke:#222,color:#000
+classDef utilidades_comunes     fill:#d9d9d9,stroke:#222,color:#000
+
+%% ───── nodo raíz ─────
+Main["**Orquestador Principal**\n(main3.py)"]
+class Main orquestador
+
+%% 1) CONFIGURACIÓN
+subgraph CONFIG["**Configuración del Sistema**"]
+    ConfigManager["**Gestor de Configuración**\n(config_manager.py)"]
+    FileManager["**Gestor de Archivos**\n(file_manager.py)"]
+end
+class CONFIG configuracion
+class ConfigManager configuracion
+class FileManager configuracion
+style CONFIG fill:#000000,color:#ffffff,stroke:#ffffff,stroke-width:2px
+
+%% 2) PDF
+subgraph PDF["**Procesamiento de PDF**"]
+    PdfProcessor["**Procesador de PDF**\n(pdf_processor.py)"]
+    TextExtractor["**Extractor de Texto**\n(text_extractor.py)"]
+end
+class PDF procesamiento_pdf
+class PdfProcessor procesamiento_pdf
+class TextExtractor procesamiento_pdf
+
+%% 3) URLs
+subgraph URLS["**Gestión y Clasif de URLs**"]
+    HistoryTracker["**Gestor de Historial**\n(history_tracker.py)"]
+    UrlClassifier["**Clasificador de URLs**\n(url_classifier.py)"]
+end
+class URLS gestion_urls
+class HistoryTracker gestion_urls
+class UrlClassifier gestion_urls
+
+%% 4) PARALELO
+subgraph PARALLEL["**Procesamiento Paralelo**"]
+    %% HTML
+    subgraph HTML["**Procesamiento HTML**"]
+        HtmlScraper["**Scraper HTML**\n(html_scraper.py)"]
+        RequestUtils["**Utilidades de Red**\n(request_utils.py)"]
+    end
+    class HTML procesamiento_html
+    class HtmlScraper procesamiento_html
+    class RequestUtils procesamiento_html
+
+    %% IMG
+    subgraph IMAGES["**Procesamiento de Imágenes**"]
+        ImageProcessor["**Procesador de Imágenes**\n(image_processor.py)"]
+        ApiClient["**Cliente API**\n(api_client.py)"]
+    end
+    class IMAGES procesamiento_imagenes
+    class ImageProcessor procesamiento_imagenes
+    class ApiClient procesamiento_imagenes
+
+    %% Facebook
+    subgraph FB["**Procesamiento de Facebook**"]
+        FacebookProcessor["**Procesador de Facebook**\n(facebook_processor.py)"]
+    end
+    class FB procesamiento_facebook
+    class FacebookProcessor procesamiento_facebook
+
+    %% Caché
+    CacheUtils["**Utilidades de Caché**\n(cache_utils.py)"]
+    class CacheUtils utilidades_comunes
+end
+class PARALLEL utilidades_comunes
+
+%% 5) LIMPIEZA
+subgraph SEMANTIC["**Clean Semántica y Output**"]
+    SemanticCleaner["**Limpiador Semántico**\n(semantic_cleaner.py)"]
+    TextSimilarity["**Analizador de Similitud**\n(text_similarity.py)"]
+    MarkdownConverter["**Conversor a Markdown**\n(markdown_converter.py)"]
+    FacebookFix["**Corrector de Facebook**\n(facebook_extractor_fix.py)"]
+end
+class SEMANTIC limpieza_semantica
+class SemanticCleaner limpieza_semantica
+class TextSimilarity limpieza_semantica
+class MarkdownConverter limpieza_semantica
+class FacebookFix limpieza_semantica
+
+%% ───── flujo principal ─────
+Main --> CONFIG
+Main --> PDF
+Main --> URLS
+Main --> PARALLEL
+Main --> SEMANTIC
+
+%% ───── conexiones internas ─────
+ConfigManager -.-> FileManager
+PdfProcessor  -.-> TextExtractor
+HistoryTracker -.-> UrlClassifier
+HtmlScraper   -.-> RequestUtils
+ImageProcessor -.-> ApiClient
+HtmlScraper   -.-> CacheUtils
+ImageProcessor -.-> CacheUtils
+FacebookProcessor -.-> CacheUtils
+SemanticCleaner -.-> TextSimilarity
+SemanticCleaner -.-> MarkdownConverter
+SemanticCleaner -.-> FacebookFix

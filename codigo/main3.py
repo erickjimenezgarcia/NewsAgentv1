@@ -63,6 +63,7 @@ sys.path.append(project_root)  # Asegurar que podemos importar desde el director
 try:
     from url_classifier import URLClassifier
     from enhanced_processor import EnhancedURLProcessor
+    from content_deduplicator import ContentDeduplicator
     ENHANCED_MODULES_AVAILABLE = True
     logger.info("Módulos mejorados de clasificación y deduplicación cargados correctamente")
 except ImportError as e:
@@ -614,6 +615,19 @@ def run_pipeline(custom_date_str=None):
                      logger.info(f"Texto del PDF cargado para consolidación desde: {pdf_text_json_path}")
                  except Exception as e:
                      logger.warning(f"Error cargando texto del PDF para consolidación: {e}")
+             # Convertir la lista de resultados de imágenes en un diccionario
+             image_texts_dict = {}
+             if isinstance(processed_data["images_api"], list):
+                 # Si es una lista, convertir a diccionario usando image_filename como clave
+                 for img_result in processed_data["images_api"]:
+                     if "image_filename" in img_result and not img_result.get("error"):
+                         key = img_result["image_filename"]
+                         image_texts_dict[key] = img_result
+             else:
+                 # Si ya es un diccionario, usarlo directamente
+                 image_texts_dict = processed_data["images_api"]
+             
+             logger.info(f"Procesando {len(image_texts_dict)} textos de imágenes para consolidación")
              
              consolidation_data = {
                  "metadata": {
@@ -624,7 +638,7 @@ def run_pipeline(custom_date_str=None):
                  "extracted_content": {
                      "pdf_paragraphs": pdf_paragraphs,
                      "html_pages": processed_data["html"],
-                     "image_texts": processed_data["images_api"],
+                     "image_texts": image_texts_dict,
                      "facebook_texts": facebook_pdf_texts
                  }
              }
