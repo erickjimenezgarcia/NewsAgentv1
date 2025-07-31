@@ -9,7 +9,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.http.models import PointStruct, VectorParams, Distance
 import tiktoken
 
-from utils import load_openai_api_key
+from RAG.utils import load_openai_api_key
 
 # Config
 MODEL_NAME = "text-embedding-3-small"
@@ -17,8 +17,17 @@ DIMENSIONS = 1536
 COLLECTION_NAME = "sunass_news_openai"
 ENCODER = tiktoken.encoding_for_model(MODEL_NAME)
 
-client = OpenAI(api_key=load_openai_api_key())
-qdrant = QdrantClient(path="./embeddings/qdrant_db")
+
+# Agrega esto en embedding_open_ia.py
+
+def get_openai_client():
+    return OpenAI(api_key=load_openai_api_key())
+
+def get_qdrant_client():
+     return QdrantClient(
+        url="http://142.93.196.168:6333",
+    )
+
 
 def chunk_text(text, max_tokens=400, overlap=50):
     tokens = ENCODER.encode(text)
@@ -31,7 +40,7 @@ def chunk_text(text, max_tokens=400, overlap=50):
         start += max_tokens - overlap
     return chunks
 
-def embed_texts(texts):
+def embed_texts(texts, client):
     response = client.embeddings.create(
         model=MODEL_NAME,
         input=texts
@@ -49,7 +58,7 @@ def detectar_evento(texto: str):
     return None
 
 
-def process_json(file_path: Path):
+def process_json(file_path: Path, client):
     with open(file_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -66,7 +75,7 @@ def process_json(file_path: Path):
             continue
 
         chunks = chunk_text(raw_text)
-        embeddings = embed_texts(chunks)
+        embeddings = embed_texts(chunks, client)
 
         for j, (chunk, emb) in enumerate(zip(chunks, embeddings)):
             payload = {
@@ -91,7 +100,7 @@ def process_json(file_path: Path):
             continue
 
         chunks = chunk_text(raw_text)
-        embeddings = embed_texts(chunks)
+        embeddings = embed_texts(chunks, client)
 
         for j, (chunk, emb) in enumerate(zip(chunks, embeddings)):
             payload = {
@@ -116,7 +125,7 @@ def process_json(file_path: Path):
             continue
 
         chunks = chunk_text(raw_text)
-        embeddings = embed_texts(chunks)
+        embeddings = embed_texts(chunks, client)
 
         for j, (chunk, emb) in enumerate(zip(chunks, embeddings)):
             payload = {
@@ -141,7 +150,7 @@ def process_json(file_path: Path):
             continue
 
         chunks = chunk_text(raw_text)
-        embeddings = embed_texts(chunks)
+        embeddings = embed_texts(chunks, client)
 
         for j, (chunk, emb) in enumerate(zip(chunks, embeddings)):
             payload = {
@@ -158,11 +167,39 @@ def process_json(file_path: Path):
                 "chunk_index": j
             }
             points.append(PointStruct(id=str(uuid.uuid4()), vector=emb, payload=payload))
+            
+        # 5. Resumen estadístico
+    stats = data.get("metadata", {}).get("stats_summary", {})
+    resumen_payload = {
+        "type": "resumen_estadistico",
+        "date": date_str,
+        "date_day": date_str,
+        "date_month": date_str[2:8],
+        "file": file_path.name,
+        "total_urls": stats.get("total_urls_in_pdf", 0),
+        "html_processed": stats.get("html_processing", {}).get("processed", 0),
+        "html_successful": stats.get("html_processing", {}).get("successful", 0),
+        "image_attempted": stats.get("image_processing", {}).get("attempted_download", 0),
+        "image_downloaded": stats.get("image_processing", {}).get("successful_download", 0),
+        "facebook_extracted": stats.get("facebook_processing", {}).get("extracted_texts", 0),
+        "time_pdf_extraction": stats.get("timings_seconds", {}).get("pdf_extraction", 0),
+        "time_text_extraction_pdf": stats.get("timings_seconds", {}).get("pdf_text_extraction", 0),
+        "time_image_download": stats.get("timings_seconds", {}).get("image_download", 0),
+        "time_image_api": stats.get("timings_seconds", {}).get("image_api", 0),
+        "time_html_scraping": stats.get("timings_seconds", {}).get("html_scraping", 0),
+        "time_facebook_processing": stats.get("timings_seconds", {}).get("facebook_processing", 0),
+        "run_timestamp": stats.get("run_timestamp", ""),
+        "semantic_chunks": stats.get("semantic_cleaning", {}).get("representative_texts", 0)
+    }
+
+    dummy_vector = [0.0] * DIMENSIONS  # No lo usarás para búsqueda semántica
+    points.append(PointStruct(id=str(uuid.uuid4()), vector=dummy_vector, payload=resumen_payload))
+
 
     return points
 
 
-def ensure_collection():
+def ensure_collection(qdrant):
     collections = qdrant.get_collections().collections
     if COLLECTION_NAME not in [c.name for c in collections]:
         print(f"🗂️ Creando colección {COLLECTION_NAME}...")
@@ -172,9 +209,11 @@ def ensure_collection():
         )
 
 def main(input_dir, fechas):
-    ensure_collection()
+    client = get_openai_client()
+    qdrant = get_qdrant_client()
+    ensure_collection(qdrant)
     for fecha in fechas:
-        file_name = f"rag_clean_{fecha}.json"
+        file_name = f"clean_{fecha}.json"
         file_path = Path(input_dir) / file_name
 
         if not file_path.exists():
@@ -182,7 +221,7 @@ def main(input_dir, fechas):
             continue
 
         print(f"📄 Procesando {file_name}...")
-        points = process_json(file_path)
+        points = process_json(file_path, client)
 
         batch_size = 100
         for i in range(0, len(points), batch_size):

@@ -4,7 +4,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.http.models import Filter, FieldCondition, MatchValue, Range
 from qdrant_client.http import models
 import httpx
-from utils import load_openai_api_key,load_llama3_api_key
+from RAG.utils import load_openai_api_key,load_llama3_api_key
 from numpy import dot
 from numpy.linalg import norm
 import time
@@ -27,9 +27,9 @@ GROQ_MODEL = "llama3-8b-8192"
 MODEL_EMBEDDING = "text-embedding-3-small"
 COLLECTION_NAME = "sunass_news_openai"
 client = OpenAI(api_key=load_openai_api_key())  # reemplaza con tu API key
-qdrant = QdrantClient(path="./embeddings/qdrant_db")
+qdrant = QdrantClient( url="http://142.93.196.168:6333",)
 
-USAR_LANGCHAIN = True
+USAR_LANGCHAIN = False
 
 class GroqChat(SimpleChatModel):
     def _call(self, messages, **kwargs):
@@ -287,14 +287,25 @@ def buscar_contexto_openai(pregunta: str, k=50):
                         key="event_type", match=MatchValue(value=tipo_evento)
                     ))
 
-                res = qdrant.query_points(
-                    collection_name=COLLECTION_NAME,
-                    query=vector,
-                    query_filter=filtro_dia,
-                    limit=k_por_dia,
-                    with_payload=True
-                )
-                puntos.extend(res.points)
+                try:
+                    print("🧪 Ejecutando query_points con:")
+                    print(f"📂 Colección: {COLLECTION_NAME}")
+                    print(f"🎯 Vector tamaño: {len(vector)}")
+                    print(f"🔍 Filtro usado: {filtro_dia if 'filtro_dia' in locals() else filtro}")
+                    print(f"🔢 Límite: {k_por_dia if 'k_por_dia' in locals() else k}")
+                    
+                    res = qdrant.search(
+                        collection_name=COLLECTION_NAME,
+                        query_vector=vector,
+                        query_filter=filtro_dia,
+                        limit=k_por_dia,
+                        with_payload=True
+                    )
+                    puntos.extend(res)
+                except Exception as e:
+                    print("❌ Error en query_points:", e)
+                    print("📋 Filtro usado:", filtro)
+                    raise
         else:
             must_conditions = []
 
@@ -324,15 +335,27 @@ def buscar_contexto_openai(pregunta: str, k=50):
                         filtro_dia.must.append(FieldCondition(
                             key="event_type", match=MatchValue(value=tipo_evento)
                         ))
+                        
+                    try:
+                        print("🧪 Ejecutando query_points con:")
+                        print(f"📂 Colección: {COLLECTION_NAME}")
+                        print(f"🎯 Vector tamaño: {len(vector)}")
+                        print(f"🔍 Filtro usado: {filtro_dia if 'filtro_dia' in locals() else filtro}")
+                        print(f"🔢 Límite: {k_por_dia if 'k_por_dia' in locals() else k}")
 
-                    res = qdrant.query_points(
-                        collection_name=COLLECTION_NAME,
-                        query=vector,
-                        query_filter=filtro_dia,
-                        limit=k_por_dia,
-                        with_payload=True
-                    )
-                    puntos.extend(res.points)
+                        res = qdrant.search(
+                            collection_name=COLLECTION_NAME,
+                            query_vector=vector,
+                            query_filter=filtro_dia,
+                            limit=k_por_dia,
+                            with_payload=True
+                        )
+                        puntos.extend(res)
+                        
+                    except Exception as e:
+                        print("❌ Error en query_points:", e)
+                        print("📋 Filtro usado:", filtro_dia)
+                        raise
 
             if tipo_evento:
                 must_conditions.append(FieldCondition(
@@ -341,14 +364,25 @@ def buscar_contexto_openai(pregunta: str, k=50):
 
             filtro = Filter(must=must_conditions) if must_conditions else None
 
-            resultados = qdrant.query_points(
-                collection_name=COLLECTION_NAME,
-                query=vector,
-                query_filter=filtro,
-                limit=k,
-                with_payload=True
-            )
-            puntos = resultados.points
+            try:
+                print("🧪 Ejecutando query_points con:")
+                print(f"📂 Colección: {COLLECTION_NAME}")
+                print(f"🎯 Vector tamaño: {len(vector)}")
+                print(f"🔍 Filtro usado: {filtro_dia if 'filtro_dia' in locals() else filtro}")
+                print(f"🔢 Límite: {k_por_dia if 'k_por_dia' in locals() else k}")
+                resultados = qdrant.search(
+                    collection_name=COLLECTION_NAME,
+                    query_vector=vector,
+                    query_filter=filtro,
+                    limit=k,
+                    with_payload=True
+                )
+                puntos.extend(resultados)
+                
+            except Exception as e:
+                print("❌ Error en query_points:", e)
+                print("📋 Filtro usado:", filtro)
+                raise
             
             
     else:
@@ -362,14 +396,21 @@ def buscar_contexto_openai(pregunta: str, k=50):
 
         filtro = Filter(must=must_conditions) if must_conditions else None
 
-        resultados = qdrant.query_points(
-            collection_name=COLLECTION_NAME,
-            query=vector,
-            query_filter=filtro,
-            limit=k,
-            with_payload=True
-        )
-        puntos = resultados.points
+        try:
+           
+            
+            resultados = qdrant.search(
+                collection_name=COLLECTION_NAME,
+                query_vector=vector,
+                query_filter=filtro,
+                limit=k,
+                with_payload=True
+            )
+            puntos.extend(resultados)
+        except Exception as e:
+            print("❌ Error en query_points:", e)
+            print("📋 Filtro usado:", filtro)
+            raise
 
     # Resultado vacío
     if not puntos:
@@ -518,6 +559,48 @@ def filtrar_eventos_por_similitud(payloads, ref_embeddings, tipo_evento, thresho
 
     return eventos_detectados
 
+def responder_chatbot(pregunta: str) -> str:
+    ref_embeddings = get_event_type_embeddings()
+    contexto, payloads = buscar_contexto_openai(pregunta)
+
+    if pregunta_es_conteo(pregunta):
+        tipo_evento = extraer_tipo_evento(pregunta)
+        if not tipo_evento:
+            return "No se pudo identificar el tipo de evento a contar."
+
+        eventos = filtrar_eventos_por_similitud(payloads, ref_embeddings, tipo_evento)
+        plural = {
+            "interrupcion": "interrupciones",
+            "denuncia": "denuncias",
+            "supervision": "supervisiones"
+        }.get(tipo_evento, tipo_evento + "s")
+
+        if not eventos:
+            return f"No se encontraron {plural} en el contexto."
+
+        conteo = len(eventos)
+        resumen_eventos = "\n\n".join([
+            f"[fecha: {p.get('date')}] [sección: {p.get('section')}] {p.get('text')}"
+            for p in eventos
+        ])
+
+        contexto_eventos = (
+            f"Se encontraron {conteo} {plural} en el contexto analizado.\n\n"
+            f"{resumen_eventos}"
+        )
+
+        if USAR_LANGCHAIN:
+            return responder_llm_langchain(pregunta, contexto, payloads)
+        else:
+            return responder_llm_groq(pregunta, contexto, payloads)
+
+    else:
+        if USAR_LANGCHAIN:
+            return responder_llm_langchain(pregunta, contexto, payloads)
+        else:
+            return responder_llm_groq(pregunta, contexto, payloads)
+        
+    
 
 
 def chat():
