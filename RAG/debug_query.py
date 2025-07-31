@@ -222,62 +222,62 @@ def create_fix_solution():
     try:
         with open(fix_path, 'w', encoding='utf-8') as f:
             f.write("""
-'''
-Corrección para vector_store.py que arregla problemas de tipo y esquema.
-Ejecutar este script para aplicar las correcciones.
-'''
+                '''
+                Corrección para vector_store.py que arregla problemas de tipo y esquema.
+                Ejecutar este script para aplicar las correcciones.
+                '''
 
-import os
-import re
+                import os
+                import re
 
-def fix_vector_store():
-    """Aplicar correcciones a vector_store.py"""
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    vector_store_path = os.path.join(script_dir, "vector_store.py")
-    
-    if not os.path.exists(vector_store_path):
-        print(f"Error: No se encontró el archivo {vector_store_path}")
-        return False
-    
-    # Hacer backup
-    backup_path = vector_store_path + ".bak"
-    with open(vector_store_path, 'r', encoding='utf-8') as f:
-        original_content = f.read()
-        
-    with open(backup_path, 'w', encoding='utf-8') as f:
-        f.write(original_content)
-    
-    print(f"Backup creado en {backup_path}")
-    
-    # Aplicar correcciones
-    modified_content = original_content
-    
-    # 1. Corregir la declaración del tipo vector para evitar problemas de compatibilidad
-    modified_content = re.sub(
-        r'1 - \(embedding <=> %s::vector\) AS similarity',
-        r'1 - (embedding <=> CAST(%s AS vector)) AS similarity',
-        modified_content
-    )
-    
-    # 2. Asegurar que todas las consultas usen self.full_table_name
-    modified_content = re.sub(
-        r'FROM {self\.table_name}',
-        r'FROM {self.full_table_name}',
-        modified_content
-    )
-    
-    # Guardar cambios
-    with open(vector_store_path, 'w', encoding='utf-8') as f:
-        f.write(modified_content)
-    
-    print("✅ Correcciones aplicadas correctamente a vector_store.py")
-    print("Ahora puedes ejecutar: python RAG/rag_pipeline.py query \"agua en Piura\"")
-    
-    return True
+                def fix_vector_store():
+                    Aplicar correcciones a vector_store.py
+                    script_dir = os.path.dirname(os.path.abspath(__file__))
+                    vector_store_path = os.path.join(script_dir, "vector_store.py")
+                    
+                    if not os.path.exists(vector_store_path):
+                        print(f"Error: No se encontró el archivo {vector_store_path}")
+                        return False
+                    
+                    # Hacer backup
+                    backup_path = vector_store_path + ".bak"
+                    with open(vector_store_path, 'r', encoding='utf-8') as f:
+                        original_content = f.read()
+                        
+                    with open(backup_path, 'w', encoding='utf-8') as f:
+                        f.write(original_content)
+                    
+                    print(f"Backup creado en {backup_path}")
+                    
+                    # Aplicar correcciones
+                    modified_content = original_content
+                    
+                    # 1. Corregir la declaración del tipo vector para evitar problemas de compatibilidad
+                    modified_content = re.sub(
+                        r'1 - \(embedding <=> %s::vector\) AS similarity',
+                        r'1 - (embedding <=> CAST(%s AS vector)) AS similarity',
+                        modified_content
+                    )
+                    
+                    # 2. Asegurar que todas las consultas usen self.full_table_name
+                    modified_content = re.sub(
+                        r'FROM {self\.table_name}',
+                        r'FROM {self.full_table_name}',
+                        modified_content
+                    )
+                    
+                    # Guardar cambios
+                    with open(vector_store_path, 'w', encoding='utf-8') as f:
+                        f.write(modified_content)
+                    
+                    print("✅ Correcciones aplicadas correctamente a vector_store.py")
+                    print("Ahora puedes ejecutar: python RAG/rag_pipeline.py query \"agua en Piura\"")
+                    
+                    return True
 
-if __name__ == "__main__":
-    fix_vector_store()
-""")
+                if __name__ == "__main__":
+                    fix_vector_store()
+                """)
         logger.info(f"Solución definitiva creada en {fix_path}")
         logger.info("Ejecutar: python RAG/fix_vector_store.py")
         
