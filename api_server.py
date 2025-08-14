@@ -65,8 +65,75 @@ SMALLTALK_PATTERNS = [
 ]
 
 
-def es_smalltalk(texto: str) -> bool:
-    t = _norm(texto)
+_LEET_MAP = str.maketrans({
+    "0": "o",
+    "1": "i",  # también podría mapear a 'l'
+    "3": "e",
+    "4": "a",
+    "@": "a",
+    "$": "s",
+    "5": "s",
+    "7": "t",
+    "¡": "",
+    "!": "",
+    "?": "",
+    "¿": "",
+})
+
+_SMALLTALK_TERMS = {
+    "hola", "holi", "holaa", "ola", "buenas",
+    "buenos dias", "buenas tardes", "buenas noches",
+    "que tal", "qué tal", "como estas", "cómo estas", "como esta", "cómo esta",
+    "gracias", "muchas gracias", "de nada",
+    "hey", "hi", "hello", "sup"
+}
+
+_MIN_LEN = 2
+_MAX_LEN_QUICK = 5
+
+def normalize_text(s: str) -> str:
+    # 1) a minúsculas
+    s = s.lower()
+    # 2) quitar acentos/diacríticos
+    s = "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn")
+    # 3) mapear leetspeak y quitar signos comunes
+    s = s.translate(_LEET_MAP)
+    # 4) colapsar repeticiones (holaaa -> hola)
+    s = re.sub(r"(.)\1{2,}", r"\1\1", s)  # deja como máximo 2 repeticiones
+    # 5) reemplazar cualquier separador/no alfabético por un espacio
+    s = re.sub(r"[^a-zA-Záéíóúñ]+", " ", s)  # tras quitar diacríticos ya no quedan tildes, pero por si acaso
+    # 6) espacios limpios
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
+
+
+def es_smalltalk(pregunta: str) -> bool:
+    
+    if not pregunta or not pregunta.strip():
+        return False
+    p = normalize_text(pregunta)
+    
+    t = _norm(pregunta)
+    
+    # Coincidencia exacta corta
+    
+    if _MIN_LEN <= len(p) <= _MAX_LEN_QUICK and p in _SMALLTALK_TERMS:
+        return True
+
+    # Coincidencia por frases (e.g., "buenos dias", "buenas tardes")
+    if p in _SMALLTALK_TERMS:
+        return True
+
+    # Heurística: si todo son palabras muy cortas y todas están en el set
+    tokens = p.split()
+    if tokens and all(t in _SMALLTALK_TERMS for t in tokens):
+        return True
+
+    # Heurística flexible: saludo + algo muy corto (e.g., "hola!", "holaa que tal")
+    for term in _SMALLTALK_TERMS:
+        if p.startswith(term) and len(p) <= len(term) + 5:
+            return True
+    
     if not t:
         return False
     # muy corto y sin verbos “informativos”
@@ -198,6 +265,9 @@ from collections import defaultdict
 import asyncio
 import json
 from datetime import datetime, timedelta
+
+
+
 
 @app.post("/chatbot/stream/")
 async def preguntar_chatbot_stream(data: ChatRequest):
