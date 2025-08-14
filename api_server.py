@@ -221,6 +221,12 @@ async def preguntar_chatbot_stream(data: ChatRequest):
 
     
     # ✅ Atajo: small-talk -> una sola respuesta y salimos
+    
+    
+    
+    pregunta = data.pregunta
+    
+    
     if es_smalltalk(pregunta):
         def gen_simple():
             yield json.dumps({"rol": "bot", "tipo": "escribiendo"}) + "\n"
@@ -233,8 +239,6 @@ async def preguntar_chatbot_stream(data: ChatRequest):
             yield json.dumps({"rol": "bot", "tipo": "final", "texto": texto}) + "\n"
         return StreamingResponse(gen_simple(), media_type="text/event-stream")
     
-    
-    pregunta = data.pregunta
     ref_embeddings = get_event_type_embeddings()
 
     # --- NUEVO: detecta si es RANGO para usar el flujo por ventanas ---
