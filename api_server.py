@@ -1,6 +1,8 @@
 # importando librerías necesarias
 import json
 import os
+import re
+import unicodedata
 import sys
 from collections import defaultdict
 import csv
@@ -35,6 +37,49 @@ from codigo.notebook_utils import setup_environment
 from codigo.main3 import run_pipeline
 
 app = FastAPI(title="NewsAgent API")
+
+
+def _norm(s: str) -> str:
+    if not s:
+        return ""
+    s = s.strip().lower()
+    s = "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn")
+    return re.sub(r"\s+", " ", s)
+
+
+SMALLTALK_PATTERNS = [
+    r"^hola(?:\s+que tal)?$",
+    r"^buen[oa]s(?:\s+dias|\s+tardes|\s+noches)?$",
+    r"^gracias(?:\s+muchas|\s+por.*)?$",
+    r"^muchas\s+gracias$",
+    r"^ok$",
+    r"^listo$",
+    r"^entendido$",
+    r"^de acuerdo$",
+    r"^presentate$",
+    r"^quien eres\??$",
+    r"^qu[ée]\s+puedes\s+hacer\??$",
+    r"^ayuda$",
+    r"^thanks?$",
+    r"^hello$",
+]
+
+
+def es_smalltalk(texto: str) -> bool:
+    t = _norm(texto)
+    if not t:
+        return False
+    # muy corto y sin verbos “informativos”
+    if len(t.split()) <= 3 and not re.search(r"(cu[aá]nt|c[oó]mo|qu[eé]|por qu[eé]|d[oó]nde|cu[aá]l|cuando)", t):
+        # si coincide saludos o cierres comunes
+        for pat in SMALLTALK_PATTERNS:
+            if re.fullmatch(pat, t):
+                return True
+    # patrones específicos
+    for pat in SMALLTALK_PATTERNS:
+        if re.fullmatch(pat, t):
+            return True
+    return False
 
 
 
@@ -174,6 +219,21 @@ async def preguntar_chatbot_stream(data: ChatRequest):
                 seleccionados.append(p)
         return seleccionados
 
+    
+    # ✅ Atajo: small-talk -> una sola respuesta y salimos
+    if es_smalltalk(pregunta):
+        def gen_simple():
+            yield json.dumps({"rol": "bot", "tipo": "escribiendo"}) + "\n"
+            # prompt “conversacional”, sin contexto
+            texto = responder_llm_gemini(
+                pregunta,
+                "Responde brevemente en tono cordial, sin inventar datos externos. Si te piden presentarte, explica en 1-2 líneas qué haces para SUNASS.",
+                "1",
+            )
+            yield json.dumps({"rol": "bot", "tipo": "final", "texto": texto}) + "\n"
+        return StreamingResponse(gen_simple(), media_type="text/event-stream")
+    
+    
     pregunta = data.pregunta
     ref_embeddings = get_event_type_embeddings()
 
@@ -237,6 +297,10 @@ async def preguntar_chatbot_stream(data: ChatRequest):
         print("================================= TIPO PREGUNTA", tipo_pregunta)
         MAX_PAYLOADS = 21
         payloads = seleccionar_payloads_balanceados(payloads, MAX_PAYLOADS)
+        
+        # ✅ Regla dura: no fragmentar si hay poco contexto
+        if len(payloads) <= 6 and tipo_pregunta == "2":
+            tipo_pregunta = "1"
 
         async def generador_respuestas():
             yield json.dumps({"rol": "bot", "tipo": "escribiendo"}) + "\n"
@@ -251,7 +315,7 @@ async def preguntar_chatbot_stream(data: ChatRequest):
                 yield json.dumps({
                     "rol": "bot",
                     "tipo": "final",
-                    "texto": f"📌 Resumen:\n{texto}"
+                    "texto": f"\n{texto}"
                 }) + "\n"
                 return
 
@@ -340,14 +404,9 @@ async def preguntar_chatbot_stream(data: ChatRequest):
         for idx, bloque in enumerate(stream_gen):
             if not bloque:
                 # Igual incrementamos el contador de parciales para mantener numeración
-                yield json.dumps({
-                    "rol": "bot",
-                    "tipo": "parcial",
-                    "analisis_parcial": idx + 1,
-                    "analisis_total": analisis_total,
-                    "texto": "Sin novedades relevantes en esta ventana."
-                }) + "\n"
-                await asyncio.sleep(0.6)
+                # En vez de emitir un parcial por ventana vacía:
+                # simplemente continúa sin enviar nada
+                # (o acumula y emite un único “sin novedades” al final si TODAS estuvieron vacías)
                 continue
 
             payloads_bloque = [p.payload for p in bloque]
@@ -734,7 +793,7 @@ async def websocket_progreso(websocket: WebSocket, filename: str):
 from fastapi.middleware.cors import CORSMiddleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Cambia esto a los dominios permitidos
+    allow_origins=["*"],  # Cambia esto a los dominios permitidos
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
