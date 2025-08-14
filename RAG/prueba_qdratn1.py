@@ -1,7 +1,7 @@
 from qdrant_client import QdrantClient
 from qdrant_client.models import Filter, FieldCondition, MatchValue
 
-client = QdrantClient(host="localhost", port=6333, timeout=30.0)
+client = QdrantClient( url="http://142.93.196.168:6333",)
 
 result = client.search(
     collection_name="sunass_news_openai",
@@ -11,7 +11,7 @@ result = client.search(
         must=[
             FieldCondition(
                 key="date_day",
-                match=MatchValue(value="14072025")
+                match=MatchValue(value="15072025")
             )
         ]
     )

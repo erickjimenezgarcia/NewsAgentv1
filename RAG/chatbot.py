@@ -1,12 +1,13 @@
 import re
 from openai import OpenAI
 from qdrant_client import QdrantClient
-from qdrant_client.http.models import Filter, FieldCondition, MatchValue, Range
+from qdrant_client.http.models import Filter, FieldCondition, MatchValue, Range, MatchAny
 from qdrant_client.http import models
 import httpx
-from RAG.utils import load_openai_api_key,load_llama3_api_key
+from RAG.utils import load_openai_api_key,load_llama3_api_key,load_api_gemini_key
 from numpy import dot
 from numpy.linalg import norm
+from calendar import monthrange
 import time
 from collections import defaultdict
 from langchain.chains import RetrievalQA
@@ -15,8 +16,15 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_core.language_models.chat_models import SimpleChatModel
 from langchain_core.messages import AIMessage, HumanMessage
 import os
+from google.generativeai.types import HarmCategory, HarmBlockThreshold
+from qdrant_client.models import Range
+from datetime import datetime, timedelta
+from math import ceil
+import google.generativeai as genai
+
 
 os.environ["OPENAI_API_KEY"] = load_openai_api_key()
+genai.configure(api_key=load_api_gemini_key())
 
 
 # Configuracion con llama3 api
@@ -67,9 +75,153 @@ qdrant_store = Qdrant(
     content_payload_key="text"
 )
 
+
+# Utilidades
+
+def ddmmyyyy_to_yyyymmdd_int(s: str) -> int:
+    # "ddmmyyyy" -> 20250107
+    return int(f"{s[4:]}{s[2:4]}{s[:2]}")
+
+def iso_to_ddmmyyyy(iso: str) -> str:
+    # "YYYY-MM-DD" -> "ddmmyyyy"
+    dt = datetime.strptime(iso, "%Y-%m-%d")
+    return dt.strftime("%d%m%Y")
+
+def daterange_days(inicio: datetime, fin: datetime):
+    dias = (fin - inicio).days + 1
+    for i in range(dias):
+        yield inicio + timedelta(days=i)
+
+def split_in_windows(inicio: datetime, fin: datetime, window_size_days: int = 10):
+    """
+    Genera ventanas [ini, fin] de window_size_days (1-10, 11-20, ...).
+    La última ventana puede ser más corta.
+    """
+    current = inicio
+    while current <= fin:
+        end = min(current + timedelta(days=window_size_days - 1), fin)
+        yield (current, end)
+        current = end + timedelta(days=1)
+        
+        
+def buscar_por_ventanas(
+    qdrant, collection, query_vector,
+    inicio_ddmmyyyy: str, fin_ddmmyyyy: str,
+    tipo_evento: str | None,
+    k_total: int = 50,
+    window_size_days: int = 10,
+    use_numeric_field: bool | str = "auto",   # True / False / "auto"
+    per_day_cap: int = 3,
+    stop_on_k: bool = False,                  # ⬅️ NO cortar al llegar a k_total (por defecto False)
+    logger=print,
+):
+    inicio = datetime.strptime(inicio_ddmmyyyy, "%d%m%Y")
+    fin = datetime.strptime(fin_ddmmyyyy, "%d%m%Y")
+
+    total_days = (fin - inicio).days + 1
+    k_por_dia = max(k_total // max(total_days, 1), per_day_cap)
+    k_por_ventana = max(1, k_por_dia * window_size_days)
+
+    ventanas = list(split_in_windows(inicio, fin, window_size_days))
+    seen_ids = set()
+    acumulados = 0
+
+    for idx, (win_ini, win_fin) in enumerate(ventanas, start=1):
+        gte = int(win_ini.strftime("%Y%m%d"))
+        lte = int(win_fin.strftime("%Y%m%d"))
+        ddmm_list = [d.strftime("%d%m%Y") for d in daterange_days(win_ini, win_fin)]
+
+        def filtro_numerico():
+            f = Filter(must=[FieldCondition(key="date_day_num", range=Range(gte=gte, lte=lte))])
+            if tipo_evento:
+                f.must.append(FieldCondition(key="event_type", match=MatchValue(value=tipo_evento)))
+            return f
+
+        def filtro_matchany():
+            f = Filter(must=[FieldCondition(key="date_day", match=MatchAny(any=ddmm_list))])
+            if tipo_evento:
+                f.must.append(FieldCondition(key="event_type", match=MatchValue(value=tipo_evento)))
+            return f
+
+        resultados = []
+        intento = None
+
+        # ---------- Selección / fallback ----------
+        if use_numeric_field is True:
+            intento = "NUM"
+            filtro = filtro_numerico()
+            logger(f"🔎 Ventana {idx}/{len(ventanas)} NUM {win_ini:%d-%m-%Y}..{win_fin:%d-%m-%Y} "
+                   f"gte={gte} lte={lte} limit={k_por_ventana}")
+            resultados = qdrant.search(
+                collection_name=collection,
+                query_vector=query_vector,
+                query_filter=filtro,
+                limit=k_por_ventana,
+                with_payload=True,
+            )
+
+        elif use_numeric_field is False:
+            intento = "ANY"
+            filtro = filtro_matchany()
+            logger(f"🔎 Ventana {idx}/{len(ventanas)} ANY {win_ini:%d-%m-%Y}..{win_fin:%d-%m-%Y} "
+                   f"days={len(ddmm_list)} limit={k_por_ventana}")
+            resultados = qdrant.search(
+                collection_name=collection,
+                query_vector=query_vector,
+                query_filter=filtro,
+                limit=k_por_ventana,
+                with_payload=True,
+            )
+
+        else:  # "auto": probar NUM y si viene vacío, caer a ANY
+            intento = "AUTO>NUM"
+            filtro = filtro_numerico()
+            logger(f"🔎 Ventana {idx}/{len(ventanas)} AUTO(NUM) {win_ini:%d-%m-%Y}..{win_fin:%d-%m-%Y} "
+                   f"gte={gte} lte={lte} limit={k_por_ventana}")
+            resultados = qdrant.search(
+                collection_name=collection,
+                query_vector=query_vector,
+                query_filter=filtro,
+                limit=k_por_ventana,
+                with_payload=True,
+            )
+            if not resultados:
+                intento = "AUTO>ANY"
+                filtro = filtro_matchany()
+                logger(f"↩️  Ventana {idx}/{len(ventanas)} fallback ANY days={len(ddmm_list)} limit={k_por_ventana}")
+                resultados = qdrant.search(
+                    collection_name=collection,
+                    query_vector=query_vector,
+                    query_filter=filtro,
+                    limit=k_por_ventana,
+                    with_payload=True,
+                )
+
+        # ---------- Dedup por ID de puntos ----------
+        nuevos = []
+        for p in resultados:
+            if p.id not in seen_ids:
+                seen_ids.add(p.id)
+                nuevos.append(p)
+        acumulados += len(nuevos)
+
+        logger(f"✅ Ventana {idx}/{len(ventanas)} [{intento}] resultados={len(resultados)} nuevos={len(nuevos)} "
+               f"acumulados={acumulados}")
+
+        yield nuevos  # bloque de esta ventana (para streaming)
+
+        # Sólo si quieres cortar al llegar a k_total
+        if stop_on_k and acumulados >= k_total:
+            logger(f"⛔ Corte por k_total={k_total} en ventana {idx}")
+            return
+
+
+
 def truncar_contexto(contexto, max_tokens=5500):
     max_chars = max_tokens * 4  # estimación generosa
     return contexto[:max_chars]
+
+
 
 def responder_llm_langchain(pregunta, contexto, payloads=None):
     print("💬 Generando respuesta con LangChain + LLaMA3...")
@@ -96,6 +248,9 @@ def deduplicar_chunks(chunks: list[str]) -> list[str]:
 
 
 def deduplicar_payloads(payloads: list[dict]) -> list[dict]:
+    """
+    Función para eliminar duplicados en una lista de payloads.
+    """
     vistos = set()
     unicos = []
     for p in payloads:
@@ -107,6 +262,9 @@ def deduplicar_payloads(payloads: list[dict]) -> list[dict]:
 
 
 def puntuar_chunks(payloads: list[dict], query_embedding: list[float], alpha=0.8) -> list[tuple[float, dict]]:
+    """
+    Función para puntuar un conjunto de payloads en base a su similitud con un embedding de consulta.
+    """
     scored = []
     for p in payloads:
         embedding = p.get("embedding", None)
@@ -156,7 +314,7 @@ def detectar_evento_por_embedding(texto: str, ref_embeddings: dict, threshold=0.
 # 🔍 Utilidades de análisis de la pregunta
 # ----------------------------
 def extraer_fecha(pregunta: str) -> dict | None:
-    pregunta = pregunta.lower()
+    s = pregunta.lower().strip()
     meses = {
         "enero": "01", "febrero": "02", "marzo": "03", "abril": "04",
         "mayo": "05", "junio": "06", "julio": "07", "agosto": "08",
@@ -164,47 +322,139 @@ def extraer_fecha(pregunta: str) -> dict | None:
         "noviembre": "11", "diciembre": "12"
     }
 
-    # 🔁 Detectar rango de fechas (varios formatos)
-    match = re.search(
-        r"(?:entre\s+)?el\s+(\d{1,2})\s+de\s+(\w+)\s+(?:y|al)\s+el?\s*(\d{1,2})\s+de\s+(\w+)(?:\s+de\s+(\d{4}))?",
-        pregunta
+    def to_ddmmyyyy(d, m, a):
+        return f"{int(d):02}{m}{a}"
+
+    # ---------- 1) Rangos con texto ----------
+    # a) "del D de MES (de AAAA)? al D de MES (de AAAA)?"
+    m = re.search(
+        r"\bdel\s+(\d{1,2})\s+de\s+(\w+)(?:\s+de\s+(\d{4}))?\s+al\s+(\d{1,2})\s+de\s+(\w+)(?:\s+de\s+(\d{4}))?",
+        s
     )
-    if match:
-        d1, m1, d2, m2, a = match.groups()
-        m1 = meses.get(m1.lower())
-        m2 = meses.get(m2.lower())
-        a = a or "2025"
+    if m:
+        d1, m1n, a1, d2, m2n, a2 = m.groups()
+        m1 = meses.get(m1n, None)
+        m2 = meses.get(m2n, None)
         if m1 and m2:
-            return {
-                "tipo": "rango",
-                "inicio": f"{int(d1):02}{m1}{a}",
-                "fin": f"{int(d2):02}{m2}{a}"
-            }
+            a1 = a1 or "2025"
+            a2 = a2 or a1
+            return {"tipo": "rango", "inicio": to_ddmmyyyy(d1, m1, a1), "fin": to_ddmmyyyy(d2, m2, a2)}
 
-    # 📅 Fecha exacta: "15 de julio de 2025"
-    match = re.search(r"(\d{1,2})\s+de\s+(\w+)(?:\s+de\s*(\d{4}))?", pregunta)
-    if match:
-        d, m_nombre, a = match.groups()
-        m = meses.get(m_nombre.lower())
-        if m:
-            return {"tipo": "exacta", "valor": f"{int(d):02}{m}{a or '2025'}"}
+    # b) "desde el D de MES (de AAAA)? hasta el D de MES (de AAAA)?"
+    m = re.search(
+        r"\bdesde\s+el\s+(\d{1,2})\s+de\s+(\w+)(?:\s+de\s+(\d{4}))?\s+hasta\s+el\s+(\d{1,2})\s+de\s+(\w+)(?:\s+de\s+(\d{4}))?",
+        s
+    )
+    if m:
+        d1, m1n, a1, d2, m2n, a2 = m.groups()
+        m1 = meses.get(m1n, None)
+        m2 = meses.get(m2n, None)
+        if m1 and m2:
+            a1 = a1 or "2025"
+            a2 = a2 or a1
+            return {"tipo": "rango", "inicio": to_ddmmyyyy(d1, m1, a1), "fin": to_ddmmyyyy(d2, m2, a2)}
 
-    # 📆 Solo mes y año: "julio de 2025"
-    # búsqueda más robusta: ¿existe un mes en la pregunta?
+    # c) "entre el D de MES (de AAAA)? y el D de MES (de AAAA)?"
+    m = re.search(
+        r"\bentre\s+el\s+(\d{1,2})\s+de\s+(\w+)(?:\s+de\s+(\d{4}))?\s+(?:y|al)\s+el?\s*(\d{1,2})\s+de\s+(\w+)(?:\s+de\s+(\d{4}))?",
+        s
+    )
+    if m:
+        d1, m1n, a1, d2, m2n, a2 = m.groups()
+        m1 = meses.get(m1n, None)
+        m2 = meses.get(m2n, None)
+        if m1 and m2:
+            a1 = a1 or "2025"
+            a2 = a2 or a1
+            return {"tipo": "rango", "inicio": to_ddmmyyyy(d1, m1, a1), "fin": to_ddmmyyyy(d2, m2, a2)}
+        
+        
+    # d) Rango de MESES con texto: "desde el mes de enero (de 2025)? (hasta|a|al) (el )?mes de febrero (de 2025)?"
+    m = re.search(
+        r"\bdesde\s+el\s+mes\s+de\s+(\w+)(?:\s+de\s+(\d{4}))?\s+(?:hasta|a|al)\s+(?:el\s+)?mes\s+de\s+(\w+)(?:\s+de\s+(\d{4}))?",
+        s
+    )
+    if m:
+        m1n, a1, m2n, a2 = m.groups()
+        m1 = meses.get(m1n, None)
+        m2 = meses.get(m2n, None)
+        if m1 and m2:
+            a1 = a1 or "2025"
+            a2 = a2 or a1  # si solo hay un año, se aplica a ambos
+            # inicio: día 01 del primer mes
+            inicio = f"01{m1}{a1}"
+            # fin: último día del segundo mes
+            last_day = monthrange(int(a2), int(m2))[1]
+            fin = f"{last_day:02}{m2}{a2}"
+            return {"tipo": "rango", "inicio": inicio, "fin": fin}
+
+    # e) Rango de MESES sin la palabra "mes": "enero (de 2025)? (hasta|a|al) febrero (de 2025)?"
+    m = re.search(
+        r"\b(\w+)(?:\s+de\s+(\d{4}))?\s+(?:hasta|a|al)\s+(\w+)(?:\s+de\s+(\d{4}))?\b",
+        s
+    )
+    if m:
+        m1n, a1, m2n, a2 = m.groups()
+        # Solo acepta si ambos son nombres de mes válidos (evita confundir con palabras sueltas)
+        if m1n in meses and m2n in meses:
+            m1 = meses[m1n]; m2 = meses[m2n]
+            a1 = a1 or "2025"
+            a2 = a2 or a1
+            inicio = f"01{m1}{a1}"
+            last_day = monthrange(int(a2), int(m2))[1]
+            fin = f"{last_day:02}{m2}{a2}"
+            return {"tipo": "rango", "inicio": inicio, "fin": fin}
+
+    # f) Rango numérico de MESES: "mm/yyyy (hasta|a|al) mm/yyyy"
+    m = re.search(
+        r"\b(\d{1,2})[\/\-](\d{4})\s+(?:hasta|a|al)\s+(\d{1,2})[\/\-](\d{4})\b",
+        s
+    )
+    if m:
+        mo1, a1, mo2, a2 = m.groups()
+        mo1 = int(mo1); mo2 = int(mo2)
+        if 1 <= mo1 <= 12 and 1 <= mo2 <= 12:
+            inicio = f"01{mo1:02}{a1}"
+            last_day = monthrange(int(a2), mo2)[1]
+            fin = f"{last_day:02}{mo2:02}{a2}"
+            return {"tipo": "rango", "inicio": inicio, "fin": fin}
+
+    # ---------- 2) Rangos numéricos ----------
+    # "dd/mm/aaaa (al|a|hasta|-) dd/mm/aaaa"  (acepta / - .)
+    m = re.search(
+        r"(\d{1,2})[\/\-\.\s](\d{1,2})[\/\-\.\s](\d{4})\s*(?:al|a|hasta|–|-|—)\s*(\d{1,2})[\/\-\.\s](\d{1,2})[\/\-\.\s](\d{4})",
+        s
+    )
+    if m:
+        d1, mo1, a1, d2, mo2, a2 = m.groups()
+        return {"tipo": "rango",
+                "inicio": f"{int(d1):02}{int(mo1):02}{a1}",
+                "fin": f"{int(d2):02}{int(mo2):02}{a2}"}
+
+    # ---------- 3) Fecha exacta (si NO hubo rango) ----------
+    m = re.search(r"(\d{1,2})\s+de\s+(\w+)(?:\s+de\s*(\d{4}))?", s)
+    if m:
+        d, m_nombre, a = m.groups()
+        mm = meses.get(m_nombre, None)
+        if mm:
+            return {"tipo": "exacta", "valor": to_ddmmyyyy(d, mm, a or "2025")}
+
+    # ---------- 4) Solo mes y año ----------
     for m_nombre, m_num in meses.items():
-        if re.search(rf"\b{m_nombre}\b.*(?:\d{{4}})?", pregunta):
-            a_match = re.search(r"(\d{4})", pregunta)
+        if re.search(rf"\b{m_nombre}\b", s):
+            a_match = re.search(r"(\d{4})", s)
             a = a_match.group(1) if a_match else "2025"
             return {"tipo": "mes", "valor": f"{m_num}{a}"}
 
-
-    # 📆 Fecha tipo numérica: "10/07/2025"
-    match = re.search(r"(\d{1,2})[/-](\d{1,2})[/-](\d{4})", pregunta)
-    if match:
-        d, m, a = match.groups()
-        return {"tipo": "exacta", "valor": f"{int(d):02}{int(m):02}{a}"}
+    # ---------- 5) Fecha exacta numérica ----------
+    m = re.search(r"(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})", s)
+    if m:
+        d, mo, a = m.groups()
+        return {"tipo": "exacta", "valor": f"{int(d):02}{int(mo):02}{a}"}
 
     return None
+
+
 
 def pregunta_es_conteo(pregunta: str) -> bool:
     patrones = [
@@ -225,6 +475,9 @@ def extraer_tipo_evento(pregunta: str):
     return None
 
 def resumir_por_dia(payloads, max_eventos_por_dia=3, min_texto_valido=30):
+    """
+    Función para resumir por dia
+    """
     from collections import defaultdict
 
     dias = defaultdict(list)
@@ -253,6 +506,7 @@ def resumir_por_dia(payloads, max_eventos_por_dia=3, min_texto_valido=30):
 # ----------------------------
 # 📥 Embedding y búsqueda
 # ----------------------------
+# ---------- Tu función principal ----------
 def buscar_contexto_openai(pregunta: str, k=50):
     fecha = extraer_fecha(pregunta)
     print("🧪 Fecha extraída:", fecha)
@@ -263,101 +517,95 @@ def buscar_contexto_openai(pregunta: str, k=50):
         input=pregunta
     ).data[0].embedding
 
-    puntos = []
+    puntos = []            # Para acumular resultados finales cuando NO es rango
+    puntos_acumulados = [] # Para el caso rango (acumula todos los bloques para la conclusión)
 
     if fecha:
-        if fecha["tipo"] == "rango":
-            from datetime import datetime, timedelta
+        if fecha.get("tipo") == "rango":
+            # === NUEVO: flujo por ventanas (stream-ready) ===
+            use_numeric = True  # ponlo en False si aún no guardas date_day_num
 
-            inicio = datetime.strptime(fecha["inicio"], "%d%m%Y")
-            fin = datetime.strptime(fecha["fin"], "%d%m%Y")
-            dias = (fin - inicio).days + 1
-            fechas_rango = [
-                (inicio + timedelta(days=i)).strftime("%d%m%Y") for i in range(dias)
-            ]
+            stream_gen = buscar_por_ventanas(
+                qdrant=qdrant,
+                collection=COLLECTION_NAME,
+                query_vector=vector,
+                inicio_ddmmyyyy=fecha["inicio"],
+                fin_ddmmyyyy=fecha["fin"],
+                tipo_evento=tipo_evento,
+                k_total=k,
+                window_size_days=10,  # ajusta 1 (día a día), 10, 15, 30, etc.
+                use_numeric_field=use_numeric,
+                per_day_cap=3,
+            )
 
-            k_por_dia = max(k // dias, 3)
+            # IMPORTANTE: aquí puedes emitir por streaming cada bloque
+            for bloque in stream_gen:
+                if not bloque:
+                    continue
+                # 👉 En tu endpoint /chatbot/stream/ envía una "respuesta parcial" con estos payloads:
+                payloads_bloque = [p.payload for p in bloque]
+                # Si quieres, dedup de texto aquí (entre bloques) antes de mandar.
+                # emitir_respuesta_parcial(payloads_bloque)  # <-- tu función de streaming
+                puntos_acumulados.extend(bloque)
 
-            for dia in fechas_rango:
-                filtro_dia = Filter(must=[
-                    FieldCondition(key="date_day", match=MatchValue(value=dia))
-                ])
-                if tipo_evento:
-                    filtro_dia.must.append(FieldCondition(
-                        key="event_type", match=MatchValue(value=tipo_evento)
-                    ))
+            # Conclusión final después del streaming por ventanas
+            payloads = [p.payload for p in puntos_acumulados]
+            payloads = deduplicar_payloads(payloads)
+            if payloads and isinstance(payloads[0], dict) and "embedding" in payloads[0]:
+                payloads = puntuar_chunks(payloads, vector)[:k]
 
-                try:
-                    print("🧪 Ejecutando query_points con:")
-                    print(f"📂 Colección: {COLLECTION_NAME}")
-                    print(f"🎯 Vector tamaño: {len(vector)}")
-                    print(f"🔍 Filtro usado: {filtro_dia if 'filtro_dia' in locals() else filtro}")
-                    print(f"🔢 Límite: {k_por_dia if 'k_por_dia' in locals() else k}")
-                    
-                    res = qdrant.search(
-                        collection_name=COLLECTION_NAME,
-                        query_vector=vector,
-                        query_filter=filtro_dia,
-                        limit=k_por_dia,
-                        with_payload=True
-                    )
-                    puntos.extend(res)
-                except Exception as e:
-                    print("❌ Error en query_points:", e)
-                    print("📋 Filtro usado:", filtro)
-                    raise
+            # Construir contexto para retorno (si esta función devuelve algo al caller)
+            contextos = []
+            for punto in puntos_acumulados:
+                payload = punto.payload
+                texto = payload.get("text", "")
+                fch = payload.get("date", "")
+                fuente = payload.get("source_type", "")
+                seccion = payload.get("section", "")
+                contextos.append(f"[fecha: {fch}] [fuente: {fuente}] [sección: {seccion}]\n{texto}")
+
+            print("📦 Total puntos (rango/ventanas):", len(puntos_acumulados))
+            print("🧹 Payloads después de dedup + rank:", len(payloads))
+
+            return "\n\n".join(contextos), payloads
+
         else:
+            # === Mantén tu lógica para exacta/mes ===
             must_conditions = []
 
             if fecha["tipo"] == "exacta":
                 must_conditions.append(FieldCondition(
                     key="date_day", match=MatchValue(value=fecha["valor"])
                 ))
+
             elif fecha["tipo"] == "mes":
-                from datetime import datetime, timedelta
-                from calendar import monthrange
                 print("📆 Buscando por mes -------------------------:", fecha["valor"])
                 mes = int(fecha["valor"][:2])
                 anio = int(fecha["valor"][2:])
                 dias_en_mes = monthrange(anio, mes)[1]
 
-                fechas_mes = [
-                    f"{day:02}{mes:02}{anio}" for day in range(1, dias_en_mes + 1)
-                ]
+                fechas_mes = [f"{day:02}{mes:02}{anio}" for day in range(1, dias_en_mes + 1)]
+                # Usar MatchAny para no disparar N queries
+                filtro_mes = Filter(must=[FieldCondition(key="date_day", match=MatchAny(any=fechas_mes))])
+                if tipo_evento:
+                    filtro_mes.must.append(FieldCondition(key="event_type", match=MatchValue(value=tipo_evento)))
 
-                k_por_dia = max(k // dias_en_mes, 3)
+                try:
+                    print("🧪 Ejecutando query_points (mes) con MatchAny:")
+                    res = qdrant.search(
+                        collection_name=COLLECTION_NAME,
+                        query_vector=vector,
+                        query_filter=filtro_mes,
+                        limit=k,
+                        with_payload=True
+                    )
+                    puntos.extend(res)
+                except Exception as e:
+                    print("❌ Error en query_points (mes):", e)
+                    print("📋 Filtro usado:", filtro_mes)
+                    raise
 
-                for dia in fechas_mes:
-                    filtro_dia = Filter(must=[FieldCondition(
-                        key="date_day", match=MatchValue(value=dia)
-                    )])
-                    if tipo_evento:
-                        filtro_dia.must.append(FieldCondition(
-                            key="event_type", match=MatchValue(value=tipo_evento)
-                        ))
-                        
-                    try:
-                        print("🧪 Ejecutando query_points con:")
-                        print(f"📂 Colección: {COLLECTION_NAME}")
-                        print(f"🎯 Vector tamaño: {len(vector)}")
-                        print(f"🔍 Filtro usado: {filtro_dia if 'filtro_dia' in locals() else filtro}")
-                        print(f"🔢 Límite: {k_por_dia if 'k_por_dia' in locals() else k}")
-
-                        res = qdrant.search(
-                            collection_name=COLLECTION_NAME,
-                            query_vector=vector,
-                            query_filter=filtro_dia,
-                            limit=k_por_dia,
-                            with_payload=True
-                        )
-                        puntos.extend(res)
-                        
-                    except Exception as e:
-                        print("❌ Error en query_points:", e)
-                        print("📋 Filtro usado:", filtro_dia)
-                        raise
-
-            if tipo_evento:
+            if tipo_evento and fecha["tipo"] != "mes":
                 must_conditions.append(FieldCondition(
                     key="event_type", match=MatchValue(value=tipo_evento)
                 ))
@@ -365,11 +613,7 @@ def buscar_contexto_openai(pregunta: str, k=50):
             filtro = Filter(must=must_conditions) if must_conditions else None
 
             try:
-                print("🧪 Ejecutando query_points con:")
-                print(f"📂 Colección: {COLLECTION_NAME}")
-                print(f"🎯 Vector tamaño: {len(vector)}")
-                print(f"🔍 Filtro usado: {filtro_dia if 'filtro_dia' in locals() else filtro}")
-                print(f"🔢 Límite: {k_por_dia if 'k_por_dia' in locals() else k}")
+                print("🧪 Ejecutando query_points (no rango):")
                 resultados = qdrant.search(
                     collection_name=COLLECTION_NAME,
                     query_vector=vector,
@@ -378,13 +622,11 @@ def buscar_contexto_openai(pregunta: str, k=50):
                     with_payload=True
                 )
                 puntos.extend(resultados)
-                
             except Exception as e:
-                print("❌ Error en query_points:", e)
+                print("❌ Error en query_points (no rango):", e)
                 print("📋 Filtro usado:", filtro)
                 raise
-            
-            
+
     else:
         # Sin fecha, búsqueda general
         print("no hay fecha")
@@ -393,12 +635,9 @@ def buscar_contexto_openai(pregunta: str, k=50):
             must_conditions.append(FieldCondition(
                 key="event_type", match=MatchValue(value=tipo_evento)
             ))
-
         filtro = Filter(must=must_conditions) if must_conditions else None
 
         try:
-           
-            
             resultados = qdrant.search(
                 collection_name=COLLECTION_NAME,
                 query_vector=vector,
@@ -408,41 +647,34 @@ def buscar_contexto_openai(pregunta: str, k=50):
             )
             puntos.extend(resultados)
         except Exception as e:
-            print("❌ Error en query_points:", e)
+            print("❌ Error en query_points (general):", e)
             print("📋 Filtro usado:", filtro)
             raise
 
-    # Resultado vacío
+    # ---------- Post-proceso común (no rango) ----------
     if not puntos:
         print("⚠️ No se encontraron puntos para esta consulta.")
         return "No se encontró contexto relacionado.", []
 
     payloads = [p.payload for p in puntos]
-
-    # Paso 2: deduplicar
     payloads = deduplicar_payloads(payloads)
 
-    # Paso 3: puntuar y limitar si tienen embedding
-    if payloads and "embedding" in payloads[0]:
-        payloads = puntuar_chunks(payloads, vector)
-        payloads = payloads[:k]
+    if payloads and isinstance(payloads[0], dict) and "embedding" in payloads[0]:
+        payloads = puntuar_chunks(payloads, vector)[:k]
 
-    # Procesamiento de contexto y payloads
     contextos = []
     for punto in puntos:
         payload = punto.payload
         texto = payload.get("text", "")
-        fecha = payload.get("date", "")
+        fch = payload.get("date", "")
         fuente = payload.get("source_type", "")
         seccion = payload.get("section", "")
+        contextos.append(f"[fecha: {fch}] [fuente: {fuente}] [sección: {seccion}]\n{texto}")
 
-        payloads.append(payload)
-        contextos.append(f"[fecha: {fecha}] [fuente: {fuente}] [sección: {seccion}]\n{texto}")
-
-        print("📌 Fecha encontrada:", fecha, "| Texto:", texto[:80])
+    print("📦 Total de puntos encontrados (sin deduplicar):", len(puntos))
+    print("🧹 Total de payloads después de deduplicar:", len(payloads))
 
     return "\n\n".join(contextos), payloads
-
 # ----------------------------
 # 🤖 Chat y generación
 # ----------------------------
@@ -531,6 +763,119 @@ def responder_llm_groq(pregunta, contexto,payloads=None, intentos=3):
                 raise
 
     return "Se alcanzó el límite de uso de la API. Intenta más tarde."
+
+def responder_llm_gemini(pregunta: str, contexto: str, tipoPregunta: str) -> str:
+    model = genai.GenerativeModel("models/gemini-1.5-pro")
+    
+    if tipoPregunta == "1":
+        
+        """"
+        Tipo de prompt para cuando es normal
+        """       
+        
+        prompt = f"""
+        Eres un asistente experto de SUNASS.
+        Con base en la siguiente información de contexto, responde la pregunta de manera clara y específica.
+
+        📚 CONTEXTO:
+        {contexto}
+
+        ❓ PREGUNTA:
+        {pregunta}
+        """
+        
+        
+    elif tipoPregunta == "2":
+        """
+        Tipo de prompt para cuando es particionada
+        """
+        
+        prompt = f"""
+        Eres un asistente experto de SUNASS.
+        Esto es una pregunta particionada de un contexto particionado, se te irá pasando una por una los contextos no des una conclución de la pregunta, es importante que la respuesta sea clara y especifica.
+        
+        📚 CONTEXTO:
+        {contexto}
+
+        ❓ PREGUNTA:
+        {pregunta}
+        
+        """
+        
+    elif tipoPregunta == "3":
+        
+        """
+        Tipo de pregunta para cuando es final de una particionada
+        """
+        
+        prompt = f"""
+        Eres un asistente experto de SUNASS.
+
+        Esto es prompt para la pregunta final, se te pasará el contexto pasado generado pero para hacer exactamente lo que se pide en la pregunta, es importante que la respuesta sea de acorde a lo que dice en la pregunta.
+
+        📚 CONTEXTO:
+        {contexto}
+
+        ❓ PREGUNTA:
+        {pregunta}
+        """
+        
+    elif tipoPregunta == "4":
+        
+        """
+        Tipo de pregunta para generar respuestas pasadas
+        """
+        
+        prompt = f"""
+        Eres un asistente experto de SUNASS.
+
+        Esto es prompt para la respuesta en el contexto de la respuesta pasada o la ultima respuesta generada, aca ya sea pregunta o una orden como generar o hacer un resumen debes hacerlo lo mas preciso a lo que se te envía la ordenanza
+
+        📚 CONTEXTO:
+        {contexto}
+
+        Ordenanza:
+        {pregunta}
+        """
+
+    try:
+        response = model.generate_content(prompt)
+        return response.text.strip() if response.text else "⚠️ No se generó respuesta."
+    except Exception as e:
+        return f"❌ Error al generar respuesta con Gemini: {str(e)}"
+
+
+
+def clasificar_tipo_pregunta(pregunta: str, cantidad_payloads: int, umbral: int = 6, ultimo_mensaje: str = "") -> str:
+    """
+    Devuelve "1", "2" o "3" según el tipo de prompt:
+    - "1": pregunta normal
+    - "2": pregunta con partición de contexto
+    - "3": pregunta que hace referencia a una respuesta previa
+    """
+    pregunta = pregunta.lower()
+
+    #  Detectar si hace referencia a una respuesta previa
+    referencias = [
+        r"\b(respuesta pasada|respuesta anterior|de lo anterior|según lo anterior)\b",
+        r"\b(resúmelo|resumen|tabla de resumen|hazme una tabla|puedes resumir)\b",
+        r"\b(según el contexto anterior|analiza lo anterior)\b"
+    ]
+
+    hace_referencia = any(re.search(pat, pregunta) for pat in referencias)
+
+    print(" Hace referencia a una respuesta previa:", hace_referencia)
+    print("ultimo mensaje:", ultimo_mensaje)
+    
+    if hace_referencia and ultimo_mensaje.strip():
+        return "3"  # Conclusión o resumen posterior
+
+    if cantidad_payloads > umbral:
+        return "2"  # Particionada
+
+    return "1"  # Normal
+
+
 
 def responder_llm(pregunta, contexto):
     print("💬 Generando respuesta con OPEN-IA-4o...")
