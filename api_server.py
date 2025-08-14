@@ -66,6 +66,16 @@ PRESENTACION = {
     "como te llamas","cómo te llamas","cual es tu nombre","cuál es tu nombre"
 }
 
+PRESENTACION_PATTERNS = [
+    re.compile(r"\bpres[eé]ntate\b"),
+    re.compile(r"\bpres[eé]ntese\b"),
+    re.compile(r"\bqu[ií]en eres\b"),
+    re.compile(r"\bc[oó]mo te llamas\b"),
+    re.compile(r"\bcu[aá]l es tu nombre\b"),
+    re.compile(r"\b(puedes|podrias|podr[ií]as|me puedes|me podr[ií]as)\s+present(ar(se|te)?|arte|arse)\b"),
+    re.compile(r"\bte\s+puedes\s+present(ar(te)?)\b"),
+]
+
 HELP_TERMS = {"ayuda","help","como funciona","cómo funciona","que puedes hacer","qué puedes hacer"}
 
 COUNT_TERMS = {"cuantas","cuántas","cuantos","cuántos","numero de","número de","conteo","total","cantidad"}
@@ -77,6 +87,14 @@ DOMAIN_HINTS = {
     "sunass","eps","interrupcion","interrupciones","corte","cortes","abastecimiento",
     "servicio de agua","suspension","suspensión","alerta","reporte","incidencia"
 }
+
+def _is_presentacion(text: str) -> bool:
+    # text debe venir ya normalizado por _normalize()
+    for pat in PRESENTACION_PATTERNS:
+        if pat.search(text):
+            return True
+    # fallback por si llega literal
+    return any(t in text for t in ("presentate","presentese","presentarte","presentarse"))
 
 def _normalize(s: str) -> str:
     s = s.lower()
@@ -94,7 +112,7 @@ def _contains_any(text: str, vocab: set[str]) -> bool:
             return True
     return False
 
-def intent_router(pregunta: str):
+def intent_router(pregunta: str) -> tuple[Intent, dict]:
     p = _normalize(pregunta or "")
     tokens = p.split()
 
@@ -102,8 +120,8 @@ def intent_router(pregunta: str):
     if (p in SMALLTALK) or (len(tokens) <= 3 and _contains_any(p, SMALLTALK)):
         return Intent.SMALLTALK, dict(should_retrieve=False, should_partition=False)
 
-    # 2) Presentación
-    if _contains_any(p, PRESENTACION):
+    # 2) Presentación  ✅ (ahora con patrones)
+    if _is_presentacion(p):
         return Intent.PRESENTACION, dict(should_retrieve=False, should_partition=False)
 
     # 3) AYUDA
@@ -118,16 +136,14 @@ def intent_router(pregunta: str):
     if _contains_any(p, STATS_TERMS):
         return Intent.STATS_QUERY, dict(should_retrieve=True, should_partition=False)
 
-    # 5) Dominio SUNASS: si menciona términos de dominio, activa RAG
+    # 5) Dominio SUNASS
     if _contains_any(p, DOMAIN_HINTS):
         return Intent.DOMAIN_QUERY, dict(should_retrieve=True, should_partition=True)
 
-    # 6) Heurística de longitud:
-    # - Muy corto y sin dominio => no RAG
+    # 6) Heurística de longitud
     if len(tokens) <= 3:
         return Intent.OTHER, dict(should_retrieve=False, should_partition=False)
 
-    # - Por defecto: consulta general; puedes probar sin partición primero
     return Intent.DOMAIN_QUERY, dict(should_retrieve=True, should_partition=False)
 
 
@@ -361,8 +377,26 @@ from collections import defaultdict
 import asyncio
 import json
 from datetime import datetime, timedelta
+from dataclasses import dataclass
 
 
+@dataclass
+class IntentDecision:
+    intent: Intent
+    should_retrieve: bool
+    should_partition: bool
+    score: float  # confianza
+
+
+def stream_final(texto: str):
+    async def gen():
+        # opcional: avisa "escribiendo" para que el frontend quite el placeholder de forma uniforme
+        yield json.dumps({"rol": "bot", "tipo": "escribiendo"}) + "\n"
+        # si quieres un micro-delay visual
+        await asyncio.sleep(0.05)
+        # mensaje final
+        yield json.dumps({"rol": "bot", "tipo": "final", "texto": texto}) + "\n"
+    return StreamingResponse(gen(), media_type="text/event-stream")
 
 
 @app.post("/chatbot/stream/")
@@ -392,28 +426,20 @@ async def preguntar_chatbot_stream(data: ChatRequest):
     should_partition = flags["should_partition"]
 
     # --- Respuestas directas (sin RAG ni particionado) ---
+    # --- Respuestas directas (sin RAG ni particionado) ---
     if intent == Intent.SMALLTALK:
-        return JSONResponse({
-            "tipo": "smalltalk",
-            "respuesta": "¡Hola! Soy tu asistente de SUNASS. ¿En qué te ayudo?"
-        })
+        return stream_final("¡Hola! Soy tu asistente de SUNASS. ¿En qué te ayudo?")
+
     if intent == Intent.PRESENTACION:
-        return JSONResponse({
-            "tipo": "presentacion",
-            "respuesta": "Soy un asistente de SUNASS. Puedo responder sobre interrupciones, fechas y conteos."
-        })
+        return stream_final("Soy un asistente de SUNASS. Puedo responder sobre interrupciones, fechas y conteos.")
+
     if intent == Intent.AYUDA:
-        return JSONResponse({
-            "tipo": "ayuda",
-            "respuesta": "Puedes preguntarme: '¿cuántas interrupciones hubo en julio 2025?' o 'eventos del 12-08-2025'."
-        })
+        return stream_final("Puedes preguntarme: '¿cuántas interrupciones hubo en julio 2025?' o 'eventos del 12-08-2025'.")
 
     # Si NO toca RAG, responde genérico sin retrieval ni partición
     if not should_retrieve:
-        return JSONResponse({
-            "tipo": "respuesta_simple",
-            "respuesta": "¿Podrías detallar un poco más para buscar en los reportes?"
-        })
+        return stream_final("¿Podrías detallar un poco más para buscar en los reportes?")
+
 
     # ===== A partir de aquí, tu flujo existente =====
     ref_embeddings = get_event_type_embeddings()
