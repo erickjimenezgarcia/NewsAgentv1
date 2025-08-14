@@ -6,6 +6,8 @@ import unicodedata
 import sys
 from collections import defaultdict
 import csv
+from enum import Enum, auto
+import re, unicodedata
 import asyncio
 from fastapi import FastAPI, UploadFile, WebSocket, File
 from fastapi.responses import JSONResponse,FileResponse, StreamingResponse
@@ -37,6 +39,98 @@ from codigo.notebook_utils import setup_environment
 from codigo.main3 import run_pipeline
 
 app = FastAPI(title="NewsAgent API")
+
+class Intent(Enum):
+    SMALLTALK = auto()
+    PRESENTACION = auto()
+    AYUDA = auto()
+    COUNT_QUERY = auto()
+    DATE_QUERY = auto()
+    STATS_QUERY = auto()
+    DOMAIN_QUERY = auto()      # Pregunta de negocio general
+    OTHER = auto()
+    
+    
+_LEET_MAP = str.maketrans({
+    "0": "o","1": "i","3": "e","4": "a","@":"a","$":"s","5":"s","7":"t",
+    "¡":"", "!":"", "?":"", "¿":""
+})
+
+SMALLTALK = {
+    "hola","holi","holaa","ola","buenas","buenos dias","buenas tardes","buenas noches",
+    "hey","hi","hello","que tal","qué tal","gracias","de nada","saludos"
+}
+
+PRESENTACION = {
+    "presentate","presentate por favor","preséntate","quien eres","quién eres",
+    "como te llamas","cómo te llamas","cual es tu nombre","cuál es tu nombre"
+}
+
+HELP_TERMS = {"ayuda","help","como funciona","cómo funciona","que puedes hacer","qué puedes hacer"}
+
+COUNT_TERMS = {"cuantas","cuántas","cuantos","cuántos","numero de","número de","conteo","total","cantidad"}
+DATE_TERMS  = {"fecha","fechas","hoy","ayer","manana","mañana","semana","mes","periodo","período","rango"}
+STATS_TERMS = {"promedio","tendencia","variacion","variación","porcentaje","proyeccion","proyección"}
+
+
+DOMAIN_HINTS = {
+    "sunass","eps","interrupcion","interrupciones","corte","cortes","abastecimiento",
+    "servicio de agua","suspension","suspensión","alerta","reporte","incidencia"
+}
+
+def _normalize(s: str) -> str:
+    s = s.lower()
+    s = "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn")
+    s = s.translate(_LEET_MAP)
+    # colapsa repeticiones largas: holaaaa -> holaa
+    s = re.sub(r"(.)\1{2,}", r"\1\1", s)
+    s = re.sub(r"[^a-z0-9ñ ]+", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
+
+def _contains_any(text: str, vocab: set[str]) -> bool:
+    for t in vocab:
+        if t in text:
+            return True
+    return False
+
+def intent_router(pregunta: str):
+    p = _normalize(pregunta or "")
+    tokens = p.split()
+
+    # 1) Smalltalk ultra-rápido (mensajes cortos y en set)
+    if (p in SMALLTALK) or (len(tokens) <= 3 and _contains_any(p, SMALLTALK)):
+        return Intent.SMALLTALK, dict(should_retrieve=False, should_partition=False)
+
+    # 2) Presentación
+    if _contains_any(p, PRESENTACION):
+        return Intent.PRESENTACION, dict(should_retrieve=False, should_partition=False)
+
+    # 3) AYUDA
+    if _contains_any(p, HELP_TERMS):
+        return Intent.AYUDA, dict(should_retrieve=False, should_partition=False)
+
+    # 4) Intentos especializados
+    if _contains_any(p, COUNT_TERMS):
+        return Intent.COUNT_QUERY, dict(should_retrieve=True, should_partition=False)
+    if _contains_any(p, DATE_TERMS):
+        return Intent.DATE_QUERY, dict(should_retrieve=True, should_partition=False)
+    if _contains_any(p, STATS_TERMS):
+        return Intent.STATS_QUERY, dict(should_retrieve=True, should_partition=False)
+
+    # 5) Dominio SUNASS: si menciona términos de dominio, activa RAG
+    if _contains_any(p, DOMAIN_HINTS):
+        return Intent.DOMAIN_QUERY, dict(should_retrieve=True, should_partition=True)
+
+    # 6) Heurística de longitud:
+    # - Muy corto y sin dominio => no RAG
+    if len(tokens) <= 3:
+        return Intent.OTHER, dict(should_retrieve=False, should_partition=False)
+
+    # - Por defecto: consulta general; puedes probar sin partición primero
+    return Intent.DOMAIN_QUERY, dict(should_retrieve=True, should_partition=False)
+
+
 
 
 def _norm(s: str) -> str:
@@ -90,6 +184,8 @@ _SMALLTALK_TERMS = {
 
 _MIN_LEN = 2
 _MAX_LEN_QUICK = 5
+
+MIN_PAYLOADS_TO_PARTITION = 7
 
 def normalize_text(s: str) -> str:
     # 1) a minúsculas
@@ -289,26 +385,37 @@ async def preguntar_chatbot_stream(data: ChatRequest):
                 seleccionados.append(p)
         return seleccionados
 
-    
-    # ✅ Atajo: small-talk -> una sola respuesta y salimos
-    
-    
-    
+    # ===== Router de intención: decide si hacemos RAG/partición =====
     pregunta = data.pregunta
-    
-    
-    if es_smalltalk(pregunta):
-        def gen_simple():
-            yield json.dumps({"rol": "bot", "tipo": "escribiendo"}) + "\n"
-            # prompt “conversacional”, sin contexto
-            texto = responder_llm_gemini(
-                pregunta,
-                "Responde brevemente en tono cordial, sin inventar datos externos. Si te piden presentarte, explica en 1-2 líneas qué haces para SUNASS.",
-                "1",
-            )
-            yield json.dumps({"rol": "bot", "tipo": "final", "texto": texto}) + "\n"
-        return StreamingResponse(gen_simple(), media_type="text/event-stream")
-    
+    intent, flags = intent_router(pregunta)
+    should_retrieve = flags["should_retrieve"]
+    should_partition = flags["should_partition"]
+
+    # --- Respuestas directas (sin RAG ni particionado) ---
+    if intent == Intent.SMALLTALK:
+        return JSONResponse({
+            "tipo": "smalltalk",
+            "respuesta": "¡Hola! Soy tu asistente de SUNASS. ¿En qué te ayudo?"
+        })
+    if intent == Intent.PRESENTACION:
+        return JSONResponse({
+            "tipo": "presentacion",
+            "respuesta": "Soy un asistente de SUNASS. Puedo responder sobre interrupciones, fechas y conteos."
+        })
+    if intent == Intent.AYUDA:
+        return JSONResponse({
+            "tipo": "ayuda",
+            "respuesta": "Puedes preguntarme: '¿cuántas interrupciones hubo en julio 2025?' o 'eventos del 12-08-2025'."
+        })
+
+    # Si NO toca RAG, responde genérico sin retrieval ni partición
+    if not should_retrieve:
+        return JSONResponse({
+            "tipo": "respuesta_simple",
+            "respuesta": "¿Podrías detallar un poco más para buscar en los reportes?"
+        })
+
+    # ===== A partir de aquí, tu flujo existente =====
     ref_embeddings = get_event_type_embeddings()
 
     # --- NUEVO: detecta si es RANGO para usar el flujo por ventanas ---
@@ -371,7 +478,7 @@ async def preguntar_chatbot_stream(data: ChatRequest):
         print("================================= TIPO PREGUNTA", tipo_pregunta)
         MAX_PAYLOADS = 21
         payloads = seleccionar_payloads_balanceados(payloads, MAX_PAYLOADS)
-        
+
         # ✅ Regla dura: no fragmentar si hay poco contexto
         if len(payloads) <= 6 and tipo_pregunta == "2":
             tipo_pregunta = "1"
@@ -434,8 +541,6 @@ async def preguntar_chatbot_stream(data: ChatRequest):
         return StreamingResponse(generador_respuestas(), media_type="text/event-stream")
 
     # ======================= FLUJO NUEVO SOLO PARA RANGO =======================
-    # Aquí stream por ventanas y conclusión al final.
-    # Puedes decidir la granularidad de la ventana (10 días recomendado).
     inicio_ddmmyyyy = fecha_detectada["inicio"]
     fin_ddmmyyyy = fecha_detectada["fin"]
     tipo_evento = extraer_tipo_evento(pregunta)
@@ -443,7 +548,6 @@ async def preguntar_chatbot_stream(data: ChatRequest):
     # Si tienes embeddings OpenAI ya en buscar_contexto, reúsalos:
     vector = client.embeddings.create(model=MODEL_EMBEDDING, input=pregunta).data[0].embedding
 
-    # Precalcular cantidad de ventanas para poder setear analisis_total
     window_size_days = 10
     ini_dt = datetime.strptime(inicio_ddmmyyyy, "%d%m%Y")
     fin_dt = datetime.strptime(fin_ddmmyyyy, "%d%m%Y")
@@ -451,7 +555,6 @@ async def preguntar_chatbot_stream(data: ChatRequest):
     ventanas = list(split_in_windows(ini_dt, fin_dt, window_size_days))
     analisis_total = len(ventanas)
 
-    # Generador de ventanas desde Qdrant
     stream_gen = buscar_por_ventanas(
         qdrant=qdrant,
         collection=COLLECTION_NAME,
@@ -459,12 +562,12 @@ async def preguntar_chatbot_stream(data: ChatRequest):
         inicio_ddmmyyyy=inicio_ddmmyyyy,
         fin_ddmmyyyy=fin_ddmmyyyy,
         tipo_evento=tipo_evento,
-        k_total=50,                 # tu K objetivo final si quieres
+        k_total=50,
         window_size_days=10,
-        use_numeric_field="auto",   # ⬅️ clave por tus datos mixtos
+        use_numeric_field="auto",
         per_day_cap=3,
-        stop_on_k=False,            # ⬅️ para que no se corte en 2/8
-        logger=print, 
+        stop_on_k=False,
+        logger=print,
     )
 
     async def generador_respuestas_rango():
@@ -474,19 +577,13 @@ async def preguntar_chatbot_stream(data: ChatRequest):
         respuestas_parciales = []
         payloads_globales = []
 
-        # Recorremos ventanas y vamos emitiendo un parcial por ventana
         for idx, bloque in enumerate(stream_gen):
             if not bloque:
-                # Igual incrementamos el contador de parciales para mantener numeración
-                # En vez de emitir un parcial por ventana vacía:
-                # simplemente continúa sin enviar nada
-                # (o acumula y emite un único “sin novedades” al final si TODAS estuvieron vacías)
                 continue
 
             payloads_bloque = [p.payload for p in bloque]
             payloads_globales.extend(payloads_bloque)
 
-            # Balanceamos por día dentro de la ventana para no enviar demasiado contexto
             payloads_balanceados = seleccionar_payloads_balanceados(payloads_bloque, max_total=21)
 
             contexto_bloque = "\n\n".join([
@@ -506,7 +603,7 @@ async def preguntar_chatbot_stream(data: ChatRequest):
             }) + "\n"
             await asyncio.sleep(0.6)
 
-        # --- Si la pregunta es de CONTEO, hacemos el conteo sobre todo lo acumulado ---
+        # CONTEO sobre todo el rango
         if pregunta_es_conteo(pregunta):
             tipo_evento = extraer_tipo_evento(pregunta)
             if not tipo_evento:
@@ -525,7 +622,6 @@ async def preguntar_chatbot_stream(data: ChatRequest):
             }.get(tipo_evento, tipo_evento + "s")
 
             if not eventos:
-                # fallback a conclusión con lo que hubo en parciales
                 conclusion = responder_llm_gemini(pregunta, "\n\n".join(respuestas_parciales) or "", "3")
                 yield json.dumps({
                     "rol": "bot",
@@ -549,24 +645,19 @@ async def preguntar_chatbot_stream(data: ChatRequest):
             }) + "\n"
             return
 
-        # --- Conclusión normal (no conteo) con todos los parciales ---
-        # --- Conclusión normal (no conteo) usando TODO el rango (payloads_globales) ---
+        # Conclusión normal con TODO el rango
         try:
-            # 1) Dedup + rank sobre TODO lo acumulado en ventanas
             payloads_glob = deduplicar_payloads(payloads_globales)
             if payloads_glob and isinstance(payloads_glob[0], dict) and "embedding" in payloads_glob[0]:
-                payloads_glob = puntuar_chunks(payloads_glob, vector)[:60]  # ajusta 60 si quieres
+                payloads_glob = puntuar_chunks(payloads_glob, vector)[:60]
 
-            # 2) Balanceo por día/mes para cobertura del rango completo
             payloads_finales = seleccionar_payloads_balanceados(payloads_glob, max_total=42)
 
-            # 3) Construir contexto final factual
             contexto_final = "\n\n".join([
                 f"[fecha: {p.get('date')}] [fuente: {p.get('source_type')}] [sección: {p.get('section')}]\n{p.get('text')}"
                 for p in payloads_finales
             ])
 
-            # (Opcional) añade los resúmenes parciales como notas
             notas_parciales = "\n\n".join(respuestas_parciales) if respuestas_parciales else ""
 
             prompt_conclusion = (
@@ -593,7 +684,6 @@ async def preguntar_chatbot_stream(data: ChatRequest):
                 "tipo": "final",
                 "texto": f"📌 Conclusión final:\n{conclusion}"
             }) + "\n"
-
 
     return StreamingResponse(generador_respuestas_rango(), media_type="text/event-stream")
 
